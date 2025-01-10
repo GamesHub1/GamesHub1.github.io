@@ -185,6 +185,18 @@
     <script>
         let lastClickedButton = null; // Variable para guardar el último botón clickeado
 
+        // Función para filtrar los elementos
+        function filterItems(category) {
+            const allItems = document.querySelectorAll('.list-item');
+            allItems.forEach(item => {
+                if (category === 'all') {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = item.dataset.category === category ? 'block' : 'none';
+                }
+            });
+        }
+
         function toggleDownloadButtons(itemId, event) {
             // Evitar la propagación del evento
             event.stopPropagation();
