@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GamesHub1</title>
-    <!-- Fuente de Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -36,172 +35,144 @@
             text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
         }
 
-        .search-container {
-            margin: 20px auto;
-            text-align: center;
+        .auth-buttons {
+            position: absolute;
+            top: 20px;
+            left: 20px;
         }
 
-        .search-box {
-            width: 60%;
-            max-width: 400px;
-            padding: 12px;
-            font-size: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 15px; /* Redondeado */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        }
-
-        .optimization-text {
-            margin-top: 10px;
-            font-size: 1.2rem;
-            color: white;
-            text-align: center;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-        }
-
-        .container {
-            position: relative;
-            margin: 50px auto;
-            width: 80%;
-            max-width: 600px;
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 15px; /* Redondeado */
-            padding: 20px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-            color: white;
-            text-align: center;
-        }
-
-        .list-item {
-            background-color: rgba(255, 255, 255, 0.2);
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 10px; /* Redondeado */
-            cursor: pointer;
-            text-align: center;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        .list-item:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-            transform: scale(1.05);
-        }
-
-        .dropdown {
-            display: none;
-            margin-top: 10px;
-            text-align: center;
-        }
-
-        .dropdown button {
+        .auth-buttons button {
+            margin: 5px;
             padding: 10px 20px;
             font-size: 1rem;
             border: none;
-            border-radius: 10px; /* Redondeado */
+            border-radius: 5px;
             background-color: #007bff;
             color: white;
             cursor: pointer;
         }
 
-        .dropdown button:hover {
+        .auth-buttons button:hover {
             background-color: #0056b3;
         }
 
-        .novedades {
+        .modal {
+            display: none;
             position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 10;
+            justify-content: center;
+            align-items: center;
         }
 
-        .novedades.left {
-            bottom: 10px;
-            left: 10px;
-        }
-
-        .novedades.right {
-            bottom: 10px;
-            right: 10px;
-        }
-
-        .novedades img {
-            width: 150px;
-            height: auto;
+        .modal-content {
+            background: white;
+            padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .modal-content input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .modal-content button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+
+        .modal-content button:hover {
+            background-color: #218838;
+        }
+
+        .modal-close {
+            background-color: #dc3545;
+            color: white;
+            margin-top: 10px;
+        }
+
+        .modal-close:hover {
+            background-color: #c82333;
         }
     </style>
     <script>
-        function toggleDropdown(id) {
-            document.querySelectorAll('.dropdown').forEach(drop => drop.style.display = 'none');
-            const dropdown = document.getElementById(id);
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
         }
 
-        function searchItems() {
-            const query = document.getElementById('search-box').value.toLowerCase();
-            const items = document.querySelectorAll('.list-item');
-            items.forEach(item => {
-                if (item.textContent.toLowerCase().includes(query)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+        function validateLogin() {
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+
+            if (username === "admin" && password === "1234") {
+                alert("Inicio de sesión exitoso.");
+                toggleModal('loginModal');
+            } else {
+                alert("Usuario o contraseña incorrectos.");
+            }
+        }
+
+        function validateRegistration() {
+            const username = document.getElementById('register-username').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+
+            if (username && email && password) {
+                alert("Registro exitoso.");
+                toggleModal('registerModal');
+            } else {
+                alert("Por favor, complete todos los campos.");
+            }
         }
     </script>
 </head>
 <body>
     <div class="background"></div>
 
+    <div class="auth-buttons">
+        <button onclick="toggleModal('loginModal')">Iniciar sesión</button>
+        <button onclick="toggleModal('registerModal')">Registrarse</button>
+    </div>
+
     <div class="header">GAMESHUB1</div>
 
-    <div class="search-container">
-        <input 
-            id="search-box" 
-            class="search-box" 
-            type="text" 
-            placeholder="Buscar..." 
-            oninput="searchItems()">
-    </div>
-
-    <div class="optimization-text">
-        Encuentra los mejores juegos y optimizaciones para mejorar tu experiencia gaming.
-    </div>
-
-    <div class="container">
-        <div class="list-item" onclick="toggleDropdown('dropdown1')">
-            EURO TRUCK SIMULATOR
-        </div>
-        <div id="dropdown1" class="dropdown">
-            <button onclick="window.location.href='https://drive.google.com/file/d/1rleQoX_mTcR0lG2AtWX2O6f7lQ3CXlNQ/view?usp=drive_link'">Descargar</button>
-        </div>
-
-        <div class="list-item" onclick="toggleDropdown('dropdown2')">
-            AMERICAN TRUCK SIMULATOR
-        </div>
-        <div id="dropdown2" class="dropdown">
-            <button onclick="window.location.href='https://drive.google.com/file/d/1DUtvEG5fg11yYmNO4375xe7OAPRelEBO/view?usp=drive_link'">Descargar</button>
-        </div>
-
-        <div class="list-item" onclick="toggleDropdown('dropdown3')">
-            DLC EURO TRUCK
-        </div>
-        <div id="dropdown3" class="dropdown">
-            <button onclick="window.location.href='https://drive.google.com/file/d/1zwmbXSZGh2rztOQ-0TEXTq5shfQtEUah/view?usp=drive_link'">Descargar</button>
-        </div>
-
-        <div class="list-item" onclick="toggleDropdown('dropdown4')">
-            DLC AMERICAN TRUCK
-        </div>
-        <div id="dropdown4" class="dropdown">
-            <button onclick="window.location.href='https://drive.google.com/file/d/1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7/view?usp=drive_link'">Descargar</button>
+    <!-- Modal de Iniciar Sesión -->
+    <div id="loginModal" class="modal" onclick="event.target.id === 'loginModal' && toggleModal('loginModal')">
+        <div class="modal-content">
+            <h2>Iniciar sesión</h2>
+            <input type="text" id="login-username" placeholder="Usuario">
+            <input type="password" id="login-password" placeholder="Contraseña">
+            <button onclick="validateLogin()">Ingresar</button>
+            <button class="modal-close" onclick="toggleModal('loginModal')">Cerrar</button>
         </div>
     </div>
 
-    <div class="novedades left">
-        <img src="Euro_Truck_Simulator_PC.jpg" alt="Euro Truck Simulator">
-    </div>
-
-    <div class="novedades right">
-        <img src="american truck simmulator PCjpg.jpg" alt="American Truck Simulator">
+    <!-- Modal de Registro -->
+    <div id="registerModal" class="modal" onclick="event.target.id === 'registerModal' && toggleModal('registerModal')">
+        <div class="modal-content">
+            <h2>Registrarse</h2>
+            <input type="text" id="register-username" placeholder="Usuario">
+            <input type="email" id="register-email" placeholder="Correo electrónico">
+            <input type="password" id="register-password" placeholder="Contraseña">
+            <button onclick="validateRegistration()">Registrar</button>
+            <button class="modal-close" onclick="toggleModal('registerModal')">Cerrar</button>
+        </div>
     </div>
 </body>
 </html>
