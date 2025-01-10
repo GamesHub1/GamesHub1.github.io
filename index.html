@@ -171,6 +171,7 @@
             background-color: #0056b3;
         }
 
+        /* Estilo del botón de descarga */
         .download-button {
             margin-top: 10px;
             padding: 10px 20px;
@@ -214,6 +215,7 @@
             event.stopPropagation();
             const parentElement = event.target;
             const existingDownloadButton = parentElement.querySelector('.download-button');
+            
             if (existingDownloadButton) {
                 // Si el botón existe, lo ocultamos con una transición suave
                 existingDownloadButton.classList.remove('show');
