@@ -240,20 +240,20 @@
         function openDownloadLink(itemId) {
             let link;
             switch (itemId) {
-                case 'euroTruck2':
-                    link = 'https://drive.google.com/file/d/1rleQoX_mTcR0lG2AtWX2O6f7lQ3CXlNQ/view?usp=drive_link';
+                case 'euroTruck':
+                    link = 'https://drive.google.com/uc?export=download&id=1rleQoX_mTcR0lG2AtWX2O6f7lQ3CXlNQ'; // Corregido para descargar directamente
                     break;
                 case 'americanTruck':
-                    link = 'https://drive.google.com/file/d/1DUtvEG5fg11yYmNO4375xe7OAPRelEBO/view?usp=drive_link';
+                    link = 'https://drive.google.com/uc?export=download&id=1DUtvEG5fg11yYmNO4375xe7OAPRelEBO'; // Corregido para descargar directamente
                     break;
-                case 'euroTruck2DLC':
-                    link = 'https://drive.google.com/file/d/1zwmbXSZGh2rztOQ-0TEXTq5shfQtEUah/view?usp=drive_link';
+                case 'euroTruckDLC':
+                    link = 'https://drive.google.com/uc?export=download&id=1zwmbXSZGh2rztOQ-0TEXTq5shfQtEUah'; // Corregido para descargar directamente
                     break;
                 case 'americanTruckDLC':
-                    link = 'https://drive.google.com/file/d/1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7/view?usp=drive_link';
+                    link = 'https://drive.google.com/uc?export=download&id=1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7'; // Corregido para descargar directamente
                     break;
                 case 'slimeRancher':
-                    link = 'https://drive.google.com/file/d/1Gy-QK5RrZKHidJ_KPUjxLqMpRml5icwc/view?usp=drive_link';
+                    link = 'https://drive.google.com/uc?export=download&id=1xyzSlimeRancherLink'; // Asegúrate de reemplazar con el ID correcto
                     break;
             }
             window.open(link, "_blank");
@@ -270,18 +270,18 @@
     </div>
 
     <div class="content">
-        <div class="header">OptiHub1</div>
+        <div class="header">GamesHub1</div>
 
         <div class="games-container">
             <div class="container">
                 <div class="list-item" data-category="games" onclick="toggleDownloadButtons('euroTruck', event)">
-                    Euro Truck Simulator 2
+                    Euro Truck Simulator
                 </div>
                 <div class="list-item" data-category="games" onclick="toggleDownloadButtons('americanTruck', event)">
                     American Truck Simulator
                 </div>
                 <div class="list-item" data-category="dlcs" onclick="toggleDownloadButtons('euroTruckDLC', event)">
-                    DLC Euro Truck 2
+                    DLC Euro Truck
                 </div>
                 <div class="list-item" data-category="dlcs" onclick="toggleDownloadButtons('americanTruckDLC', event)">
                     DLC American Truck
@@ -295,7 +295,7 @@
         <div class="novedades">
             <div class="novedad-item">
                 <img src="Euro_Truck_Simulator_PC.jpg" alt="Euro Truck">
-                <h3>Euro Truck Simulator 2</h3>
+                <h3>Euro Truck Simulator</h3>
             </div>
             <div class="novedad-item">
                 <img src="slimeranchernovedad.jpg" alt="Slime Rancher">
