@@ -25,7 +25,6 @@
         }
 
         .header {
-            position: relative;
             margin-top: 20px;
             text-align: center;
             color: white;
@@ -38,7 +37,7 @@
         .auth-buttons {
             position: absolute;
             top: 20px;
-            left: 20px;
+            right: 20px;
         }
 
         .auth-buttons button {
@@ -56,89 +55,90 @@
             background-color: #0056b3;
         }
 
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 10;
-            justify-content: center;
-            align-items: center;
+        .container {
+            position: relative;
+            top: 20px;
+            max-width: 800px;
+            margin: auto;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
         }
 
-        .modal-content {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
+        .description {
+            color: white;
             text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .search-bar {
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .search-bar input {
+            padding: 10px;
             width: 80%;
             max-width: 400px;
-        }
-
-        .modal-content input {
-            width: 90%;
-            padding: 10px;
-            margin: 10px 0;
+            border-radius: 20px;
             border: 1px solid #ccc;
-            border-radius: 5px;
         }
 
-        .modal-content button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #28a745;
+        .list-item {
+            background-color: rgba(255, 255, 255, 0.2);
             color: white;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            text-align: center;
             cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .modal-content button:hover {
-            background-color: #218838;
+        .list-item:hover {
+            box-shadow: 0 0 20px 5px #ffe600;
+            transform: scale(1.05);
         }
 
-        .modal-close {
-            background-color: #dc3545;
+        .novedades {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+
+        .novedad-item {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        .novedad-item img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .novedad-item h3 {
             color: white;
             margin-top: 10px;
-        }
-
-        .modal-close:hover {
-            background-color: #c82333;
         }
     </style>
     <script>
-        function toggleModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        function toggleDropdown(id) {
+            document.querySelectorAll('.dropdown').forEach(dropdown => dropdown.style.display = 'none');
+            const dropdown = document.getElementById(id);
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         }
 
-        function validateLogin() {
-            const username = document.getElementById('login-username').value;
-            const password = document.getElementById('login-password').value;
-
-            if (username === "admin" && password === "1234") {
-                alert("Inicio de sesión exitoso.");
-                toggleModal('loginModal');
-            } else {
-                alert("Usuario o contraseña incorrectos.");
-            }
-        }
-
-        function validateRegistration() {
-            const username = document.getElementById('register-username').value;
-            const email = document.getElementById('register-email').value;
-            const password = document.getElementById('register-password').value;
-
-            if (username && email && password) {
-                alert("Registro exitoso.");
-                toggleModal('registerModal');
-            } else {
-                alert("Por favor, complete todos los campos.");
-            }
+        function filterList() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            document.querySelectorAll('.list-item').forEach(item => {
+                item.style.display = item.textContent.toLowerCase().includes(query) ? 'block' : 'none';
+            });
         }
     </script>
 </head>
@@ -146,32 +146,40 @@
     <div class="background"></div>
 
     <div class="auth-buttons">
-        <button onclick="toggleModal('loginModal')">Iniciar sesión</button>
-        <button onclick="toggleModal('registerModal')">Registrarse</button>
+        <button onclick="alert('Iniciar sesión aún no implementado')">Iniciar sesión</button>
+        <button onclick="alert('Registro aún no implementado')">Registrarse</button>
     </div>
 
     <div class="header">GAMESHUB1</div>
 
-    <!-- Modal de Iniciar Sesión -->
-    <div id="loginModal" class="modal" onclick="event.target.id === 'loginModal' && toggleModal('loginModal')">
-        <div class="modal-content">
-            <h2>Iniciar sesión</h2>
-            <input type="text" id="login-username" placeholder="Usuario">
-            <input type="password" id="login-password" placeholder="Contraseña">
-            <button onclick="validateLogin()">Ingresar</button>
-            <button class="modal-close" onclick="toggleModal('loginModal')">Cerrar</button>
+    <div class="container">
+        <div class="description">Disfruta de una experiencia optimizada y descarga los mejores juegos y DLCs con facilidad.</div>
+
+        <div class="search-bar">
+            <input id="search-input" oninput="filterList()" type="text" placeholder="Buscar archivos...">
+        </div>
+
+        <div>
+            <div class="list-item" onclick="toggleDropdown('dropdown1')">EURO TRUCK SIMULATOR</div>
+            <div id="dropdown1" class="dropdown" style="display: none; text-align: center;">
+                <button onclick="window.location.href = 'https://drive.google.com/file/d/1rleQoX_mTcR0lG2AtWX2O6f7lQ3CXlNQ/view?usp=drive_link';">Descargar</button>
+            </div>
+
+            <div class="list-item" onclick="toggleDropdown('dropdown2')">AMERICAN TRUCK SIMULATOR</div>
+            <div id="dropdown2" class="dropdown" style="display: none; text-align: center;">
+                <button onclick="window.location.href = 'https://drive.google.com/file/d/1DUtvEG5fg11yYmNO4375xe7OAPRelEBO/view?usp=drive_link';">Descargar</button>
+            </div>
         </div>
     </div>
 
-    <!-- Modal de Registro -->
-    <div id="registerModal" class="modal" onclick="event.target.id === 'registerModal' && toggleModal('registerModal')">
-        <div class="modal-content">
-            <h2>Registrarse</h2>
-            <input type="text" id="register-username" placeholder="Usuario">
-            <input type="email" id="register-email" placeholder="Correo electrónico">
-            <input type="password" id="register-password" placeholder="Contraseña">
-            <button onclick="validateRegistration()">Registrar</button>
-            <button class="modal-close" onclick="toggleModal('registerModal')">Cerrar</button>
+    <div class="novedades">
+        <div class="novedad-item">
+            <img src="Euro_Truck_Simulator_PC.jpg" alt="Euro Truck Simulator">
+            <h3>Novedades: Euro Truck</h3>
+        </div>
+        <div class="novedad-item">
+            <img src="american_truck_simmulator_PCjpg.jpg" alt="American Truck Simulator">
+            <h3>Novedades: American Truck</h3>
         </div>
     </div>
 </body>
