@@ -207,7 +207,7 @@
             // Si ya hay un botón de descarga, lo ocultamos
             const existingDownloadButton = parentElement.querySelector('.download-button');
             if (existingDownloadButton) {
-                existingDownloadButton.style.display = existingDownloadButton.style.display === 'block' ? 'none' : 'block';
+                existingDownloadButton.style.display = 'none'; // Ocultar el botón si ya existe
             } else {
                 // Crear un nuevo botón de descarga debajo del botón tocado
                 const downloadButton = document.createElement('button');
