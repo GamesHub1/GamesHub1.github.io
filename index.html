@@ -20,7 +20,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('Fondo2.jpg') no-repeat center center fixed;
+            background: url('fondo2.jpg') no-repeat center center fixed;
             background-size: cover;
             filter: blur(5px);
             z-index: -1;
@@ -112,7 +112,7 @@
             text-align: center;
             cursor: pointer;
             width: 250px;
-            transition: transform 1s, box-shadow 0.5s;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .list-item:hover {
@@ -180,13 +180,15 @@
             border-radius: 5px;
             cursor: pointer;
             display: none; /* Inicialmente oculto */
-            transition: opacity 0.3s ease-in-out; /* Efecto suave */
             opacity: 0; /* Inicialmente invisible */
+            transform: translateY(20px); /* Desplazado hacia abajo */
+            transition: opacity 0.5s ease, transform 0.5s ease; /* Suavizado de transición */
         }
 
         .download-button.show {
             display: block;
             opacity: 1; /* Hacerlo visible */
+            transform: translateY(0); /* Restaurar posición */
         }
 
         .download-button:hover {
@@ -213,13 +215,13 @@
             const parentElement = event.target;
             const existingDownloadButton = parentElement.querySelector('.download-button');
             if (existingDownloadButton) {
-                // Si el botón existe, lo ocultamos
+                // Si el botón existe, lo ocultamos con una transición suave
                 existingDownloadButton.classList.remove('show');
                 setTimeout(() => {
                     existingDownloadButton.remove();
-                }, 300); // Esperamos el tiempo de transición
+                }, 500); // Esperamos el tiempo de transición
             } else {
-                // Si no existe, lo creamos
+                // Si no existe, lo creamos y mostramos con una animación
                 const downloadButton = document.createElement('button');
                 downloadButton.classList.add('download-button');
                 downloadButton.innerText = `Descargar ${itemId}`;
@@ -228,10 +230,10 @@
                 };
                 parentElement.appendChild(downloadButton);
 
-                // Mostrar el botón con efecto
+                // Mostrar el botón con transición
                 setTimeout(() => {
                     downloadButton.classList.add('show');
-                }, 10);
+                }, 10); // Pequeño retraso para la animación
             }
         }
 
