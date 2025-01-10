@@ -55,35 +55,44 @@
             background-color: #0056b3;
         }
 
-        .container {
-            position: relative;
-            top: 20px;
-            max-width: 800px;
-            margin: auto;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
-        }
-
-        .description {
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 100%;
+            background-color: #333;
+            padding: 20px 10px;
             color: white;
             text-align: center;
-            margin-bottom: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .sidebar button {
+            width: 100%;
+            padding: 10px 0;
+            margin: 10px 0;
             font-size: 1.2rem;
+            border: none;
+            background-color: #444;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
-        .search-bar {
-            margin: 20px auto;
-            text-align: center;
+        .sidebar button:hover {
+            background-color: #555;
+            transform: scale(1.05);
         }
 
-        .search-bar input {
-            padding: 10px;
-            width: 80%;
-            max-width: 400px;
-            border-radius: 20px;
-            border: 1px solid #ccc;
+        .container {
+            margin-left: 220px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
         }
 
         .list-item {
@@ -104,9 +113,10 @@
         }
 
         .novedades {
-            display: flex;
-            justify-content: space-between;
             margin: 20px 0;
+            display: none;
+            flex-direction: column;
+            align-items: center;
         }
 
         .novedad-item {
@@ -115,6 +125,7 @@
             padding: 10px;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+            margin: 10px 0;
         }
 
         .novedad-item img {
@@ -127,36 +138,34 @@
             margin-top: 10px;
         }
 
-        /* Diseño del botón de descarga */
-        .download-btn {
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 25px;
-            background-color: #28a745;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-            margin-top: 10px;
+        .search-bar {
+            margin: 20px auto;
+            text-align: center;
         }
 
-        .download-btn:hover {
-            background-color: #218838;
-            transform: scale(1.05);
+        .search-bar input {
+            padding: 10px;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
         }
     </style>
     <script>
-        function toggleDropdown(id) {
-            document.querySelectorAll('.dropdown').forEach(dropdown => dropdown.style.display = 'none');
-            const dropdown = document.getElementById(id);
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        }
+        function toggleCategory(category) {
+            const games = document.querySelector('.games');
+            const dlcs = document.querySelector('.dlcs');
+            const novedades = document.querySelector('.novedades');
 
-        function filterList() {
-            const query = document.getElementById('search-input').value.toLowerCase();
-            document.querySelectorAll('.list-item').forEach(item => {
-                item.style.display = item.textContent.toLowerCase().includes(query) ? 'block' : 'none';
-            });
+            if (category === 'games') {
+                games.style.display = games.style.display === 'block' ? 'none' : 'block';
+                dlcs.style.display = 'none';
+                novedades.style.display = 'block';
+            } else {
+                dlcs.style.display = dlcs.style.display === 'block' ? 'none' : 'block';
+                games.style.display = 'none';
+                novedades.style.display = 'block';
+            }
         }
     </script>
 </head>
@@ -170,46 +179,35 @@
 
     <div class="header">GAMESHUB1</div>
 
-    <div class="container">
-        <div class="description">Disfruta de una experiencia optimizada y descarga los mejores juegos y DLCs con facilidad.</div>
-
-        <div class="search-bar">
-            <input id="search-input" oninput="filterList()" type="text" placeholder="Buscar archivos...">
-        </div>
-
-        <div>
-            <div class="list-item" onclick="toggleDropdown('dropdown1')">EURO TRUCK SIMULATOR</div>
-            <div id="dropdown1" class="dropdown" style="display: none; text-align: center;">
-                <button class="download-btn" onclick="window.location.href = 'https://drive.google.com/file/d/1rleQoX_mTcR0lG2AtWX2O6f7lQ3CXlNQ/view?usp=drive_link';">Descargar</button>
-            </div>
-
-            <div class="list-item" onclick="toggleDropdown('dropdown2')">AMERICAN TRUCK SIMULATOR</div>
-            <div id="dropdown2" class="dropdown" style="display: none; text-align: center;">
-                <button class="download-btn" onclick="window.location.href = 'https://drive.google.com/file/d/1DUtvEG5fg11yYmNO4375xe7OAPRelEBO/view?usp=drive_link';">Descargar</button>
-            </div>
-
-            <!-- Nueva opción Euro Truck DLC -->
-            <div class="list-item" onclick="toggleDropdown('dropdown3')">EURO TRUCK DLC</div>
-            <div id="dropdown3" class="dropdown" style="display: none; text-align: center;">
-                <button class="download-btn" onclick="window.location.href = 'https://drive.google.com/file/d/1zwmbXSZGh2rztOQ-0TEXTq5shfQtEUah/view?usp=drive_link';">Descargar Euro Truck DLC</button>
-            </div>
-
-            <!-- Nueva opción American Truck DLC -->
-            <div class="list-item" onclick="toggleDropdown('dropdown4')">AMERICAN TRUCK DLC</div>
-            <div id="dropdown4" class="dropdown" style="display: none; text-align: center;">
-                <button class="download-btn" onclick="window.location.href = 'https://drive.google.com/file/d/1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7/view?usp=drive_link';">Descargar American Truck DLC</button>
-            </div>
-        </div>
+    <div class="sidebar">
+        <button onclick="toggleCategory('games')">JUEGOS</button>
+        <button onclick="toggleCategory('dlcs')">DLC</button>
     </div>
 
-    <div class="novedades">
-        <div class="novedad-item">
-            <img src="Euro_Truck_Simulator_PC.jpg" alt="Euro Truck Simulator">
-            <h3>Novedades: Euro Truck</h3>
+    <div class="container">
+        <div class="search-bar">
+            <input id="search-input" type="text" placeholder="Buscar archivos...">
         </div>
-        <div class="novedad-item">
-            <img src="american_truck_simmulator_PCjpg.jpg" alt="American Truck Simulator">
-            <h3>Novedades: American Truck</h3>
+
+        <div class="games" style="display: block;">
+            <div class="list-item">EURO TRUCK SIMULATOR</div>
+            <div class="list-item">AMERICAN TRUCK SIMULATOR</div>
+        </div>
+
+        <div class="dlcs" style="display: none;">
+            <div class="list-item">DLC EURO TRUCK</div>
+            <div class="list-item">DLC AMERICAN TRUCK</div>
+        </div>
+
+        <div class="novedades">
+            <div class="novedad-item">
+                <img src="Euro_Truck_Simulator_PC.jpg" alt="Euro Truck Simulator">
+                <h3>Novedades: Euro Truck</h3>
+            </div>
+            <div class="novedad-item">
+                <img src="american_truck_simmulator_PCjpg.jpg" alt="American Truck Simulator">
+                <h3>Novedades: American Truck</h3>
+            </div>
         </div>
     </div>
 </body>
