@@ -95,7 +95,6 @@
             text-align: center;
             margin-left: auto;
             margin-right: auto;
-            display: none; /* Se oculta por defecto */
         }
 
         .list-item {
@@ -183,15 +182,20 @@
 
     </style>
     <script>
-        function toggleDownloadButtons(itemId) {
-            const buttons = document.querySelectorAll('.download-button');
-            buttons.forEach(button => {
-                button.style.display = 'none'; // Ocultamos todos los botones de descarga
+        // Esta función se encarga de mostrar el botón de descarga correcto
+        // y de ocultar el anterior si ya está visible.
+        function toggleDownloadButton(itemId) {
+            const allDownloadButtons = document.querySelectorAll('.download-button');
+            
+            // Oculta todos los botones de descarga antes de mostrar el nuevo
+            allDownloadButtons.forEach(button => {
+                button.style.display = 'none';
             });
 
+            // Muestra el botón de descarga correspondiente
             const targetButton = document.querySelector(`#download-${itemId}`);
             if (targetButton) {
-                targetButton.style.display = 'block'; // Solo mostramos el botón correspondiente
+                targetButton.style.display = 'block';
             }
         }
 
@@ -212,28 +216,28 @@
     <div class="content">
         <div class="header">GamesHub1</div>
 
-        <!-- Contenedor rectangular detrás de los juegos (ajustado en tamaño) -->
+        <!-- Contenedor rectangular detrás de los juegos -->
         <div class="games-container">
             <div class="container">
-                <div class="list-item" data-category="games" onclick="toggleDownloadButtons('euroTruck')">
+                <div class="list-item" data-category="games" onclick="toggleDownloadButton('euroTruck')">
                     Euro Truck Simulator
                 </div>
-                <div class="list-item" data-category="games" onclick="toggleDownloadButtons('americanTruck')">
+                <div class="list-item" data-category="games" onclick="toggleDownloadButton('americanTruck')">
                     American Truck Simulator
                 </div>
-                <div class="list-item" data-category="dlcs" onclick="toggleDownloadButtons('euroTruckDLC')">
+                <div class="list-item" data-category="dlcs" onclick="toggleDownloadButton('euroTruckDLC')">
                     DLC Euro Truck
                 </div>
-                <div class="list-item" data-category="dlcs" onclick="toggleDownloadButtons('americanTruckDLC')">
+                <div class="list-item" data-category="dlcs" onclick="toggleDownloadButton('americanTruckDLC')">
                     DLC American Truck
                 </div>
             </div>
 
             <!-- Botones de descarga -->
-            <button class="download-button" id="download-euroTruck" style="display:none;" onclick="openDownloadLink('https://drive.google.com/file/d/1rleQoX_mTcR0lG2AtWX2O6f7lQ3CXlNQ/view?usp=drive_link')">Descargar Euro Truck Simulator</button>
-            <button class="download-button" id="download-americanTruck" style="display:none;" onclick="openDownloadLink('https://drive.google.com/file/d/1DUtvEG5fg11yYmNO4375xe7OAPRelEBO/view?usp=drive_link')">Descargar American Truck Simulator</button>
-            <button class="download-button" id="download-euroTruckDLC" style="display:none;" onclick="openDownloadLink('https://drive.google.com/file/d/1zwmbXSZGh2rztOQ-0TEXTq5shfQtEUah/view?usp=drive_link')">Descargar DLC Euro Truck</button>
-            <button class="download-button" id="download-americanTruckDLC" style="display:none;" onclick="openDownloadLink('https://drive.google.com/file/d/1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7/view?usp=drive_link')">Descargar DLC American Truck</button>
+            <button class="download-button" id="download-euroTruck" style="display:none;" onclick="openDownloadLink('http://link-a-eurotrucksimulator.com')">Descargar Euro Truck Simulator</button>
+            <button class="download-button" id="download-americanTruck" style="display:none;" onclick="openDownloadLink('http://link-a-americantrucksimulator.com')">Descargar American Truck Simulator</button>
+            <button class="download-button" id="download-euroTruckDLC" style="display:none;" onclick="openDownloadLink('http://link-a-dlceurotruck.com')">Descargar DLC Euro Truck</button>
+            <button class="download-button" id="download-americanTruckDLC" style="display:none;" onclick="openDownloadLink('http://link-a-dlctrucksimulator.com')">Descargar DLC American Truck</button>
         </div>
 
         <div class="novedades">
