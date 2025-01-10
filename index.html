@@ -37,7 +37,6 @@
             flex-grow: 1;
         }
 
-        /* Barra lateral */
         .sidebar {
             width: 200px;
             height: 100vh;
@@ -70,25 +69,24 @@
             background-color: #0056b3;
         }
 
-        /* Barra de búsqueda */
         .search-bar {
-            width: 100%;
+            width: 90%;
             padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
+            margin: 0 auto 20px;
+            border-radius: 12px;
             border: none;
             font-size: 1rem;
-            background-color: #007bff;
-            color: white;
             text-align: center;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            transition: all 0.3s ease;
         }
 
         .search-bar:focus {
             outline: none;
-            background-color: #0056b3;
+            background-color: rgba(255, 255, 255, 0.5);
         }
 
-        /* Resto del diseño */
         .content {
             margin-left: 220px;
             padding: 20px;
@@ -106,16 +104,15 @@
         }
 
         .games-container {
-            background-color: rgba(0, 0, 0, 0.5); /* Misma caja que las novedades */
-            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
-            width: 50%; /* Más pequeño */
+            max-width: 800px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
             text-align: center;
             margin-left: auto;
             margin-right: auto;
-            display: block; /* Hacemos visible */
         }
 
         .list-item {
@@ -127,7 +124,7 @@
             font-size: 1.2rem;
             text-align: center;
             cursor: pointer;
-            width: 250px; /* Ajustado el tamaño de los botones */
+            width: 250px;
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
@@ -145,48 +142,6 @@
             max-width: 800px;
         }
 
-        .novedad-item {
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            width: 45%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
-        }
-
-        .novedad-item img {
-            width: 100px;
-            height: auto;
-            border-radius: 10px;
-        }
-
-        .novedad-item h3 {
-            color: white;
-            margin: 0;
-        }
-
-        .filter-section {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .filter-section button {
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .filter-section button:hover {
-            background-color: #0056b3;
-        }
-
         .download-button {
             margin-top: 10px;
             padding: 10px 20px;
@@ -200,87 +155,12 @@
         .download-button:hover {
             background-color: #218838;
         }
-
     </style>
     <script>
-        let lastClickedButton = null; // Variable para guardar el último botón clickeado
-
-        // Función para filtrar los elementos
-        function filterItems(category) {
-            const allItems = document.querySelectorAll('.list-item');
-            allItems.forEach(item => {
-                if (category === 'all') {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = item.dataset.category === category ? 'block' : 'none';
-                }
-            });
-        }
-
-        function toggleDownloadButtons(itemId, event) {
-            // Evitar la propagación del evento
-            event.stopPropagation();
-
-            // Buscar el contenedor del botón clickeado
-            const parentElement = event.target;
-
-            // Si ya hay un botón de descarga, lo ocultamos
-            const existingDownloadButton = parentElement.querySelector('.download-button');
-            if (existingDownloadButton) {
-                existingDownloadButton.style.display = existingDownloadButton.style.display === 'block' ? 'none' : 'block';
-            } else {
-                // Crear un nuevo botón de descarga debajo del botón tocado
-                const downloadButton = document.createElement('button');
-                downloadButton.classList.add('download-button');
-                downloadButton.innerText = `Descargar ${itemId}`;
-                downloadButton.onclick = function() {
-                    openDownloadLink(itemId);
-                };
-
-                // Insertar el botón de descarga debajo del botón clickeado
-                parentElement.appendChild(downloadButton);
-            }
-
-            // Si se hizo clic en un nuevo botón, eliminamos el botón de descarga del anterior
-            if (lastClickedButton && lastClickedButton !== itemId) {
-                const previousButton = document.querySelector(`#download-${lastClickedButton}`);
-                if (previousButton) {
-                    previousButton.style.display = 'none';
-                }
-            }
-
-            // Guardamos el ID del último botón clickeado
-            lastClickedButton = itemId;
-        }
-
-        function openDownloadLink(itemId) {
-            let link;
-            // Asignar link según el item
-            switch (itemId) {
-                case 'euroTruck':
-                    link = 'https://drive.google.com/uc?export=download&id=1rleQoX_mTcR0lG2AtWX2O6f7lQ3CXlNQ';
-                    break;
-                case 'americanTruck':
-                    link = 'https://drive.google.com/uc?export=download&id=1DUtvEG5fg11yYmNO4375xe7OAPRelEBO';
-                    break;
-                case 'euroTruckDLC':
-                    link = 'https://drive.google.com/uc?export=download&id=1zwmbXSZGh2rztOQ-0TEXTq5shfQtEUah';
-                    break;
-                case 'americanTruckDLC':
-                    link = 'https://drive.google.com/uc?export=download&id=1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7';
-                    break;
-                case 'slimeRancher':
-                    link = 'https://drive.google.com/uc?export=download&id=YOUR_SLIME_RANCHER_FILE_ID';
-                    break;
-            }
-            window.open(link, "_blank");
-        }
-
-        // Función para filtrar juegos por nombre
         function searchGames() {
             const searchText = document.querySelector('.search-bar').value.toLowerCase();
             const listItems = document.querySelectorAll('.list-item');
-            
+
             listItems.forEach(item => {
                 const gameName = item.textContent.toLowerCase();
                 if (gameName.includes(searchText)) {
@@ -296,10 +176,6 @@
     <div class="background"></div>
 
     <div class="sidebar">
-        <div style="width: 100%; margin-bottom: 10px;">
-            <!-- Barra de búsqueda -->
-            <input type="text" class="search-bar" placeholder="Buscar juegos..." oninput="searchGames()">
-        </div>
         <button onclick="filterItems('games')">Juegos</button>
         <button onclick="filterItems('dlcs')">DLC</button>
         <button onclick="filterItems('all')">Mostrar todo</button>
@@ -308,37 +184,18 @@
     <div class="content">
         <div class="header">GamesHub1</div>
 
-        <!-- Contenedor rectangular detrás de los juegos -->
         <div class="games-container">
-            <div class="container">
-                <div class="list-item" data-category="games" onclick="toggleDownloadButtons('euroTruck', event)">
-                    Euro Truck Simulator
-                </div>
-                <div class="list-item" data-category="games" onclick="toggleDownloadButtons('americanTruck', event)">
-                    American Truck Simulator
-                </div>
-                <div class="list-item" data-category="dlcs" onclick="toggleDownloadButtons('euroTruckDLC', event)">
-                    DLC Euro Truck
-                </div>
-                <div class="list-item" data-category="dlcs" onclick="toggleDownloadButtons('americanTruckDLC', event)">
-                    DLC American Truck
-                </div>
-                <div class="list-item" data-category="games" onclick="toggleDownloadButtons('slimeRancher', event)">
-                    Slime Rancher
-                </div>
-            </div>
-        </div>
-
-        <div class="novedades">
-            <div class="novedad-item">
-                <img src="Euro_Truck_Simulator_PC.jpg" alt="Euro Truck">
-                <h3>Euro Truck Simulator</h3>
-            </div>
-            <div class="novedad-item">
-                <img src="slimeranchernovedad.jpg" alt="Slime Rancher">
-                <h3>Slime Rancher</h3>
-            </div>
+            <!-- Barra de búsqueda -->
+            <input type="text" class="search-bar" placeholder="Buscar juegos..." oninput="searchGames()">
+            
+            <!-- Juegos -->
+            <div class="list-item" onclick="toggleDownloadButtons('euroTruck', event)">Euro Truck Simulator</div>
+            <div class="list-item" onclick="toggleDownloadButtons('americanTruck', event)">American Truck Simulator</div>
+            <div class="list-item" onclick="toggleDownloadButtons('euroTruckDLC', event)">DLC Euro Truck</div>
+            <div class="list-item" onclick="toggleDownloadButtons('americanTruckDLC', event)">DLC American Truck</div>
+            <div class="list-item" onclick="toggleDownloadButtons('slimeRancher', event)">Slime Rancher</div>
         </div>
     </div>
 </body>
 </html>
+
