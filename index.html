@@ -11,6 +11,7 @@
             padding: 0;
             font-family: Arial, sans-serif;
             background-color: #1b1b1b;
+            display: flex;
         }
 
         .background {
@@ -33,6 +34,7 @@
             font-weight: bold;
             font-family: 'Roboto Slab', serif;
             text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+            flex-grow: 1;
         }
 
         .auth-buttons {
@@ -101,7 +103,44 @@
             background-color: #0056b3;
         }
 
+        /* Barra lateral */
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            background-color: #333;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 20px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sidebar img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .sidebar img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px 3px #ffe600;
+        }
+
         /* Resto del diseño */
+        .content {
+            margin-left: 220px;
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+
         .filter-section {
             display: flex;
             justify-content: center;
@@ -181,6 +220,8 @@
         }
     </style>
     <script>
+        let loggedIn = false;
+
         function showModal(type) {
             const modal = document.getElementById(`${type}-modal`);
             modal.style.display = 'block';
@@ -201,67 +242,107 @@
                 }
             });
         }
+
+        function login() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            // Simulación de validación
+            if (email === 'user@example.com' && password === 'password123') {
+                loggedIn = true;
+                closeModal('login');
+                document.getElementById('login-btn').style.display = 'none';
+                document.getElementById('register-btn').style.display = 'none';
+                alert('Inicio de sesión exitoso');
+            } else {
+                alert('Correo electrónico o contraseña incorrectos');
+            }
+        }
+
+        function register() {
+            const username = document.getElementById('register-username').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+
+            // Simulación de validación
+            if (email && password && username) {
+                loggedIn = true;
+                closeModal('register');
+                document.getElementById('login-btn').style.display = 'none';
+                document.getElementById('register-btn').style.display = 'none';
+                alert('Registro exitoso');
+            } else {
+                alert('Todos los campos son necesarios');
+            }
+        }
     </script>
 </head>
 <body>
     <div class="background"></div>
 
-    <!-- Botones de inicio de sesión y registro -->
-    <div class="auth-buttons">
-        <button onclick="showModal('login')">Iniciar sesión</button>
-        <button onclick="showModal('register')">Registrarse</button>
+    <!-- Barra lateral -->
+    <div class="sidebar">
+        <img src="pngwing.com.png" alt="Juego 1" onclick="filterItems('games')">
+        <img src="pngwing.com (1).png" alt="DLC 1" onclick="filterItems('dlcs')">
     </div>
 
-    <!-- Modal de inicio de sesión -->
-    <div id="login-modal" class="modal">
-        <div class="modal-content">
-            <span onclick="closeModal('login')" style="color: #fff; font-size: 30px; cursor: pointer;">&times;</span>
-            <h2 style="color: white; text-align: center;">Iniciar sesión</h2>
-            <input type="email" placeholder="Correo electrónico" required>
-            <input type="password" placeholder="Contraseña" required>
-            <button>Iniciar sesión</button>
+    <!-- Contenido principal -->
+    <div class="content">
+        <div class="header">GAMESHUB1</div>
+
+        <!-- Botones de inicio de sesión y registro -->
+        <div class="auth-buttons" id="auth-buttons">
+            <button id="login-btn" onclick="showModal('login')">Iniciar sesión</button>
+            <button id="register-btn" onclick="showModal('register')">Registrarse</button>
         </div>
-    </div>
 
-    <!-- Modal de registro -->
-    <div id="register-modal" class="modal">
-        <div class="modal-content">
-            <span onclick="closeModal('register')" style="color: #fff; font-size: 30px; cursor: pointer;">&times;</span>
-            <h2 style="color: white; text-align: center;">Registrarse</h2>
-            <input type="text" placeholder="Nombre de usuario" required>
-            <input type="email" placeholder="Correo electrónico" required>
-            <input type="password" placeholder="Contraseña" required>
-            <button>Registrarse</button>
+        <!-- Modal de inicio de sesión -->
+        <div id="login-modal" class="modal">
+            <div class="modal-content">
+                <span onclick="closeModal('login')" style="color: #fff; font-size: 30px; cursor: pointer;">&times;</span>
+                <h2 style="color: white; text-align: center;">Iniciar sesión</h2>
+                <input type="email" id="login-email" placeholder="Correo electrónico" required>
+                <input type="password" id="login-password" placeholder="Contraseña" required>
+                <button onclick="login()">Iniciar sesión</button>
+            </div>
         </div>
-    </div>
 
-    <div class="header">GAMESHUB1</div>
-
-    <!-- Sección de imágenes para el filtrado -->
-    <div class="filter-section">
-        <!-- Reemplaza "pngwing.com.png" y "pngwing.com (1).png" con las imágenes que desees usar -->
-        <img src="pngwing.com.png" alt="Juegos" onclick="filterItems('games')">
-        <img src="pngwing.com (1).png" alt="DLC" onclick="filterItems('dlcs')">
-    </div>
-
-    <div class="container">
-        <div class="list-item" data-category="games">Euro Truck Simulator</div>
-        <div class="list-item" data-category="games">American Truck Simulator</div>
-        <div class="list-item" data-category="dlcs">DLC Euro Truck</div>
-        <div class="list-item" data-category="dlcs">DLC American Truck</div>
-    </div>
-
-    <!-- Novedades -->
-    <div class="novedades">
-        <div class="novedad-item">
-            <img src="Euro_Truck_Simulator_PC.jpg" alt="Euro Truck">
-            <h3>Euro Truck Simulator</h3>
+        <!-- Modal de registro -->
+        <div id="register-modal" class="modal">
+            <div class="modal-content">
+                <span onclick="closeModal('register')" style="color: #fff; font-size: 30px; cursor: pointer;">&times;</span>
+                <h2 style="color: white; text-align: center;">Registrarse</h2>
+                <input type="text" id="register-username" placeholder="Nombre de usuario" required>
+                <input type="email" id="register-email" placeholder="Correo electrónico" required>
+                <input type="password" id="register-password" placeholder="Contraseña" required>
+                <button onclick="register()">Registrarse</button>
+            </div>
         </div>
-        <div class="novedad-item">
-            <img src="american truck simmulator PC.jpg" alt="American Truck">
-            <h3>American Truck Simulator</h3>
+
+        <!-- Sección de imágenes para el filtrado -->
+        <div class="filter-section">
+            <img src="pngwing.com.png" alt="Juegos" onclick="filterItems('games')">
+            <img src="pngwing.com (1).png" alt="DLC" onclick="filterItems('dlcs')">
+        </div>
+
+        <div class="container">
+            <div class="list-item" data-category="games">Euro Truck Simulator</div>
+            <div class="list-item" data-category="games">American Truck Simulator</div>
+            <div class="list-item" data-category="dlcs">DLC Euro Truck</div>
+            <div class="list-item" data-category="dlcs">DLC American Truck</div>
+        </div>
+
+        <!-- Novedades -->
+        <div class="novedades">
+            <div class="novedad-item">
+                <img src="Euro_Truck_Simulator_PC.jpg" alt="Euro Truck">
+                <h3>Euro Truck Simulator</h3>
+            </div>
+            <div class="novedad-item">
+                <img src="american truck simmulator PC.jpg" alt="American Truck">
+                <h3>American Truck Simulator</h3>
+            </div>
         </div>
     </div>
 </body>
 </html>
-
