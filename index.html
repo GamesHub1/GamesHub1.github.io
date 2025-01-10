@@ -37,11 +37,11 @@
             flex-grow: 1;
         }
 
-        /* Barra lateral con blur y esquinas redondeadas */
+        /* Barra lateral */
         .sidebar {
             width: 200px;
             height: 100vh;
-            background-color: rgba(51, 51, 51, 0.8);
+            background-color: #333;
             position: fixed;
             left: 0;
             top: 0;
@@ -51,10 +51,8 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            backdrop-filter: blur(10px);
-            z-index: 1;
-            border-top-right-radius: 20px; /* Redondeo de las esquinas */
-            border-bottom-right-radius: 20px; /* Redondeo de las esquinas */
+            border-radius: 10px 0 0 10px;
+            backdrop-filter: blur(5px);
         }
 
         .sidebar button {
@@ -69,6 +67,24 @@
         }
 
         .sidebar button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Barra de búsqueda */
+        .search-bar {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1rem;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+        }
+
+        .search-bar:focus {
+            outline: none;
             background-color: #0056b3;
         }
 
@@ -90,16 +106,16 @@
         }
 
         .games-container {
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.5); /* Misma caja que las novedades */
             padding: 10px;
             border-radius: 10px;
             margin-bottom: 20px;
-            width: 50%;
+            width: 50%; /* Más pequeño */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
             text-align: center;
             margin-left: auto;
             margin-right: auto;
-            display: block;
+            display: block; /* Hacemos visible */
         }
 
         .list-item {
@@ -111,7 +127,7 @@
             font-size: 1.2rem;
             text-align: center;
             cursor: pointer;
-            width: 250px;
+            width: 250px; /* Ajustado el tamaño de los botones */
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
@@ -171,7 +187,6 @@
             background-color: #0056b3;
         }
 
-        /* Estilo del botón de descarga */
         .download-button {
             margin-top: 10px;
             padding: 10px 20px;
@@ -180,16 +195,6 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            display: none; /* Inicialmente oculto */
-            opacity: 0; /* Inicialmente invisible */
-            transform: translateY(20px); /* Desplazado hacia abajo */
-            transition: opacity 0.5s ease, transform 0.5s ease; /* Suavizado de transición */
-        }
-
-        .download-button.show {
-            display: block;
-            opacity: 1; /* Hacerlo visible */
-            transform: translateY(0); /* Restaurar posición */
         }
 
         .download-button:hover {
@@ -198,6 +203,9 @@
 
     </style>
     <script>
+        let lastClickedButton = null; // Variable para guardar el último botón clickeado
+
+        // Función para filtrar los elementos
         function filterItems(category) {
             const allItems = document.querySelectorAll('.list-item');
             allItems.forEach(item => {
@@ -210,53 +218,77 @@
         }
 
         function toggleDownloadButtons(itemId, event) {
+            // Evitar la propagación del evento
             event.stopPropagation();
+
+            // Buscar el contenedor del botón clickeado
             const parentElement = event.target;
+
+            // Si ya hay un botón de descarga, lo ocultamos
             const existingDownloadButton = parentElement.querySelector('.download-button');
-            
             if (existingDownloadButton) {
-                // Si el botón existe, lo ocultamos con una transición suave
-                existingDownloadButton.classList.remove('show');
-                setTimeout(() => {
-                    existingDownloadButton.remove();
-                }, 500); // Esperamos el tiempo de transición
+                existingDownloadButton.style.display = existingDownloadButton.style.display === 'block' ? 'none' : 'block';
             } else {
-                // Si no existe, lo creamos y mostramos con una animación
+                // Crear un nuevo botón de descarga debajo del botón tocado
                 const downloadButton = document.createElement('button');
                 downloadButton.classList.add('download-button');
                 downloadButton.innerText = `Descargar ${itemId}`;
                 downloadButton.onclick = function() {
                     openDownloadLink(itemId);
                 };
-                parentElement.appendChild(downloadButton);
 
-                // Mostrar el botón con transición
-                setTimeout(() => {
-                    downloadButton.classList.add('show');
-                }, 10); // Pequeño retraso para la animación
+                // Insertar el botón de descarga debajo del botón clickeado
+                parentElement.appendChild(downloadButton);
             }
+
+            // Si se hizo clic en un nuevo botón, eliminamos el botón de descarga del anterior
+            if (lastClickedButton && lastClickedButton !== itemId) {
+                const previousButton = document.querySelector(`#download-${lastClickedButton}`);
+                if (previousButton) {
+                    previousButton.style.display = 'none';
+                }
+            }
+
+            // Guardamos el ID del último botón clickeado
+            lastClickedButton = itemId;
         }
 
         function openDownloadLink(itemId) {
             let link;
+            // Asignar link según el item
             switch (itemId) {
                 case 'euroTruck':
-                    link = 'https://drive.google.com/uc?export=download&id=1rleQoX_mTcR0lG2AtWX2O6f7lQ3CXlNQ'; // Corregido para descargar directamente
+                    link = 'https://drive.google.com/uc?export=download&id=1rleQoX_mTcR0lG2AtWX2O6f7lQ3CXlNQ';
                     break;
                 case 'americanTruck':
-                    link = 'https://drive.google.com/uc?export=download&id=1DUtvEG5fg11yYmNO4375xe7OAPRelEBO'; // Corregido para descargar directamente
+                    link = 'https://drive.google.com/uc?export=download&id=1DUtvEG5fg11yYmNO4375xe7OAPRelEBO';
                     break;
                 case 'euroTruckDLC':
-                    link = 'https://drive.google.com/uc?export=download&id=1zwmbXSZGh2rztOQ-0TEXTq5shfQtEUah'; // Corregido para descargar directamente
+                    link = 'https://drive.google.com/uc?export=download&id=1zwmbXSZGh2rztOQ-0TEXTq5shfQtEUah';
                     break;
                 case 'americanTruckDLC':
-                    link = 'https://drive.google.com/uc?export=download&id=1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7'; // Corregido para descargar directamente
+                    link = 'https://drive.google.com/uc?export=download&id=1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7';
                     break;
                 case 'slimeRancher':
-                    link = 'https://drive.google.com/uc?export=download&id=1xyzSlimeRancherLink'; // Asegúrate de reemplazar con el ID correcto
+                    link = 'https://drive.google.com/uc?export=download&id=YOUR_SLIME_RANCHER_FILE_ID';
                     break;
             }
             window.open(link, "_blank");
+        }
+
+        // Función para filtrar juegos por nombre
+        function searchGames() {
+            const searchText = document.querySelector('.search-bar').value.toLowerCase();
+            const listItems = document.querySelectorAll('.list-item');
+            
+            listItems.forEach(item => {
+                const gameName = item.textContent.toLowerCase();
+                if (gameName.includes(searchText)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
         }
     </script>
 </head>
@@ -272,6 +304,10 @@
     <div class="content">
         <div class="header">GamesHub1</div>
 
+        <!-- Barra de búsqueda -->
+        <input type="text" class="search-bar" placeholder="Buscar juegos..." oninput="searchGames()">
+
+        <!-- Contenedor rectangular detrás de los juegos -->
         <div class="games-container">
             <div class="container">
                 <div class="list-item" data-category="games" onclick="toggleDownloadButtons('euroTruck', event)">
