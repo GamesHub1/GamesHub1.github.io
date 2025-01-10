@@ -168,7 +168,7 @@
         }
 
         .download-button {
-            margin-top: 15px;
+            margin-top: 10px;
             padding: 10px 20px;
             background-color: #28a745;
             color: white;
@@ -185,24 +185,59 @@
     <script>
         let lastClickedButton = null; // Variable para guardar el último botón clickeado
 
-        function toggleDownloadButtons(itemId) {
-            // Ocultamos todos los botones de descarga
-            const buttons = document.querySelectorAll('.download-button');
-            buttons.forEach(button => {
-                button.style.display = 'none';
-            });
+        function toggleDownloadButtons(itemId, event) {
+            // Evitar la propagación del evento
+            event.stopPropagation();
 
-            // Si se hace clic en un nuevo botón, lo mostramos
-            const targetButton = document.querySelector(`#download-${itemId}`);
-            if (targetButton) {
-                targetButton.style.display = 'block'; // Mostramos el botón de descarga correspondiente
+            // Buscar el contenedor del botón clickeado
+            const parentElement = event.target;
+
+            // Si ya hay un botón de descarga, lo ocultamos
+            const existingDownloadButton = parentElement.querySelector('.download-button');
+            if (existingDownloadButton) {
+                existingDownloadButton.style.display = existingDownloadButton.style.display === 'block' ? 'none' : 'block';
+            } else {
+                // Crear un nuevo botón de descarga debajo del botón tocado
+                const downloadButton = document.createElement('button');
+                downloadButton.classList.add('download-button');
+                downloadButton.innerText = `Descargar ${itemId}`;
+                downloadButton.onclick = function() {
+                    openDownloadLink(itemId);
+                };
+
+                // Insertar el botón de descarga debajo del botón clickeado
+                parentElement.appendChild(downloadButton);
             }
 
-            // Guardamos el botón clickeado
+            // Si se hizo clic en un nuevo botón, eliminamos el botón de descarga del anterior
+            if (lastClickedButton && lastClickedButton !== itemId) {
+                const previousButton = document.querySelector(`#download-${lastClickedButton}`);
+                if (previousButton) {
+                    previousButton.style.display = 'none';
+                }
+            }
+
+            // Guardamos el ID del último botón clickeado
             lastClickedButton = itemId;
         }
 
-        function openDownloadLink(link) {
+        function openDownloadLink(itemId) {
+            let link;
+            // Asignar link según el item
+            switch (itemId) {
+                case 'euroTruck':
+                    link = 'http://link-a-eurotrucksimulator.com';
+                    break;
+                case 'americanTruck':
+                    link = 'http://link-a-americantrucksimulator.com';
+                    break;
+                case 'euroTruckDLC':
+                    link = 'http://link-a-dlceurotruck.com';
+                    break;
+                case 'americanTruckDLC':
+                    link = 'http://link-a-dlctrucksimulator.com';
+                    break;
+            }
             window.open(link, "_blank");
         }
     </script>
@@ -222,25 +257,19 @@
         <!-- Contenedor rectangular detrás de los juegos -->
         <div class="games-container">
             <div class="container">
-                <div class="list-item" data-category="games" onclick="toggleDownloadButtons('euroTruck')">
+                <div class="list-item" data-category="games" onclick="toggleDownloadButtons('euroTruck', event)">
                     Euro Truck Simulator
                 </div>
-                <div class="list-item" data-category="games" onclick="toggleDownloadButtons('americanTruck')">
+                <div class="list-item" data-category="games" onclick="toggleDownloadButtons('americanTruck', event)">
                     American Truck Simulator
                 </div>
-                <div class="list-item" data-category="dlcs" onclick="toggleDownloadButtons('euroTruckDLC')">
+                <div class="list-item" data-category="dlcs" onclick="toggleDownloadButtons('euroTruckDLC', event)">
                     DLC Euro Truck
                 </div>
-                <div class="list-item" data-category="dlcs" onclick="toggleDownloadButtons('americanTruckDLC')">
+                <div class="list-item" data-category="dlcs" onclick="toggleDownloadButtons('americanTruckDLC', event)">
                     DLC American Truck
                 </div>
             </div>
-
-            <!-- Botones de descarga -->
-            <button class="download-button" id="download-euroTruck" style="display:none;" onclick="openDownloadLink('http://link-a-eurotrucksimulator.com')">Descargar Euro Truck Simulator</button>
-            <button class="download-button" id="download-americanTruck" style="display:none;" onclick="openDownloadLink('http://link-a-americantrucksimulator.com')">Descargar American Truck Simulator</button>
-            <button class="download-button" id="download-euroTruckDLC" style="display:none;" onclick="openDownloadLink('http://link-a-dlceurotruck.com')">Descargar DLC Euro Truck</button>
-            <button class="download-button" id="download-americanTruckDLC" style="display:none;" onclick="openDownloadLink('http://link-a-dlctrucksimulator.com')">Descargar DLC American Truck</button>
         </div>
 
         <div class="novedades">
