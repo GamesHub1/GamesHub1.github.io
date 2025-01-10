@@ -108,7 +108,7 @@
             font-size: 1.2rem;
             text-align: center;
             cursor: pointer;
-            width: 300px; /* Botones más grandes */
+            width: 300px;
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
@@ -146,6 +146,19 @@
         .novedad-item h3 {
             color: white;
             margin: 0;
+        }
+
+        .user-info {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 250px;
         }
 
         /* Estilos para los modales */
@@ -193,16 +206,24 @@
             background-color: #0056b3;
         }
 
-        .user-info {
-            display: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.7);
+        .filter-section {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .filter-section button {
+            padding: 10px;
+            background-color: #007bff;
             color: white;
-            padding: 20px;
-            border-radius: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .filter-section button:hover {
+            background-color: #0056b3;
         }
 
     </style>
@@ -262,23 +283,34 @@
             }
         }
 
-        function showUserInfo() {
-            if (loggedIn) {
-                const userInfo = JSON.parse(localStorage.getItem('user'));
-                const userInfoDiv = document.createElement('div');
-                userInfoDiv.classList.add('user-info');
-                userInfoDiv.innerHTML = `
-                    <h3>Nombre de usuario: ${userInfo.username}</h3>
-                    <p>Correo electrónico: ${userInfo.email}</p>
-                    <p>Contraseña: ${userInfo.password}</p>
-                `;
-                document.body.appendChild(userInfoDiv);
-                setTimeout(() => {
-                    userInfoDiv.style.display = 'block';
-                }, 200);
+        function toggleUserInfo() {
+            const userInfoDiv = document.getElementById('user-info');
+            if (userInfoDiv.style.display === 'block') {
+                userInfoDiv.style.display = 'none';
             } else {
-                alert('Por favor inicie sesión o regístrese primero.');
+                if (loggedIn) {
+                    const userInfo = JSON.parse(localStorage.getItem('user'));
+                    userInfoDiv.innerHTML = `
+                        <h3>Nombre de usuario: ${userInfo.username}</h3>
+                        <p>Correo electrónico: ${userInfo.email}</p>
+                        <p>Contraseña: ${userInfo.password}</p>
+                    `;
+                    userInfoDiv.style.display = 'block';
+                } else {
+                    alert('Por favor inicie sesión o regístrese primero.');
+                }
             }
+        }
+
+        function filterItems(category) {
+            const allItems = document.querySelectorAll('.list-item');
+            allItems.forEach(item => {
+                if (item.dataset.category !== category && category !== 'all') {
+                    item.style.display = 'none';
+                } else {
+                    item.style.display = 'block';
+                }
+            });
         }
     </script>
 </head>
@@ -287,7 +319,6 @@
 
     <!-- Barra lateral -->
     <div class="sidebar">
-        <img src="pngwing.com (2).png" alt="Logo" onclick="showUserInfo()">
         <button id="login-btn" onclick="showModal('login')">Iniciar sesión</button>
         <button id="register-btn" onclick="showModal('register')">Registrarse</button>
     </div>
@@ -296,15 +327,30 @@
     <div class="content">
         <div class="header">GAMESHUB1</div>
 
-        <!-- Sección de juegos y DLC -->
-        <div class="container">
-            <div class="list-item">Euro Truck Simulator</div>
-            <div class="list-item">American Truck Simulator</div>
-            <div class="list-item">DLC Euro Truck</div>
-            <div class="list-item">DLC American Truck</div>
+        <!-- Imagen de la cuenta -->
+        <div>
+            <img src="pngwing.com (2).png" alt="Imagen cuenta" style="width: 100px; cursor: pointer;" onclick="toggleUserInfo()">
         </div>
 
-        <!-- Sección de novedades -->
+        <!-- Información de la cuenta -->
+        <div id="user-info" class="user-info" style="display: none;"></div>
+
+        <!-- Sección de filtros -->
+        <div class="filter-section">
+            <button onclick="filterItems('games')">JUEGOS</button>
+            <button onclick="filterItems('dlcs')">DLC</button>
+            <button onclick="filterItems('all')">Mostrar todo</button>
+        </div>
+
+        <!-- Sección de elementos -->
+        <div class="container">
+            <div class="list-item" data-category="games">Euro Truck Simulator</div>
+            <div class="list-item" data-category="games">American Truck Simulator</div>
+            <div class="list-item" data-category="dlcs">DLC Euro Truck</div>
+            <div class="list-item" data-category="dlcs">DLC American Truck</div>
+        </div>
+
+        <!-- Novedades -->
         <div class="novedades">
             <div class="novedad-item">
                 <img src="Euro_Truck_Simulator_PC.jpg" alt="Euro Truck">
