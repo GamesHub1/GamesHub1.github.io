@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GamesHub1</title>
+    <title>GamesHub1 - Optimización de Juegos</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            line-height: 1.6;
         }
 
+        /* Fondo */
         .background {
             position: fixed;
             top: 0;
@@ -19,51 +23,67 @@
             height: 100%;
             background: url('fondo.jpg') no-repeat center center fixed;
             background-size: cover;
-            filter: blur(5px); /* Ajusta el nivel de desenfoque */
+            filter: blur(8px);
             z-index: -1;
         }
 
+        /* Encabezado */
         .header {
-            position: absolute;
-            top: 20px;
-            width: 100%;
             text-align: center;
-            color: white;
+            padding: 30px 0;
             font-size: 3rem;
-            font-weight: bold;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            font-weight: 700;
+            color: #f8f8f8;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+            margin-top: 10px;
         }
 
+        /* Contenedor principal */
         .container {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 80%;
+            width: 90%;
             max-width: 400px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
             padding: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(10px);
         }
 
+        /* Texto adicional */
+        .info-text {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #ddd;
+        }
+
+        /* Estilo de los botones */
         .list-item {
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.1);
             color: white;
             margin: 10px 0;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 1rem;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.2rem;
             cursor: pointer;
             text-align: center;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
         }
 
         .list-item:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .list-item.active {
             background-color: rgba(255, 255, 255, 0.3);
         }
 
+        /* Desplegable */
         .dropdown {
             display: none;
             margin-top: 10px;
@@ -71,23 +91,53 @@
         }
 
         .dropdown button {
-            padding: 10px 20px;
-            font-size: 1rem;
+            padding: 12px 25px;
+            font-size: 1.1rem;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             background-color: #28a745;
             color: white;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
 
         .dropdown button:hover {
             background-color: #218838;
         }
+
+        /* Botón de descarga en azul para DLC */
+        .blue-button {
+            background-color: #007bff;
+        }
+
+        .blue-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Efecto de transición */
+        .container .list-item.active + .dropdown {
+            display: block;
+        }
+
     </style>
     <script>
+        // Función para cambiar la visibilidad de los botones
         function toggleDropdown(id) {
             const dropdown = document.getElementById(id);
+            const otherDropdown = document.querySelectorAll('.dropdown');
+            otherDropdown.forEach(function(d) {
+                if (d !== dropdown) d.style.display = 'none'; // Esconde otros dropdowns
+            });
             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Función para manejar el clic en la opción de juego y ocultar el otro
+        function handleClick(buttonId, hideButtonId) {
+            const button = document.getElementById(buttonId);
+            const hideButton = document.getElementById(hideButtonId);
+            button.classList.add('active');
+            hideButton.classList.remove('active');
+            toggleDropdown(buttonId);
         }
     </script>
 </head>
@@ -97,20 +147,41 @@
     <div class="header">GAMESHUB1</div>
 
     <div class="container">
-        <div style="filter: none;">
-            <div class="list-item" onclick="toggleDropdown('dropdown1')">
-                EURO TRUCK SIMULATOR
-            </div>
-            <div id="dropdown1" class="dropdown">
-                <button onclick="window.location.href = 'https://drive.google.com/file/d/1rleQoX_mTcR0lG2AtWX2O6f7lQ3CXlNQ/view?usp=drive_link';">Descargar</button>
-            </div>
+        <!-- Texto de optimización -->
+        <div class="info-text">
+            Optimiza tu experiencia de juego con nuestros archivos exclusivos. ¡Aumenta el rendimiento y disfruta al máximo!
+        </div>
 
-            <div class="list-item" onclick="toggleDropdown('dropdown2')">
-                AMERICAN TRUCK SIMULATOR
-            </div>
-            <div id="dropdown2" class="dropdown">
-                <button onclick="window.location.href = 'https://drive.google.com/file/d/1DUtvEG5fg11yYmNO4375xe7OAPRelEBO/view?usp=drive_link';">Descargar</button>
-            </div>
+        <!-- Opción Euro Truck Simulator -->
+        <div id="euroTruck" class="list-item" onclick="handleClick('euroTruck', 'americanTruck')">
+            EURO TRUCK SIMULATOR
+        </div>
+        <div id="dropdown1" class="dropdown">
+            <button onclick="window.location.href = 'https://drive.google.com/file/d/1rleQoX_mTcR0lG2AtWX2O6f7lQ3CXlNQ/view?usp=drive_link';">Descargar</button>
+        </div>
+
+        <!-- Opción American Truck Simulator -->
+        <div id="americanTruck" class="list-item" onclick="handleClick('americanTruck', 'euroTruck')">
+            AMERICAN TRUCK SIMULATOR
+        </div>
+        <div id="dropdown2" class="dropdown">
+            <button onclick="window.location.href = 'https://drive.google.com/file/d/1DUtvEG5fg11yYmNO4375xe7OAPRelEBO/view?usp=drive_link';">Descargar</button>
+        </div>
+
+        <!-- Opción DLC Euro Truck Simulator -->
+        <div id="dlcEuroTruck" class="list-item" onclick="handleClick('dlcEuroTruck', 'dlcAmericanTruck')">
+            DLC EURO TRUCK SIMULATOR
+        </div>
+        <div id="dropdown3" class="dropdown">
+            <button class="blue-button" onclick="window.location.href = 'https://drive.google.com/file/d/1zwmbXSZGh2rztOQ-0TEXTq5shfQtEUah/view?usp=drive_link';">Descargar</button>
+        </div>
+
+        <!-- Opción DLC American Truck Simulator -->
+        <div id="dlcAmericanTruck" class="list-item" onclick="handleClick('dlcAmericanTruck', 'dlcEuroTruck')">
+            DLC AMERICAN TRUCK SIMULATOR
+        </div>
+        <div id="dropdown4" class="dropdown">
+            <button class="blue-button" onclick="window.location.href = 'https://drive.google.com/file/d/1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7/view?usp=drive_link';">Descargar</button>
         </div>
     </div>
 </body>
