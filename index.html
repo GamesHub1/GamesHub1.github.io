@@ -50,7 +50,7 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            border-radius: 10px 0 0 10px;
+            border-radius: 0 10px 10px 0;
             backdrop-filter: blur(5px);
         }
 
@@ -142,6 +142,12 @@
             max-width: 800px;
         }
 
+        .novedades img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+        }
+
         .download-button {
             margin-top: 10px;
             padding: 10px 20px;
@@ -170,6 +176,13 @@
                 }
             });
         }
+
+        function toggleDownloadButtons(id, event) {
+            const button = document.querySelector(`#${id}-download`);
+            if (button) {
+                button.style.display = button.style.display === 'none' ? 'block' : 'none';
+            }
+        }
     </script>
 </head>
 <body>
@@ -195,7 +208,12 @@
             <div class="list-item" onclick="toggleDownloadButtons('americanTruckDLC', event)">DLC American Truck</div>
             <div class="list-item" onclick="toggleDownloadButtons('slimeRancher', event)">Slime Rancher</div>
         </div>
+
+        <!-- Novedades -->
+        <div class="novedades">
+            <img src="slimeranchernovedad.jpg" alt="Slime Rancher Novedad">
+            <img src="othernovedad.jpg" alt="Other Novedad">
+        </div>
     </div>
 </body>
 </html>
-
