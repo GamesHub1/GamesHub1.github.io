@@ -19,13 +19,13 @@
             height: 100%;
             background: url('fondo.jpg') no-repeat center center fixed;
             background-size: cover;
+            filter: blur(5px);
             z-index: -1;
         }
 
         .header {
-            position: absolute;
-            top: 20px;
-            width: 100%;
+            position: relative;
+            margin-top: 20px;
             text-align: center;
             color: white;
             font-size: 3rem;
@@ -33,31 +33,152 @@
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
         }
 
+        .search-container {
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .search-box {
+            width: 60%;
+            max-width: 400px;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .container {
+            position: relative;
+            margin: 50px auto;
+            width: 80%;
+            max-width: 600px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+        }
+
+        .list-item {
+            background-color: rgba(255, 255, 255, 0.2);
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .list-item:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .dropdown {
+            display: none;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .dropdown button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        .dropdown button:hover {
+            background-color: #0056b3;
+        }
+
         .novedades {
             position: fixed;
-            bottom: 20px;
-            width: 150px;
         }
 
         .novedades.left {
-            left: 20px;
+            bottom: 10px;
+            left: 10px;
         }
 
         .novedades.right {
-            right: 20px;
+            bottom: 10px;
+            right: 10px;
         }
 
         .novedades img {
-            width: 100%;
+            width: 150px;
+            height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
     </style>
+    <script>
+        function toggleDropdown(id) {
+            document.querySelectorAll('.dropdown').forEach(drop => drop.style.display = 'none');
+            const dropdown = document.getElementById(id);
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function searchItems() {
+            const query = document.getElementById('search-box').value.toLowerCase();
+            const items = document.querySelectorAll('.list-item');
+            items.forEach(item => {
+                if (item.textContent.toLowerCase().includes(query)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </head>
 <body>
     <div class="background"></div>
 
     <div class="header">GAMESHUB1</div>
+
+    <div class="search-container">
+        <input 
+            id="search-box" 
+            class="search-box" 
+            type="text" 
+            placeholder="Buscar..." 
+            oninput="searchItems()">
+    </div>
+
+    <div class="container">
+        <div class="list-item" onclick="toggleDropdown('dropdown1')">
+            EURO TRUCK SIMULATOR
+        </div>
+        <div id="dropdown1" class="dropdown">
+            <button onclick="window.location.href='https://drive.google.com/file/d/1rleQoX_mTcR0lG2AtWX2O6f7lQ3CXlNQ/view?usp=drive_link'">Descargar</button>
+        </div>
+
+        <div class="list-item" onclick="toggleDropdown('dropdown2')">
+            AMERICAN TRUCK SIMULATOR
+        </div>
+        <div id="dropdown2" class="dropdown">
+            <button onclick="window.location.href='https://drive.google.com/file/d/1DUtvEG5fg11yYmNO4375xe7OAPRelEBO/view?usp=drive_link'">Descargar</button>
+        </div>
+
+        <div class="list-item" onclick="toggleDropdown('dropdown3')">
+            DLC EURO TRUCK
+        </div>
+        <div id="dropdown3" class="dropdown">
+            <button onclick="window.location.href='https://drive.google.com/file/d/1zwmbXSZGh2rztOQ-0TEXTq5shfQtEUah/view?usp=drive_link'">Descargar</button>
+        </div>
+
+        <div class="list-item" onclick="toggleDropdown('dropdown4')">
+            DLC AMERICAN TRUCK
+        </div>
+        <div id="dropdown4" class="dropdown">
+            <button onclick="window.location.href='https://drive.google.com/file/d/1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7/view?usp=drive_link'">Descargar</button>
+        </div>
+    </div>
 
     <div class="novedades left">
         <img src="Euro_Truck_Simulator_PC.jpg" alt="Euro Truck Simulator">
