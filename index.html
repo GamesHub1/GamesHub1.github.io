@@ -126,6 +126,24 @@
             color: white;
             margin-top: 10px;
         }
+
+        /* Diseño del botón de descarga */
+        .download-btn {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 25px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-top: 10px;
+        }
+
+        .download-btn:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
     </style>
     <script>
         function toggleDropdown(id) {
@@ -162,12 +180,24 @@
         <div>
             <div class="list-item" onclick="toggleDropdown('dropdown1')">EURO TRUCK SIMULATOR</div>
             <div id="dropdown1" class="dropdown" style="display: none; text-align: center;">
-                <button onclick="window.location.href = 'https://drive.google.com/file/d/1rleQoX_mTcR0lG2AtWX2O6f7lQ3CXlNQ/view?usp=drive_link';">Descargar</button>
+                <button class="download-btn" onclick="window.location.href = 'https://drive.google.com/file/d/1rleQoX_mTcR0lG2AtWX2O6f7lQ3CXlNQ/view?usp=drive_link';">Descargar</button>
             </div>
 
             <div class="list-item" onclick="toggleDropdown('dropdown2')">AMERICAN TRUCK SIMULATOR</div>
             <div id="dropdown2" class="dropdown" style="display: none; text-align: center;">
-                <button onclick="window.location.href = 'https://drive.google.com/file/d/1DUtvEG5fg11yYmNO4375xe7OAPRelEBO/view?usp=drive_link';">Descargar</button>
+                <button class="download-btn" onclick="window.location.href = 'https://drive.google.com/file/d/1DUtvEG5fg11yYmNO4375xe7OAPRelEBO/view?usp=drive_link';">Descargar</button>
+            </div>
+
+            <!-- Nueva opción Euro Truck DLC -->
+            <div class="list-item" onclick="toggleDropdown('dropdown3')">EURO TRUCK DLC</div>
+            <div id="dropdown3" class="dropdown" style="display: none; text-align: center;">
+                <button class="download-btn" onclick="window.location.href = 'https://drive.google.com/file/d/1zwmbXSZGh2rztOQ-0TEXTq5shfQtEUah/view?usp=drive_link';">Descargar Euro Truck DLC</button>
+            </div>
+
+            <!-- Nueva opción American Truck DLC -->
+            <div class="list-item" onclick="toggleDropdown('dropdown4')">AMERICAN TRUCK DLC</div>
+            <div id="dropdown4" class="dropdown" style="display: none; text-align: center;">
+                <button class="download-btn" onclick="window.location.href = 'https://drive.google.com/file/d/1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7/view?usp=drive_link';">Descargar American Truck DLC</button>
             </div>
         </div>
     </div>
