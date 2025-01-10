@@ -42,8 +42,8 @@
 
         .auth-buttons button {
             margin: 5px;
-            padding: 10px 20px;
-            font-size: 1rem;
+            padding: 8px 15px;
+            font-size: 0.9rem;
             border: none;
             border-radius: 5px;
             background-color: #007bff;
@@ -96,9 +96,9 @@
             background-color: rgba(255, 255, 255, 0.2);
             color: white;
             margin: 10px 0;
-            padding: 10px;
-            border-radius: 10px;
-            font-size: 1.2rem;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 1rem;
             text-align: center;
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
@@ -106,7 +106,7 @@
 
         .list-item:hover {
             box-shadow: 0 0 20px 5px #ffe600;
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
         .novedades {
@@ -139,30 +139,77 @@
             margin: 0;
         }
 
-        .search-bar {
-            margin: 20px auto;
-            text-align: center;
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            z-index: 100;
         }
 
-        .search-bar input {
-            padding: 10px;
-            width: 80%;
-            max-width: 400px;
-            border-radius: 20px;
+        .modal.active {
+            display: block;
+        }
+
+        .modal input {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 8px;
+            border-radius: 5px;
             border: 1px solid #ccc;
+        }
+
+        .modal button {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        .modal button:hover {
+            background-color: #0056b3;
         }
     </style>
     <script>
-        function toggleCategory(category) {
-            const games = document.querySelector('.games');
-            const dlcs = document.querySelector('.dlcs');
+        function showModal(type) {
+            const modal = document.getElementById('auth-modal');
+            modal.setAttribute('data-type', type);
+            modal.classList.add('active');
+            document.getElementById('auth-title').textContent = 
+                type === 'login' ? 'Iniciar Sesión' : 'Registrarse';
+        }
 
-            if (category === 'games') {
-                games.style.display = games.style.display === 'block' ? 'none' : 'block';
-                dlcs.style.display = 'block';
-            } else if (category === 'dlcs') {
-                dlcs.style.display = dlcs.style.display === 'block' ? 'none' : 'block';
-                games.style.display = 'block';
+        function closeModal() {
+            const modal = document.getElementById('auth-modal');
+            modal.classList.remove('active');
+        }
+
+        function submitAuth() {
+            const modal = document.getElementById('auth-modal');
+            const type = modal.getAttribute('data-type');
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const username = type === 'register' ? document.getElementById('username').value : null;
+
+            if (!email || !password || (type === 'register' && !username)) {
+                alert('Por favor, completa todos los campos.');
+                return;
+            }
+
+            alert(`${type === 'login' ? 'Sesión iniciada' : 'Registro exitoso'}`);
+            closeModal();
+
+            if (type === 'login') {
+                document.querySelector('.auth-buttons').style.display = 'none';
             }
         }
     </script>
@@ -171,8 +218,19 @@
     <div class="background"></div>
 
     <div class="auth-buttons">
-        <button onclick="alert('Iniciar sesión aún no implementado')">Iniciar sesión</button>
-        <button onclick="alert('Registro aún no implementado')">Registrarse</button>
+        <button onclick="showModal('login')">Iniciar sesión</button>
+        <button onclick="showModal('register')">Registrarse</button>
+    </div>
+
+    <div id="auth-modal" class="modal">
+        <h3 id="auth-title">Iniciar Sesión</h3>
+        <input type="email" id="email" placeholder="Correo electrónico">
+        <input type="password" id="password" placeholder="Contraseña">
+        <div id="username-field" style="display: none;">
+            <input type="text" id="username" placeholder="Nombre de usuario">
+        </div>
+        <button onclick="submitAuth()">Enviar</button>
+        <button onclick="closeModal()">Cancelar</button>
     </div>
 
     <div class="header">GAMESHUB1</div>
@@ -183,30 +241,9 @@
     </div>
 
     <div class="container">
-        <div class="search-bar">
-            <input id="search-input" type="text" placeholder="Buscar archivos...">
-        </div>
-
-        <div class="games">
-            <div class="list-item">DLC EURO TRUCK</div>
-            <div class="list-item">DLC AMERICAN TRUCK</div>
-        </div>
-
-        <div class="dlcs">
-            <div class="list-item">EURO TRUCK SIMULATOR</div>
-            <div class="list-item">AMERICAN TRUCK SIMULATOR</div>
-        </div>
-
-        <div class="novedades">
-            <div class="novedad-item">
-                <img src="Euro_Truck_Simulator_PC.jpg" alt="Euro Truck Simulator">
-                <h3>NOVEDAD Euro Truck Simulator</h3>
-            </div>
-            <div class="novedad-item">
-                <img src="american truck simmulator PC.jpg" alt="American Truck Simulator">
-                <h3>NOVEDAD American Truck Simulator</h3>
-            </div>
-        </div>
+        <!-- Juegos y DLC aquí -->
+        <!-- Novedades -->
+        <!-- Agregado posteriormente -->
     </div>
 </body>
 </html>
