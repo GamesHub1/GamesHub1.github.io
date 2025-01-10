@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,17 +31,16 @@
             margin-top: 10px;
             text-align: center;
             color: white;
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: bold;
             font-family: 'Roboto Slab', serif;
             text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
-            flex-grow: 1;
         }
 
         .sidebar {
             width: 200px;
             height: 100vh;
-            background-color: #333;
+            background-color: rgba(51, 51, 51, 0.8);
             position: fixed;
             left: 0;
             top: 0;
@@ -50,7 +50,7 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            border-radius: 0 10px 10px 0;
+            border-radius: 0 15px 15px 0;
             backdrop-filter: blur(5px);
         }
 
@@ -69,46 +69,19 @@
             background-color: #0056b3;
         }
 
-        .search-bar {
-            width: 90%;
-            padding: 10px;
-            margin: 0 auto 20px;
-            border-radius: 12px;
-            border: none;
-            font-size: 1rem;
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.2);
-            color: white;
-            transition: all 0.3s ease;
-        }
-
-        .search-bar:focus {
-            outline: none;
-            background-color: rgba(255, 255, 255, 0.5);
-        }
-
         .content {
             margin-left: 220px;
             padding: 20px;
             color: white;
-            text-align: center;
-            width: 100%;
-        }
-
-        .container {
-            margin: 20px auto;
-            padding: 20px;
-            color: white;
-            text-align: center;
-            max-width: 800px;
+            width: calc(100% - 220px);
         }
 
         .games-container {
             background-color: rgba(0, 0, 0, 0.5);
-            padding: 20px;
+            padding: 10px;
             border-radius: 10px;
             margin-bottom: 20px;
-            max-width: 800px;
+            width: 50%;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
             text-align: center;
             margin-left: auto;
@@ -142,10 +115,46 @@
             max-width: 800px;
         }
 
-        .novedades img {
-            max-width: 100%;
+        .novedad-item {
+            background: rgba(0, 0, 0, 0.5);
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 45%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        .novedad-item img {
+            width: 100px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .novedad-item h3 {
+            color: white;
+            margin: 0;
+        }
+
+        .filter-section {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .filter-section button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .filter-section button:hover {
+            background-color: #0056b3;
         }
 
         .download-button {
@@ -156,64 +165,65 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            display: none;
         }
 
-        .download-button:hover {
-            background-color: #218838;
+        .download-button.show {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
     </style>
     <script>
-        function searchGames() {
-            const searchText = document.querySelector('.search-bar').value.toLowerCase();
-            const listItems = document.querySelectorAll('.list-item');
-
-            listItems.forEach(item => {
-                const gameName = item.textContent.toLowerCase();
-                if (gameName.includes(searchText)) {
+        function filterItems(category) {
+            const allItems = document.querySelectorAll('.list-item');
+            allItems.forEach(item => {
+                if (category === 'all') {
                     item.style.display = 'block';
                 } else {
-                    item.style.display = 'none';
+                    item.style.display = item.dataset.category === category ? 'block' : 'none';
                 }
             });
         }
-
-        function toggleDownloadButtons(id, event) {
-            const button = document.querySelector(`#${id}-download`);
-            if (button) {
-                button.style.display = button.style.display === 'none' ? 'block' : 'none';
-            }
-        }
     </script>
 </head>
+
 <body>
     <div class="background"></div>
 
     <div class="sidebar">
-        <button onclick="filterItems('games')">Juegos</button>
+        <button onclick="filterItems('games')">JUEGOS</button>
         <button onclick="filterItems('dlcs')">DLC</button>
-        <button onclick="filterItems('all')">Mostrar todo</button>
+        <button onclick="filterItems('all')">MOSTRAR TODO</button>
     </div>
 
     <div class="content">
         <div class="header">GamesHub1</div>
 
         <div class="games-container">
-            <!-- Barra de búsqueda -->
-            <input type="text" class="search-bar" placeholder="Buscar juegos..." oninput="searchGames()">
-            
-            <!-- Juegos -->
-            <div class="list-item" onclick="toggleDownloadButtons('euroTruck', event)">Euro Truck Simulator</div>
-            <div class="list-item" onclick="toggleDownloadButtons('americanTruck', event)">American Truck Simulator</div>
-            <div class="list-item" onclick="toggleDownloadButtons('euroTruckDLC', event)">DLC Euro Truck</div>
-            <div class="list-item" onclick="toggleDownloadButtons('americanTruckDLC', event)">DLC American Truck</div>
-            <div class="list-item" onclick="toggleDownloadButtons('slimeRancher', event)">Slime Rancher</div>
+            <div class="list-item" data-category="games">Euro Truck Simulator</div>
+            <div class="list-item" data-category="dlcs">DLC Euro Truck</div>
         </div>
 
-        <!-- Novedades -->
         <div class="novedades">
-            <img src="slimeranchernovedad.jpg" alt="Slime Rancher Novedad">
-            <img src="othernovedad.jpg" alt="Other Novedad">
+            <div class="novedad-item">
+                <img src="slimeranchernovedad.jpg" alt="Slime Rancher">
+                <h3>Slime Rancher</h3>
+            </div>
+            <div class="novedad-item">
+                <img src="Euro_Truck_Simulator_PC.jpg" alt="Euro Truck">
+                <h3>Euro Truck Simulator</h3>
+            </div>
         </div>
     </div>
 </body>
+
 </html>
