@@ -319,6 +319,8 @@
 
     <!-- Barra lateral -->
     <div class="sidebar">
+        <!-- Logo de la cuenta -->
+        <img src="pngwing.com (2).png" alt="Logo de cuenta" style="width: 100px; cursor: pointer;" onclick="toggleUserInfo()">
         <button id="login-btn" onclick="showModal('login')">Iniciar sesión</button>
         <button id="register-btn" onclick="showModal('register')">Registrarse</button>
     </div>
@@ -326,11 +328,6 @@
     <!-- Contenido principal -->
     <div class="content">
         <div class="header">GAMESHUB1</div>
-
-        <!-- Imagen de la cuenta -->
-        <div>
-            <img src="pngwing.com (2).png" alt="Imagen cuenta" style="width: 100px; cursor: pointer;" onclick="toggleUserInfo()">
-        </div>
 
         <!-- Información de la cuenta -->
         <div id="user-info" class="user-info" style="display: none;"></div>
