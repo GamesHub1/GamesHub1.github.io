@@ -204,22 +204,23 @@
             // Buscar el contenedor del botón clickeado
             const parentElement = event.target;
 
-            // Eliminar cualquier botón de descarga previo
+            // Verificar si ya hay un botón de descarga visible
             const existingDownloadButton = parentElement.querySelector('.download-button');
             if (existingDownloadButton) {
+                // Si ya existe, eliminarlo
                 existingDownloadButton.remove();
+            } else {
+                // Crear un nuevo botón de descarga debajo del botón tocado
+                const downloadButton = document.createElement('button');
+                downloadButton.classList.add('download-button');
+                downloadButton.innerText = `Descargar ${itemId}`;
+                downloadButton.onclick = function() {
+                    openDownloadLink(itemId);
+                };
+
+                // Insertar el botón de descarga debajo del botón clickeado
+                parentElement.appendChild(downloadButton);
             }
-
-            // Crear un nuevo botón de descarga debajo del botón tocado
-            const downloadButton = document.createElement('button');
-            downloadButton.classList.add('download-button');
-            downloadButton.innerText = `Descargar ${itemId}`;
-            downloadButton.onclick = function() {
-                openDownloadLink(itemId);
-            };
-
-            // Insertar el botón de descarga debajo del botón clickeado
-            parentElement.appendChild(downloadButton);
         }
 
         function openDownloadLink(itemId) {
