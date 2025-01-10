@@ -95,6 +95,7 @@
             text-align: center;
             margin-left: auto;
             margin-right: auto;
+            display: block; /* Hacemos visible */
         }
 
         .list-item {
@@ -182,21 +183,23 @@
 
     </style>
     <script>
-        // Esta función se encarga de mostrar el botón de descarga correcto
-        // y de ocultar el anterior si ya está visible.
-        function toggleDownloadButton(itemId) {
-            const allDownloadButtons = document.querySelectorAll('.download-button');
-            
-            // Oculta todos los botones de descarga antes de mostrar el nuevo
-            allDownloadButtons.forEach(button => {
+        let lastClickedButton = null; // Variable para guardar el último botón clickeado
+
+        function toggleDownloadButtons(itemId) {
+            // Ocultamos todos los botones de descarga
+            const buttons = document.querySelectorAll('.download-button');
+            buttons.forEach(button => {
                 button.style.display = 'none';
             });
 
-            // Muestra el botón de descarga correspondiente
+            // Si se hace clic en un nuevo botón, lo mostramos
             const targetButton = document.querySelector(`#download-${itemId}`);
             if (targetButton) {
-                targetButton.style.display = 'block';
+                targetButton.style.display = 'block'; // Mostramos el botón de descarga correspondiente
             }
+
+            // Guardamos el botón clickeado
+            lastClickedButton = itemId;
         }
 
         function openDownloadLink(link) {
@@ -219,16 +222,16 @@
         <!-- Contenedor rectangular detrás de los juegos -->
         <div class="games-container">
             <div class="container">
-                <div class="list-item" data-category="games" onclick="toggleDownloadButton('euroTruck')">
+                <div class="list-item" data-category="games" onclick="toggleDownloadButtons('euroTruck')">
                     Euro Truck Simulator
                 </div>
-                <div class="list-item" data-category="games" onclick="toggleDownloadButton('americanTruck')">
+                <div class="list-item" data-category="games" onclick="toggleDownloadButtons('americanTruck')">
                     American Truck Simulator
                 </div>
-                <div class="list-item" data-category="dlcs" onclick="toggleDownloadButton('euroTruckDLC')">
+                <div class="list-item" data-category="dlcs" onclick="toggleDownloadButtons('euroTruckDLC')">
                     DLC Euro Truck
                 </div>
-                <div class="list-item" data-category="dlcs" onclick="toggleDownloadButton('americanTruckDLC')">
+                <div class="list-item" data-category="dlcs" onclick="toggleDownloadButtons('americanTruckDLC')">
                     DLC American Truck
                 </div>
             </div>
