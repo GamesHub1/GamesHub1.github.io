@@ -20,7 +20,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('Fondo2.jpg') no-repeat center center fixed; /* Cambié el fondo */
+            background: url('fondo2.jpg') no-repeat center center fixed;
             background-size: cover;
             filter: blur(5px);
             z-index: -1;
@@ -37,11 +37,11 @@
             flex-grow: 1;
         }
 
-        /* Barra lateral */
+        /* Barra lateral con blur */
         .sidebar {
             width: 200px;
             height: 100vh;
-            background-color: #333;
+            background-color: rgba(51, 51, 51, 0.8); /* Fondo oscuro con transparencia */
             position: fixed;
             left: 0;
             top: 0;
@@ -51,6 +51,8 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
+            backdrop-filter: blur(10px); /* Efecto blur */
+            z-index: 1;
         }
 
         .sidebar button {
@@ -86,16 +88,16 @@
         }
 
         .games-container {
-            background-color: rgba(0, 0, 0, 0.5); /* Misma caja que las novedades */
+            background-color: rgba(0, 0, 0, 0.5);
             padding: 10px;
             border-radius: 10px;
             margin-bottom: 20px;
-            width: 50%; /* Más pequeño */
+            width: 50%;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
             text-align: center;
             margin-left: auto;
             margin-right: auto;
-            display: block; /* Hacemos visible */
+            display: block;
         }
 
         .list-item {
@@ -107,7 +109,7 @@
             font-size: 1.2rem;
             text-align: center;
             cursor: pointer;
-            width: 250px; /* Ajustado el tamaño de los botones */
+            width: 250px;
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
@@ -183,9 +185,8 @@
 
     </style>
     <script>
-        let lastClickedButton = null; // Variable para guardar el último botón clickeado
+        let lastClickedButton = null;
 
-        // Función para filtrar los elementos
         function filterItems(category) {
             const allItems = document.querySelectorAll('.list-item');
             allItems.forEach(item => {
@@ -198,34 +199,24 @@
         }
 
         function toggleDownloadButtons(itemId, event) {
-            // Evitar la propagación del evento
             event.stopPropagation();
-
-            // Buscar el contenedor del botón clickeado
             const parentElement = event.target;
-
-            // Verificar si ya hay un botón de descarga visible
             const existingDownloadButton = parentElement.querySelector('.download-button');
             if (existingDownloadButton) {
-                // Si ya existe, eliminarlo
                 existingDownloadButton.remove();
             } else {
-                // Crear un nuevo botón de descarga debajo del botón tocado
                 const downloadButton = document.createElement('button');
                 downloadButton.classList.add('download-button');
                 downloadButton.innerText = `Descargar ${itemId}`;
                 downloadButton.onclick = function() {
                     openDownloadLink(itemId);
                 };
-
-                // Insertar el botón de descarga debajo del botón clickeado
                 parentElement.appendChild(downloadButton);
             }
         }
 
         function openDownloadLink(itemId) {
             let link;
-            // Asignar link según el item
             switch (itemId) {
                 case 'euroTruck':
                     link = 'https://drive.google.com/file/d/1rleQoX_mTcR0lG2AtWX2O6f7lQ3CXlNQ/view?usp=drive_link';
@@ -239,8 +230,8 @@
                 case 'americanTruckDLC':
                     link = 'https://drive.google.com/file/d/1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7/view?usp=drive_link';
                     break;
-                case 'slimeRancher': // Nueva opción para Slime Rancher
-                    link = 'https://drive.google.com/file/d/1xyzSlimeRancherLink/view?usp=drive_link'; // Actualiza este enlace
+                case 'slimeRancher':
+                    link = 'https://drive.google.com/file/d/1Gy-QK5RrZKHidJ_KPUjxLqMpRml5icwc/view?usp=drive_link';
                     break;
             }
             window.open(link, "_blank");
@@ -259,7 +250,6 @@
     <div class="content">
         <div class="header">GamesHub1</div>
 
-        <!-- Contenedor rectangular detrás de los juegos -->
         <div class="games-container">
             <div class="container">
                 <div class="list-item" data-category="games" onclick="toggleDownloadButtons('euroTruck', event)">
@@ -274,7 +264,7 @@
                 <div class="list-item" data-category="dlcs" onclick="toggleDownloadButtons('americanTruckDLC', event)">
                     DLC American Truck
                 </div>
-                <div class="list-item" data-category="games" onclick="toggleDownloadButtons('slimeRancher', event)"> <!-- Nueva opción -->
+                <div class="list-item" data-category="games" onclick="toggleDownloadButtons('slimeRancher', event)">
                     Slime Rancher
                 </div>
             </div>
@@ -286,11 +276,10 @@
                 <h3>Euro Truck Simulator</h3>
             </div>
             <div class="novedad-item">
-                <img src="slimeranchernovedad.jpg" alt="Slime Rancher"> <!-- Nueva imagen -->
+                <img src="slimeranchernovedad.jpg" alt="Slime Rancher">
                 <h3>Slime Rancher</h3>
             </div>
         </div>
     </div>
 </body>
 </html>
-
