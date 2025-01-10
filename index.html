@@ -20,7 +20,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('fondo.jpg') no-repeat center center fixed;
+            background: url('fondo2.jpg') no-repeat center center fixed; /* Cambié el fondo */
             background-size: cover;
             filter: blur(5px);
             z-index: -1;
@@ -239,6 +239,9 @@
                 case 'americanTruckDLC':
                     link = 'https://drive.google.com/file/d/1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7/view?usp=drive_link';
                     break;
+                case 'slimeRancher': // Nueva opción para Slime Rancher
+                    link = 'https://drive.google.com/file/d/1xyzSlimeRancherLink/view?usp=drive_link'; // Actualiza este enlace
+                    break;
             }
             window.open(link, "_blank");
         }
@@ -271,6 +274,9 @@
                 <div class="list-item" data-category="dlcs" onclick="toggleDownloadButtons('americanTruckDLC', event)">
                     DLC American Truck
                 </div>
+                <div class="list-item" data-category="games" onclick="toggleDownloadButtons('slimeRancher', event)"> <!-- Nueva opción -->
+                    Slime Rancher
+                </div>
             </div>
         </div>
 
@@ -280,10 +286,11 @@
                 <h3>Euro Truck Simulator</h3>
             </div>
             <div class="novedad-item">
-                <img src="american truck simmulator PC.jpg" alt="American Truck">
-                <h3>American Truck Simulator</h3>
+                <img src="slimeranchernovedad.jpg" alt="Slime Rancher"> <!-- Nueva imagen -->
+                <h3>Slime Rancher</h3>
             </div>
         </div>
     </div>
 </body>
 </html>
+
