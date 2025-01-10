@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +47,6 @@
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            filter: blur(3px);
             backdrop-filter: blur(10px);
         }
 
@@ -98,20 +99,21 @@
     <div class="header">GAMESHUB1</div>
 
     <div class="container">
-        <div class="list-item" onclick="toggleDropdown('dropdown1')">
-            EURO TRUCK SIMULATOR
-        </div>
-        <div id="dropdown1" class="dropdown">
-            <button onclick="window.location.href='#'">Descargar</button>
-        </div>
+        <div style="filter: none;">
+            <div class="list-item" onclick="toggleDropdown('dropdown1')">
+                EURO TRUCK SIMULATOR
+            </div>
+            <div id="dropdown1" class="dropdown">
+                <button onclick="window.location.href='#'">Descargar</button>
+            </div>
 
-        <div class="list-item" onclick="toggleDropdown('dropdown2')">
-            AMERICAN TRUCK SIMULATOR
-        </div>
-        <div id="dropdown2" class="dropdown">
-            <button onclick="window.location.href='#'">Descargar</button>
+            <div class="list-item" onclick="toggleDropdown('dropdown2')">
+                AMERICAN TRUCK SIMULATOR
+            </div>
+            <div id="dropdown2" class="dropdown">
+                <button onclick="window.location.href='#'">Descargar</button>
+            </div>
         </div>
     </div>
 </body>
 </html>
-
