@@ -112,4 +112,96 @@
         }
 
         .novedades.left {
-         
+            bottom: 10px;
+            left: 10px;
+        }
+
+        .novedades.right {
+            bottom: 10px;
+            right: 10px;
+        }
+
+        .novedades img {
+            width: 150px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+    <script>
+        function toggleDropdown(id) {
+            document.querySelectorAll('.dropdown').forEach(drop => drop.style.display = 'none');
+            const dropdown = document.getElementById(id);
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function searchItems() {
+            const query = document.getElementById('search-box').value.toLowerCase();
+            const items = document.querySelectorAll('.list-item');
+            items.forEach(item => {
+                if (item.textContent.toLowerCase().includes(query)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="background"></div>
+
+    <div class="header">GAMESHUB1</div>
+
+    <div class="search-container">
+        <input 
+            id="search-box" 
+            class="search-box" 
+            type="text" 
+            placeholder="Buscar..." 
+            oninput="searchItems()">
+    </div>
+
+    <div class="optimization-text">
+        Encuentra los mejores juegos y optimizaciones para mejorar tu experiencia gaming.
+    </div>
+
+    <div class="container">
+        <div class="list-item" onclick="toggleDropdown('dropdown1')">
+            EURO TRUCK SIMULATOR
+        </div>
+        <div id="dropdown1" class="dropdown">
+            <button onclick="window.location.href='https://drive.google.com/file/d/1rleQoX_mTcR0lG2AtWX2O6f7lQ3CXlNQ/view?usp=drive_link'">Descargar</button>
+        </div>
+
+        <div class="list-item" onclick="toggleDropdown('dropdown2')">
+            AMERICAN TRUCK SIMULATOR
+        </div>
+        <div id="dropdown2" class="dropdown">
+            <button onclick="window.location.href='https://drive.google.com/file/d/1DUtvEG5fg11yYmNO4375xe7OAPRelEBO/view?usp=drive_link'">Descargar</button>
+        </div>
+
+        <div class="list-item" onclick="toggleDropdown('dropdown3')">
+            DLC EURO TRUCK
+        </div>
+        <div id="dropdown3" class="dropdown">
+            <button onclick="window.location.href='https://drive.google.com/file/d/1zwmbXSZGh2rztOQ-0TEXTq5shfQtEUah/view?usp=drive_link'">Descargar</button>
+        </div>
+
+        <div class="list-item" onclick="toggleDropdown('dropdown4')">
+            DLC AMERICAN TRUCK
+        </div>
+        <div id="dropdown4" class="dropdown">
+            <button onclick="window.location.href='https://drive.google.com/file/d/1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7/view?usp=drive_link'">Descargar</button>
+        </div>
+    </div>
+
+    <div class="novedades left">
+        <img src="Euro_Truck_Simulator_PC.jpg" alt="Euro Truck Simulator">
+    </div>
+
+    <div class="novedades right">
+        <img src="american truck simmulator PCjpg.jpg" alt="American Truck Simulator">
+    </div>
+</body>
+</html>
