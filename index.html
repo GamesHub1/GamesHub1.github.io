@@ -27,7 +27,7 @@
         }
 
         .header {
-            margin-top: 20px;
+            margin-top: 10px;
             text-align: center;
             color: white;
             font-size: 3.5rem;
@@ -74,7 +74,7 @@
         .search-bar {
             width: 100%;
             padding: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             border-radius: 5px;
             border: none;
             font-size: 1rem;
@@ -296,6 +296,10 @@
     <div class="background"></div>
 
     <div class="sidebar">
+        <div style="width: 100%; margin-bottom: 10px;">
+            <!-- Barra de búsqueda -->
+            <input type="text" class="search-bar" placeholder="Buscar juegos..." oninput="searchGames()">
+        </div>
         <button onclick="filterItems('games')">Juegos</button>
         <button onclick="filterItems('dlcs')">DLC</button>
         <button onclick="filterItems('all')">Mostrar todo</button>
@@ -303,9 +307,6 @@
 
     <div class="content">
         <div class="header">GamesHub1</div>
-
-        <!-- Barra de búsqueda -->
-        <input type="text" class="search-bar" placeholder="Buscar juegos..." oninput="searchGames()">
 
         <!-- Contenedor rectangular detrás de los juegos -->
         <div class="games-container">
