@@ -56,54 +56,91 @@
             background-color: #0056b3;
         }
 
-        .sidebar {
+        /* Estilos para los modales */
+        .modal {
+            display: none;
             position: fixed;
-            top: 0;
+            z-index: 1;
             left: 0;
-            width: 120px;
+            top: 0;
+            width: 100%;
             height: 100%;
-            background-color: #333;
-            padding: 10px;
-            color: white;
-            text-align: center;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
         }
 
-        .sidebar button {
+        .modal-content {
+            background-color: #1b1b1b;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px;
+            border-radius: 10px;
+        }
+
+        .modal-content input {
             width: 100%;
-            padding: 6px 0;
-            margin: 8px 0;
-            font-size: 0.8rem;
-            border: none;
-            background-color: #444;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        .modal-content button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
             color: white;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
         }
 
-        .sidebar button:hover {
-            background-color: #555;
-            transform: scale(1.05);
+        .modal-content button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Resto del diseño */
+        .filter-section {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .filter-section img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .filter-section img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px 3px #ffe600;
         }
 
         .container {
-            margin-left: 150px;
+            margin: 20px auto;
             padding: 20px;
             color: white;
             text-align: center;
+            max-width: 800px;
         }
 
         .list-item {
             background-color: rgba(255, 255, 255, 0.2);
             color: white;
             margin: 10px auto;
-            padding: 8px;
-            border-radius: 8px;
-            font-size: 0.9rem;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 1.2rem;
             text-align: center;
             cursor: pointer;
-            width: 200px;
+            width: 300px; /* Botones más grandes */
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
@@ -113,11 +150,12 @@
         }
 
         .novedades {
-            margin: 20px auto;
+            margin: 40px auto;
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 800px;
         }
 
         .novedad-item {
@@ -127,7 +165,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            width: 90%;
+            width: 45%; /* Ajustamos el ancho para que quepan dos por fila */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
         }
 
@@ -141,56 +179,19 @@
             color: white;
             margin: 0;
         }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(30, 30, 30, 0.95);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
-            color: white;
-            z-index: 100;
-            width: 300px;
-            text-align: center;
-        }
-
-        .modal.active {
-            display: block;
-        }
-
-        .modal input {
-            display: block;
-            width: 100%;
-            margin: 10px auto;
-            padding: 12px;
-            border-radius: 5px;
-            border: none;
-            font-size: 1rem;
-            background-color: #444;
-            color: white;
-        }
-
-        .modal button {
-            margin-top: 15px;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border: none;
-            border-radius: 5px;
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
-        }
-
-        .modal button:hover {
-            background-color: #0056b3;
-        }
     </style>
     <script>
-        function toggleCategory(category) {
+        function showModal(type) {
+            const modal = document.getElementById(`${type}-modal`);
+            modal.style.display = 'block';
+        }
+
+        function closeModal(type) {
+            const modal = document.getElementById(`${type}-modal`);
+            modal.style.display = 'none';
+        }
+
+        function filterItems(category) {
             const allItems = document.querySelectorAll('.list-item');
             allItems.forEach(item => {
                 if (item.dataset.category !== category && category !== 'all') {
@@ -200,66 +201,47 @@
                 }
             });
         }
-
-        function showModal(type) {
-            const modal = document.getElementById('auth-modal');
-            modal.setAttribute('data-type', type);
-            modal.classList.add('active');
-            document.getElementById('auth-title').textContent = type === 'login' ? 'Iniciar Sesión' : 'Registrarse';
-            document.getElementById('username-field').style.display = type === 'register' ? 'block' : 'none';
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('auth-modal');
-            modal.classList.remove('active');
-        }
-
-        function submitAuth() {
-            const modal = document.getElementById('auth-modal');
-            const type = modal.getAttribute('data-type');
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const username = type === 'register' ? document.getElementById('username').value : null;
-
-            if (!email || !password || (type === 'register' && !username)) {
-                alert('Por favor, completa todos los campos.');
-                return;
-            }
-
-            alert(`${type === 'login' ? 'Sesión iniciada' : 'Registro exitoso'}`);
-            closeModal();
-
-            if (type === 'login') {
-                document.querySelector('.auth-buttons').style.display = 'none';
-            }
-        }
     </script>
 </head>
 <body>
     <div class="background"></div>
 
+    <!-- Botones de inicio de sesión y registro -->
     <div class="auth-buttons">
         <button onclick="showModal('login')">Iniciar sesión</button>
         <button onclick="showModal('register')">Registrarse</button>
     </div>
 
-    <div id="auth-modal" class="modal">
-        <h3 id="auth-title">Iniciar Sesión</h3>
-        <input type="email" id="email" placeholder="Correo electrónico">
-        <input type="password" id="password" placeholder="Contraseña">
-        <div id="username-field" style="display: none;">
-            <input type="text" id="username" placeholder="Nombre de usuario">
+    <!-- Modal de inicio de sesión -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span onclick="closeModal('login')" style="color: #fff; font-size: 30px; cursor: pointer;">&times;</span>
+            <h2 style="color: white; text-align: center;">Iniciar sesión</h2>
+            <input type="email" placeholder="Correo electrónico" required>
+            <input type="password" placeholder="Contraseña" required>
+            <button>Iniciar sesión</button>
         </div>
-        <button onclick="submitAuth()">Enviar</button>
-        <button onclick="closeModal()">Cancelar</button>
+    </div>
+
+    <!-- Modal de registro -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <span onclick="closeModal('register')" style="color: #fff; font-size: 30px; cursor: pointer;">&times;</span>
+            <h2 style="color: white; text-align: center;">Registrarse</h2>
+            <input type="text" placeholder="Nombre de usuario" required>
+            <input type="email" placeholder="Correo electrónico" required>
+            <input type="password" placeholder="Contraseña" required>
+            <button>Registrarse</button>
+        </div>
     </div>
 
     <div class="header">GAMESHUB1</div>
 
-    <div class="sidebar">
-        <button onclick="toggleCategory('all')">Todos</button>
-        <button onclick="toggleCategory('games')">JUEGOS</button>
-        <button onclick="toggleCategory('dlcs')">DLC</button>
+    <!-- Sección de imágenes para el filtrado -->
+    <div class="filter-section">
+        <!-- Reemplaza "pngwing.com.png" y "pngwing.com (1).png" con las imágenes que desees usar -->
+        <img src="pngwing.com.png" alt="Juegos" onclick="filterItems('games')">
+        <img src="pngwing.com (1).png" alt="DLC" onclick="filterItems('dlcs')">
     </div>
 
     <div class="container">
@@ -269,6 +251,7 @@
         <div class="list-item" data-category="dlcs">DLC American Truck</div>
     </div>
 
+    <!-- Novedades -->
     <div class="novedades">
         <div class="novedad-item">
             <img src="Euro_Truck_Simulator_PC.jpg" alt="Euro Truck">
@@ -281,3 +264,4 @@
     </div>
 </body>
 </html>
+
