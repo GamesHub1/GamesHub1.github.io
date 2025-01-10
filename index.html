@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GamesHub1</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Montserrat', sans-serif;
-            overflow-x: hidden;
+            font-family: Arial, sans-serif;
         }
 
         .background {
@@ -21,7 +19,6 @@
             height: 100%;
             background: url('fondo.jpg') no-repeat center center fixed;
             background-size: cover;
-            filter: brightness(0.6) blur(2px);
             z-index: -1;
         }
 
@@ -33,155 +30,41 @@
             color: white;
             font-size: 3rem;
             font-weight: bold;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
         }
 
-        .search-bar {
-            position: absolute;
-            top: 90px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            max-width: 400px;
+        .novedades {
+            position: fixed;
+            bottom: 20px;
+            width: 150px;
         }
 
-        .search-bar input {
+        .novedades.left {
+            left: 20px;
+        }
+
+        .novedades.right {
+            right: 20px;
+        }
+
+        .novedades img {
             width: 100%;
-            padding: 10px 15px;
-            border-radius: 20px;
-            border: none;
-            font-size: 1rem;
-            outline: none;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        .container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90%;
-            max-width: 400px;
-            background: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(5px);
-            text-align: center;
-        }
-
-        .list-item {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 10px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .list-item:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-            transform: scale(1.05);
-        }
-
-        .dropdown {
-            display: none;
-            margin-top: 10px;
-        }
-
-        .dropdown button {
-            padding: 12px 20px;
-            font-size: 1rem;
-            border: none;
-            border-radius: 10px;
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .dropdown button:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
     </style>
-    <script>
-        function toggleDropdown(id) {
-            const dropdowns = document.querySelectorAll('.dropdown');
-            dropdowns.forEach(dropdown => {
-                if (dropdown.id !== id) {
-                    dropdown.style.display = 'none'; // Oculta otros dropdowns
-                }
-            });
-            const dropdown = document.getElementById(id);
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        }
-
-        function filterOptions() {
-            const query = document.getElementById('search-input').value.toLowerCase();
-            const items = document.querySelectorAll('.list-item');
-            items.forEach(item => {
-                const text = item.textContent.toLowerCase();
-                if (text.includes(query)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        }
-    </script>
 </head>
 <body>
-
     <div class="background"></div>
 
     <div class="header">GAMESHUB1</div>
 
-    <!-- Barra de búsqueda -->
-    <div class="search-bar">
-        <input
-            type="text"
-            id="search-input"
-            placeholder="Buscar archivos..."
-            oninput="filterOptions()"
-        />
+    <div class="novedades left">
+        <img src="Euro_Truck_Simulator_PC.jpg" alt="Euro Truck Simulator">
     </div>
 
-    <div class="container">
-        <div class="list-item" onclick="toggleDropdown('dropdown1')">
-            EURO TRUCK SIMULATOR
-        </div>
-        <div id="dropdown1" class="dropdown">
-            <button onclick="window.location.href = 'https://drive.google.com/file/d/1rleQoX_mTcR0lG2AtWX2O6f7lQ3CXlNQ/view?usp=drive_link';">Descargar Euro Truck</button>
-        </div>
-
-        <div class="list-item" onclick="toggleDropdown('dropdown2')">
-            AMERICAN TRUCK SIMULATOR
-        </div>
-        <div id="dropdown2" class="dropdown">
-            <button onclick="window.location.href = 'https://drive.google.com/file/d/1DUtvEG5fg11yYmNO4375xe7OAPRelEBO/view?usp=drive_link';">Descargar American Truck</button>
-        </div>
-
-        <div class="list-item" onclick="toggleDropdown('dropdown3')">
-            DLC EURO TRUCK SIMULATOR
-        </div>
-        <div id="dropdown3" class="dropdown">
-            <button onclick="window.location.href = 'https://drive.google.com/file/d/1zwmbXSZGh2rztOQ-0TEXTq5shfQtEUah/view?usp=drive_link';">Descargar DLC Euro Truck</button>
-        </div>
-
-        <div class="list-item" onclick="toggleDropdown('dropdown4')">
-            DLC AMERICAN TRUCK SIMULATOR
-        </div>
-        <div id="dropdown4" class="dropdown">
-            <button onclick="window.location.href = 'https://drive.google.com/file/d/1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7/view?usp=drive_link';">Descargar DLC American Truck</button>
-        </div>
+    <div class="novedades right">
+        <img src="american truck simmulator PCjpg.jpg" alt="American Truck Simulator">
     </div>
-
 </body>
 </html>
-
