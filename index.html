@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -115,48 +114,27 @@
             background-color: #0056b3;
         }
 
-        /* Efecto de transición */
-        .container .list-item.active + .dropdown {
-            display: block;
-        }
-
     </style>
     <script>
-        // Función para cambiar la visibilidad de los botones
+        // Función para manejar el clic en una opción de juego y mostrar el botón de descarga correspondiente
         function toggleDropdown(id) {
             const dropdown = document.getElementById(id);
-            const otherDropdown = document.querySelectorAll('.dropdown');
-            otherDropdown.forEach(function(d) {
-                if (d !== dropdown) d.style.display = 'none'; // Esconde otros dropdowns
+            const allDropdowns = document.querySelectorAll('.dropdown');
+            allDropdowns.forEach(function(d) {
+                if (d !== dropdown) {
+                    d.style.display = 'none'; // Oculta otros dropdowns
+                }
             });
             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         }
 
-        // Función para manejar el clic en la opción de juego y ocultar el otro
-        function handleClick(buttonId, hideButtonId) {
+        // Función para gestionar la visibilidad de los botones de descarga
+        function handleClick(buttonId, dropdownId) {
             const button = document.getElementById(buttonId);
-            const hideButton = document.getElementById(hideButtonId);
-            const dropdown = document.getElementById("dropdown1");
-            const dropdown2 = document.getElementById("dropdown2");
-            const dropdown3 = document.getElementById("dropdown3");
-            const dropdown4 = document.getElementById("dropdown4");
-            
-            // Si el botón de juego ya está activo, no cambiar nada
-            if (button.classList.contains('active')) {
-                return;
-            }
+            const dropdown = document.getElementById(dropdownId);
 
-            // Activa el botón y oculta el botón contrario
-            button.classList.add('active');
-            hideButton.classList.remove('active');
-            
-            // Esconde los dropdowns si ya no son visibles
-            dropdown.style.display = 'none';
-            dropdown2.style.display = 'none';
-            dropdown3.style.display = 'none';
-            dropdown4.style.display = 'none';
-            
-            toggleDropdown(buttonId);
+            button.classList.add('active'); // Añade el estilo activo al botón
+            toggleDropdown(dropdownId); // Muestra el dropdown correspondiente
         }
     </script>
 </head>
@@ -172,7 +150,7 @@
         </div>
 
         <!-- Opción Euro Truck Simulator -->
-        <div id="euroTruck" class="list-item" onclick="handleClick('euroTruck', 'americanTruck')">
+        <div id="euroTruck" class="list-item" onclick="handleClick('euroTruck', 'dropdown1')">
             EURO TRUCK SIMULATOR
         </div>
         <div id="dropdown1" class="dropdown">
@@ -180,7 +158,7 @@
         </div>
 
         <!-- Opción American Truck Simulator -->
-        <div id="americanTruck" class="list-item" onclick="handleClick('americanTruck', 'euroTruck')">
+        <div id="americanTruck" class="list-item" onclick="handleClick('americanTruck', 'dropdown2')">
             AMERICAN TRUCK SIMULATOR
         </div>
         <div id="dropdown2" class="dropdown">
@@ -188,7 +166,7 @@
         </div>
 
         <!-- Opción DLC Euro Truck Simulator -->
-        <div id="dlcEuroTruck" class="list-item" onclick="handleClick('dlcEuroTruck', 'dlcAmericanTruck')">
+        <div id="dlcEuroTruck" class="list-item" onclick="handleClick('dlcEuroTruck', 'dropdown3')">
             DLC EURO TRUCK SIMULATOR
         </div>
         <div id="dropdown3" class="dropdown">
@@ -196,7 +174,7 @@
         </div>
 
         <!-- Opción DLC American Truck Simulator -->
-        <div id="dlcAmericanTruck" class="list-item" onclick="handleClick('dlcAmericanTruck', 'dlcEuroTruck')">
+        <div id="dlcAmericanTruck" class="list-item" onclick="handleClick('dlcAmericanTruck', 'dropdown4')">
             DLC AMERICAN TRUCK SIMULATOR
         </div>
         <div id="dropdown4" class="dropdown">
