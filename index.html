@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OptiHub1</title>
+    <title>GamesHub1</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -20,7 +20,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('Fondo2.jpg') no-repeat center center fixed;
+            background: url('fondo2.jpg') no-repeat center center fixed;
             background-size: cover;
             filter: blur(5px);
             z-index: -1;
@@ -37,11 +37,11 @@
             flex-grow: 1;
         }
 
-        /* Barra lateral con blur */
+        /* Barra lateral con blur y esquinas redondeadas */
         .sidebar {
             width: 200px;
             height: 100vh;
-            background-color: rgba(51, 51, 51, 0.8); /* Fondo oscuro con transparencia */
+            background-color: rgba(51, 51, 51, 0.8);
             position: fixed;
             left: 0;
             top: 0;
@@ -51,8 +51,10 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            backdrop-filter: blur(4px); /* Efecto blur */
+            backdrop-filter: blur(10px);
             z-index: 1;
+            border-top-right-radius: 20px; /* Redondeo de las esquinas */
+            border-bottom-right-radius: 20px; /* Redondeo de las esquinas */
         }
 
         .sidebar button {
@@ -177,6 +179,14 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            display: none; /* Inicialmente oculto */
+            transition: opacity 0.3s ease-in-out; /* Efecto suave */
+            opacity: 0; /* Inicialmente invisible */
+        }
+
+        .download-button.show {
+            display: block;
+            opacity: 1; /* Hacerlo visible */
         }
 
         .download-button:hover {
@@ -203,8 +213,13 @@
             const parentElement = event.target;
             const existingDownloadButton = parentElement.querySelector('.download-button');
             if (existingDownloadButton) {
-                existingDownloadButton.remove();
+                // Si el botón existe, lo ocultamos
+                existingDownloadButton.classList.remove('show');
+                setTimeout(() => {
+                    existingDownloadButton.remove();
+                }, 300); // Esperamos el tiempo de transición
             } else {
+                // Si no existe, lo creamos
                 const downloadButton = document.createElement('button');
                 downloadButton.classList.add('download-button');
                 downloadButton.innerText = `Descargar ${itemId}`;
@@ -212,6 +227,11 @@
                     openDownloadLink(itemId);
                 };
                 parentElement.appendChild(downloadButton);
+
+                // Mostrar el botón con efecto
+                setTimeout(() => {
+                    downloadButton.classList.add('show');
+                }, 10);
             }
         }
 
@@ -231,7 +251,7 @@
                     link = 'https://drive.google.com/file/d/1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7/view?usp=drive_link';
                     break;
                 case 'slimeRancher':
-                    link = 'https://drive.google.com/file/d/1Gy-QK5RrZKHidJ_KPUjxLqMpRml5icwc/view?usp=drive_link';
+                    link = 'https://drive.google.com/file/d/1xyzSlimeRancherLink/view?usp=drive_link';
                     break;
             }
             window.open(link, "_blank");
