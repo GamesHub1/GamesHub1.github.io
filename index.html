@@ -90,11 +90,12 @@
             padding: 10px;
             border-radius: 10px;
             margin-bottom: 20px;
-            width: 60%; /* Más pequeño */
+            width: 50%; /* Más pequeño */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
             text-align: center;
             margin-left: auto;
             margin-right: auto;
+            display: none; /* Se oculta por defecto */
         }
 
         .list-item {
@@ -182,15 +183,16 @@
 
     </style>
     <script>
-        function filterItems(category) {
-            const allItems = document.querySelectorAll('.list-item');
-            allItems.forEach(item => {
-                if (item.dataset.category !== category && category !== 'all') {
-                    item.style.display = 'none';
-                } else {
-                    item.style.display = 'block';
-                }
+        function toggleDownloadButtons(itemId) {
+            const buttons = document.querySelectorAll('.download-button');
+            buttons.forEach(button => {
+                button.style.display = 'none'; // Ocultamos todos los botones de descarga
             });
+
+            const targetButton = document.querySelector(`#download-${itemId}`);
+            if (targetButton) {
+                targetButton.style.display = 'block'; // Solo mostramos el botón correspondiente
+            }
         }
 
         function openDownloadLink(link) {
@@ -213,23 +215,25 @@
         <!-- Contenedor rectangular detrás de los juegos (ajustado en tamaño) -->
         <div class="games-container">
             <div class="container">
-                <div class="list-item" data-category="games">
+                <div class="list-item" data-category="games" onclick="toggleDownloadButtons('euroTruck')">
                     Euro Truck Simulator
-                    <button class="download-button" onclick="openDownloadLink('http://link-a-eurotrucksimulator.com')">Descargar</button>
                 </div>
-                <div class="list-item" data-category="games">
+                <div class="list-item" data-category="games" onclick="toggleDownloadButtons('americanTruck')">
                     American Truck Simulator
-                    <button class="download-button" onclick="openDownloadLink('http://link-a-americantrucksimulator.com')">Descargar</button>
                 </div>
-                <div class="list-item" data-category="dlcs">
+                <div class="list-item" data-category="dlcs" onclick="toggleDownloadButtons('euroTruckDLC')">
                     DLC Euro Truck
-                    <button class="download-button" onclick="openDownloadLink('http://link-a-dlceurotruck.com')">Descargar</button>
                 </div>
-                <div class="list-item" data-category="dlcs">
+                <div class="list-item" data-category="dlcs" onclick="toggleDownloadButtons('americanTruckDLC')">
                     DLC American Truck
-                    <button class="download-button" onclick="openDownloadLink('http://link-a-dlctrucksimulator.com')">Descargar</button>
                 </div>
             </div>
+
+            <!-- Botones de descarga -->
+            <button class="download-button" id="download-euroTruck" style="display:none;" onclick="openDownloadLink('https://drive.google.com/file/d/1rleQoX_mTcR0lG2AtWX2O6f7lQ3CXlNQ/view?usp=drive_link')">Descargar Euro Truck Simulator</button>
+            <button class="download-button" id="download-americanTruck" style="display:none;" onclick="openDownloadLink('https://drive.google.com/file/d/1DUtvEG5fg11yYmNO4375xe7OAPRelEBO/view?usp=drive_link')">Descargar American Truck Simulator</button>
+            <button class="download-button" id="download-euroTruckDLC" style="display:none;" onclick="openDownloadLink('https://drive.google.com/file/d/1zwmbXSZGh2rztOQ-0TEXTq5shfQtEUah/view?usp=drive_link')">Descargar DLC Euro Truck</button>
+            <button class="download-button" id="download-americanTruckDLC" style="display:none;" onclick="openDownloadLink('https://drive.google.com/file/d/1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7/view?usp=drive_link')">Descargar DLC American Truck</button>
         </div>
 
         <div class="novedades">
