@@ -204,33 +204,22 @@
             // Buscar el contenedor del botón clickeado
             const parentElement = event.target;
 
-            // Si ya hay un botón de descarga, lo ocultamos
+            // Eliminar cualquier botón de descarga previo
             const existingDownloadButton = parentElement.querySelector('.download-button');
             if (existingDownloadButton) {
-                existingDownloadButton.style.display = existingDownloadButton.style.display === 'none' ? 'block' : 'none';
-            } else {
-                // Crear un nuevo botón de descarga debajo del botón tocado
-                const downloadButton = document.createElement('button');
-                downloadButton.classList.add('download-button');
-                downloadButton.innerText = `Descargar ${itemId}`;
-                downloadButton.onclick = function() {
-                    openDownloadLink(itemId);
-                };
-
-                // Insertar el botón de descarga debajo del botón clickeado
-                parentElement.appendChild(downloadButton);
+                existingDownloadButton.remove();
             }
 
-            // Si se hizo clic en un nuevo botón, eliminamos el botón de descarga del anterior
-            if (lastClickedButton && lastClickedButton !== itemId) {
-                const previousButton = document.querySelector(`#download-${lastClickedButton}`);
-                if (previousButton) {
-                    previousButton.style.display = 'none';
-                }
-            }
+            // Crear un nuevo botón de descarga debajo del botón tocado
+            const downloadButton = document.createElement('button');
+            downloadButton.classList.add('download-button');
+            downloadButton.innerText = `Descargar ${itemId}`;
+            downloadButton.onclick = function() {
+                openDownloadLink(itemId);
+            };
 
-            // Guardamos el ID del último botón clickeado
-            lastClickedButton = itemId;
+            // Insertar el botón de descarga debajo del botón clickeado
+            parentElement.appendChild(downloadButton);
         }
 
         function openDownloadLink(itemId) {
