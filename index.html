@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,31 +30,17 @@
             margin-top: 10px;
             text-align: center;
             color: white;
-            font-size: 4.5rem;
+            font-size: 4rem;
             font-weight: bold;
             font-family: 'Roboto Slab', serif;
             text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
-        }
-
-        .search-bar {
-            margin: 20px auto;
-            display: flex;
-            justify-content: center;
-        }
-
-        .search-bar input {
-            width: 250px;
-            padding: 10px;
-            border: 2px solid white;
-            border-radius: 15px;
-            background-color: white;
-            color: black;
+            flex-grow: 1;
         }
 
         .sidebar {
             width: 200px;
             height: 100vh;
-            background-color: rgba(51, 51, 51, 0.8);
+            background-color: rgba(51, 51, 51, 0.9);
             position: fixed;
             left: 0;
             top: 0;
@@ -66,7 +51,6 @@
             justify-content: flex-start;
             align-items: center;
             border-radius: 0 15px 15px 0;
-            backdrop-filter: blur(5px);
         }
 
         .sidebar button {
@@ -88,7 +72,16 @@
             margin-left: 220px;
             padding: 20px;
             color: white;
-            width: calc(100% - 220px);
+            text-align: center;
+            width: 100%;
+        }
+
+        .container {
+            margin: 20px auto;
+            padding: 20px;
+            color: white;
+            text-align: center;
+            max-width: 800px;
         }
 
         .games-container {
@@ -114,12 +107,42 @@
             cursor: pointer;
             width: 250px;
             transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
         }
 
         .list-item:hover {
             box-shadow: 0 0 15px 3px #ffe600;
             transform: scale(1.1);
+        }
+
+        .novedades {
+            margin: 40px auto;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 800px;
+        }
+
+        .novedad-item {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 45%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        .novedad-item img {
+            width: 100px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .novedad-item h3 {
+            color: white;
+            margin: 0;
         }
 
         .download-button {
@@ -130,76 +153,112 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            display: none;
-            animation: fadeIn 0.5s ease-in-out;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
         .download-button.show {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            opacity: 1;
+            transform: scale(1);
         }
     </style>
     <script>
-        function toggleDownload(button) {
-            const downloadButton = button.querySelector('.download-button');
-            if (downloadButton.classList.contains('show')) {
-                downloadButton.classList.remove('show');
+        let lastClickedButton = null;
+
+        function filterItems(category) {
+            const allItems = document.querySelectorAll('.list-item');
+            allItems.forEach(item => {
+                if (category === 'all') {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = item.dataset.category === category ? 'block' : 'none';
+                }
+            });
+        }
+
+        function toggleDownloadButtons(itemId, event) {
+            event.stopPropagation();
+            const parentElement = event.target;
+            const existingDownloadButton = parentElement.querySelector('.download-button');
+            if (existingDownloadButton) {
+                existingDownloadButton.classList.toggle('show');
             } else {
-                document.querySelectorAll('.download-button').forEach(btn => btn.classList.remove('show'));
-                downloadButton.classList.add('show');
+                const downloadButton = document.createElement('button');
+                downloadButton.classList.add('download-button', 'show');
+                downloadButton.innerText = `Descargar ${itemId}`;
+                downloadButton.onclick = function() {
+                    openDownloadLink(itemId);
+                };
+                parentElement.appendChild(downloadButton);
             }
         }
 
-        function filterSearch() {
-            const input = document.querySelector('.search-bar input').value.toLowerCase();
-            const items = document.querySelectorAll('.list-item');
-            items.forEach(item => {
-                const text = item.textContent.toLowerCase();
-                item.style.display = text.includes(input) ? 'block' : 'none';
-            });
+        function openDownloadLink(itemId) {
+            let link;
+            switch (itemId) {
+                case 'euroTruck':
+                    link = 'https://drive.google.com/file/d/1rleQoX_mTcR0lG2AtWX2O6f7lQ3CXlNQ/view?usp=drive_link';
+                    break;
+                case 'americanTruck':
+                    link = 'https://drive.google.com/file/d/1DUtvEG5fg11yYmNO4375xe7OAPRelEBO/view?usp=drive_link';
+                    break;
+                case 'euroTruckDLC':
+                    link = 'https://drive.google.com/file/d/1zwmbXSZGh2rztOQ-0TEXTq5shfQtEUah/view?usp=drive_link';
+                    break;
+                case 'americanTruckDLC':
+                    link = 'https://drive.google.com/file/d/1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7/view?usp=drive_link';
+                    break;
+                case 'slimeRancher':
+                    link = 'https://example.com/slime-rancher-download';
+                    break;
+            }
+            window.open(link, "_blank");
         }
     </script>
 </head>
-
 <body>
     <div class="background"></div>
 
     <div class="sidebar">
-        <button onclick="filterSearch()">Buscar</button>
+        <button onclick="filterItems('games')">JUEGOS</button>
+        <button onclick="filterItems('dlcs')">DLC</button>
+        <button onclick="filterItems('all')">MOSTRAR TODO</button>
     </div>
 
     <div class="content">
         <div class="header">OptiHub1</div>
-        <div class="search-bar">
-            <input type="text" placeholder="Buscar..." oninput="filterSearch()">
-        </div>
 
         <div class="games-container">
-            <div class="list-item" onclick="toggleDownload(this)">Euro Truck Simulator
-                <button class="download-button">Descargar</button>
+            <div class="container">
+                <div class="list-item" data-category="games" onclick="toggleDownloadButtons('euroTruck', event)">
+                    Euro Truck Simulator
+                </div>
+                <div class="list-item" data-category="games" onclick="toggleDownloadButtons('americanTruck', event)">
+                    American Truck Simulator
+                </div>
+                <div class="list-item" data-category="dlcs" onclick="toggleDownloadButtons('euroTruckDLC', event)">
+                    DLC Euro Truck
+                </div>
+                <div class="list-item" data-category="dlcs" onclick="toggleDownloadButtons('americanTruckDLC', event)">
+                    DLC American Truck
+                </div>
+                <div class="list-item" data-category="games" onclick="toggleDownloadButtons('slimeRancher', event)">
+                    Slime Rancher
+                </div>
             </div>
-            <div class="list-item" onclick="toggleDownload(this)">DLC Euro Truck
-                <button class="download-button">Descargar</button>
+        </div>
+
+        <div class="novedades">
+            <div class="novedad-item">
+                <img src="Euro_Truck_Simulator_PC.jpg" alt="Euro Truck">
+                <h3>Euro Truck Simulator</h3>
             </div>
-            <div class="list-item" onclick="toggleDownload(this)">American Truck Simulator
-                <button class="download-button">Descargar</button>
-            </div>
-            <div class="list-item" onclick="toggleDownload(this)">DLC American Truck
-                <button class="download-button">Descargar</button>
-            </div>
-            <div class="list-item" onclick="toggleDownload(this)">Slime Rancher
-                <button class="download-button">Descargar</button>
+            <div class="novedad-item">
+                <img src="slimeranchernovedad.jpg" alt="Slime Rancher">
+                <h3>Slime Rancher</h3>
             </div>
         </div>
     </div>
 </body>
-
 </html>
