@@ -211,16 +211,17 @@
 
         function toggleDownload(button, downloadLink) {
             // Verifica si el botón de descarga ya está visible
-            let downloadButton = button.querySelector('.download-button');
-            if (!downloadButton) {
-                // Si no existe, crea un nuevo botón de descarga
+            let downloadButton = button.nextElementSibling; // Obtener el siguiente elemento hermano (el botón de descarga)
+            
+            // Si no existe el botón de descarga, lo crea
+            if (!downloadButton || !downloadButton.classList.contains('download-button')) {
                 downloadButton = document.createElement('button');
                 downloadButton.classList.add('download-button');
                 downloadButton.textContent = 'Descargar';
                 downloadButton.onclick = function() {
                     window.location.href = downloadLink; // Enlace de descarga
                 };
-                button.parentNode.appendChild(downloadButton); // Agrega el botón de descarga fuera del botón del juego
+                button.parentNode.insertBefore(downloadButton, button.nextSibling); // Añadir el botón de descarga debajo
             }
 
             // Alterna la visibilidad del botón de descarga
