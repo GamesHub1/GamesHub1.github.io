@@ -4,295 +4,190 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OptiHub1</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
-            padding: 0;
             font-family: Arial, sans-serif;
-            background-color: #1b1b1b;
-            display: flex;
-        }
-
-        .background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
             background: url('Fondo2.jpg') no-repeat center center fixed;
             background-size: cover;
-            filter: blur(5px);
-            z-index: -1;
-        }
-
-        .header {
-            margin-top: 10px;
-            text-align: center;
-            color: white;
-            font-size: 4.5rem;
-            font-weight: bold;
-            font-family: 'Roboto Slab', serif;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
-            flex-grow: 1;
+            backdrop-filter: blur(5px);
         }
 
         .sidebar {
-            width: 200px;
-            height: 100vh;
-            background-color: rgba(51, 51, 51, 0.9);
-            position: fixed;
+            position: absolute;
             left: 0;
             top: 0;
-            padding: 20px;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            border-top-right-radius: 20px;
-            border-bottom-right-radius: 20px;
+            width: 150px;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px 10px;
+            box-sizing: border-box;
+            border-radius: 0 15px 15px 0;
         }
 
         .sidebar button {
             width: 100%;
+            margin-bottom: 10px;
             padding: 10px;
-            margin-top: 10px;
             background-color: #007bff;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            transition: transform 0.3s ease;
         }
 
         .sidebar button:hover {
-            background-color: #0056b3;
-        }
-
-        .content {
-            margin-left: 220px;
-            padding: 20px;
-            color: white;
-            text-align: center;
-            width: 100%;
-        }
-
-        .container {
-            margin: 20px auto;
-            padding: 20px;
-            color: white;
-            text-align: center;
-            max-width: 800px;
-        }
-
-        .games-container {
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            width: 50%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
-            text-align: center;
-            margin-left: auto;
-            margin-right: auto;
-            display: block;
-        }
-
-        .list-item {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: white;
-            margin: 10px auto;
-            padding: 12px;
-            border-radius: 12px;
-            font-size: 1.2rem;
-            text-align: center;
-            cursor: pointer;
-            width: 250px;
-            transition: transform 0.3s, box-shadow 0.3s, height 0.3s ease-in-out;
-        }
-
-        .list-item:hover {
-            box-shadow: 0 0 15px 3px #ffe600;
             transform: scale(1.1);
         }
 
+        .title {
+            text-align: center;
+            color: white;
+            font-size: 36px;
+            margin-top: 20px;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .game-button {
+            width: 300px;
+            padding: 15px;
+            margin: 10px 0;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .game-button:hover {
+            background-color: rgba(200, 200, 200, 0.9);
+        }
+
         .download-button {
+            display: none;
             margin-top: 10px;
-            padding: 10px 20px;
+            padding: 10px;
             background-color: #28a745;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            opacity: 0;
-            height: 0;
-            transition: opacity 0.3s, height 0.3s ease-in-out;
-            overflow: hidden;
+            animation: fadeIn 0.3s ease;
         }
 
-        .download-button.active {
-            opacity: 1;
-            height: auto;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
-        .novedades {
-            margin: 40px auto;
+        .news {
+            margin-top: 30px;
             display: flex;
             justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            max-width: 800px;
+            gap: 20px;
         }
 
-        .novedad-item {
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
+        .news-item {
+            width: 200px;
+            height: 250px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            text-align: center;
             padding: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            width: 45%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
         }
 
-        .novedad-item img {
-            width: 100px;
+        .news-item img {
+            width: 100%;
             height: auto;
             border-radius: 10px;
         }
-
-        .novedad-item h3 {
-            color: white;
-            margin: 0;
-        }
     </style>
+</head>
+<body>
+    <div class="sidebar">
+        <button onclick="filterGames('games')">JUEGOS</button>
+        <button onclick="filterGames('dlc')">DLC</button>
+        <button onclick="filterGames('all')">MOSTRAR TODO</button>
+    </div>
+
+    <div class="title">OptiHub1</div>
+
+    <div class="content" id="game-list">
+        <button class="game-button" data-category="games" onclick="toggleDownload(this)">
+            Euro Truck Simulator
+            <button class="download-button" onclick="event.stopPropagation(); downloadGame('Euro Truck Simulator')">Descargar</button>
+        </button>
+        <button class="game-button" data-category="games" onclick="toggleDownload(this)">
+            American Truck Simulator
+            <button class="download-button" onclick="event.stopPropagation(); downloadGame('American Truck Simulator')">Descargar</button>
+        </button>
+        <button class="game-button" data-category="games" onclick="toggleDownload(this)">
+            Slime Rancher
+            <button class="download-button" onclick="event.stopPropagation(); downloadGame('Slime Rancher')">Descargar</button>
+        </button>
+        <button class="game-button" data-category="dlc" onclick="toggleDownload(this)">
+            DLC Euro Truck
+            <button class="download-button" onclick="event.stopPropagation(); downloadGame('DLC Euro Truck')">Descargar</button>
+        </button>
+        <button class="game-button" data-category="dlc" onclick="toggleDownload(this)">
+            DLC American Truck
+            <button class="download-button" onclick="event.stopPropagation(); downloadGame('DLC American Truck')">Descargar</button>
+        </button>
+    </div>
+
+    <div class="news">
+        <div class="news-item">
+            <img src="EuroTruckNovedad.jpg" alt="Euro Truck">
+            <p>Euro Truck Simulator</p>
+        </div>
+        <div class="news-item">
+            <img src="SlimeRancherNovedad.jpg" alt="Slime Rancher">
+            <p>Slime Rancher</p>
+        </div>
+    </div>
+
     <script>
-        let activeItem = null; // Variable para guardar el botón activo
-
-        function toggleDownloadButtons(itemId, event) {
-            // Evitar la propagación del evento
-            event.stopPropagation();
-
-            const parentElement = event.target;
-
-            // Si el botón ya está activo, lo cerramos
-            if (activeItem === itemId) {
-                const downloadButton = parentElement.querySelector('.download-button');
-                if (downloadButton) {
-                    downloadButton.classList.remove('active');
-                }
-                activeItem = null;
-                parentElement.style.transform = 'scale(1)';
-                return;
-            }
-
-            // Si hay otro botón activo, lo cerramos primero
-            if (activeItem) {
-                const previousElement = document.getElementById(activeItem).parentElement;
-                const previousDownloadButton = previousElement.querySelector('.download-button');
-                if (previousDownloadButton) {
-                    previousDownloadButton.classList.remove('active');
-                }
-                previousElement.style.transform = 'scale(1)';
-            }
-
-            // Marcar este botón como activo
-            activeItem = itemId;
-
-            // Crear o mostrar el botón de descarga
-            let downloadButton = parentElement.querySelector('.download-button');
-            if (!downloadButton) {
-                downloadButton = document.createElement('button');
-                downloadButton.classList.add('download-button', 'active');
-                downloadButton.innerText = `Descargar ${itemId}`;
-                downloadButton.onclick = function () {
-                    openDownloadLink(itemId);
-                };
-                parentElement.appendChild(downloadButton);
-            } else {
-                downloadButton.classList.add('active');
-            }
-
-            // Animar el botón principal
-            parentElement.style.transform = 'scale(1.1)';
-        }
-
-        function openDownloadLink(itemId) {
-            let link;
-            switch (itemId) {
-                case 'euroTruck':
-                    link = 'https://drive.google.com/file/d/1rleQoX_mTcR0lG2AtWX2O6f7lQ3CXlNQ/view?usp=drive_link';
-                    break;
-                case 'americanTruck':
-                    link = 'https://drive.google.com/file/d/1DUtvEG5fg11yYmNO4375xe7OAPRelEBO/view?usp=drive_link';
-                    break;
-                case 'euroTruckDLC':
-                    link = 'https://drive.google.com/file/d/1zwmbXSZGh2rztOQ-0TEXTq5shfQtEUah/view?usp=drive_link';
-                    break;
-                case 'americanTruckDLC':
-                    link = 'https://drive.google.com/file/d/1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7/view?usp=drive_link';
-                    break;
-                case 'slimeRancher':
-                    link = 'https://example.com/slimerancher';
-                    break;
-            }
-            window.open(link, '_blank');
-        }
-
-        function filterItems(category) {
-            const allItems = document.querySelectorAll('.list-item');
-            allItems.forEach(item => {
-                if (category === 'all') {
-                    item.style.display = 'block';
+        function filterGames(category) {
+            const games = document.querySelectorAll('.game-button');
+            games.forEach(game => {
+                if (category === 'all' || game.dataset.category === category) {
+                    game.style.display = 'block';
                 } else {
-                    item.style.display = item.dataset.category === category ? 'block' : 'none';
+                    game.style.display = 'none';
                 }
             });
         }
+
+        function toggleDownload(button) {
+            const downloadButton = button.querySelector('.download-button');
+            if (downloadButton.style.display === 'block') {
+                downloadButton.style.display = 'none';
+                button.style.transform = 'scale(1)';
+            } else {
+                downloadButton.style.display = 'block';
+                button.style.transform = 'scale(1.1)';
+                setTimeout(() => button.style.transform = 'scale(1)', 300);
+            }
+        }
+
+        function downloadGame(gameName) {
+            alert(`Descargando ${gameName}...`);
+        }
     </script>
-</head>
-<body>
-    <div class="background"></div>
-
-    <div class="sidebar">
-        <button onclick="filterItems('games')">JUEGOS</button>
-        <button onclick="filterItems('dlcs')">DLC</button>
-        <button onclick="filterItems('all')">MOSTRAR TODO</button>
-    </div>
-
-    <div class="content">
-        <div class="header">OptiHub1</div>
-
-        <div class="games-container">
-            <div class="container">
-                <div class="list-item" id="euroTruck" data-category="games" onclick="toggleDownloadButtons('euroTruck', event)">
-                    Euro Truck Simulator
-                </div>
-                <div class="list-item" id="americanTruck" data-category="games" onclick="toggleDownloadButtons('americanTruck', event)">
-                    American Truck Simulator
-                </div>
-                <div class="list-item" id="slimeRancher" data-category="games" onclick="toggleDownloadButtons('slimeRancher', event)">
-                    Slime Rancher
-                </div>
-                <div class="list-item" id="euroTruckDLC" data-category="dlcs" onclick="toggleDownloadButtons('euroTruckDLC', event)">
-                    DLC Euro Truck
-                </div>
-                <div class="list-item" id="americanTruckDLC" data-category="dlcs" onclick="toggleDownloadButtons('americanTruckDLC', event)">
-                    DLC American Truck
-                </div>
-            </div>
-        </div>
-
-        <div class="novedades">
-            <div class="novedad-item">
-                <img src="Euro_Truck_Simulator_PC.jpg" alt="Euro Truck">
-                <h3>Euro Truck Simulator</h3>
-            </div>
-            <div class="novedad-item">
-                <img src="slimeranchernovedad.jpg" alt="Slime Rancher">
-                <h3>Slime Rancher</h3>
-            </div>
-        </div>
-    </div>
 </body>
 </html>
