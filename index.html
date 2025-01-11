@@ -71,17 +71,20 @@
             background-color: rgba(200, 200, 200, 0.9);
         }
 
-        .content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
+        .central-box {
+            background: rgba(0, 0, 0, 0.6);
+            width: 60%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
         }
 
         .game-button {
             width: 300px;
             padding: 15px;
-            margin: 10px 0;
+            margin: 10px auto;
             text-align: center;
             background-color: rgba(255, 255, 255, 0.8);
             border: none;
@@ -154,7 +157,7 @@
         <input type="text" id="search" placeholder="Buscar juegos o DLC..." onkeyup="searchGames()">
     </div>
 
-    <div class="content" id="game-list">
+    <div class="central-box" id="game-list">
         <button class="game-button" data-category="games" onclick="toggleDownload(this)">
             Euro Truck Simulator
             <button class="download-button" onclick="event.stopPropagation(); downloadGame('Euro Truck Simulator')">Descargar</button>
