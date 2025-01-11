@@ -30,7 +30,7 @@
             margin-top: 10px;
             text-align: center;
             color: white;
-            font-size: 4rem;
+            font-size: 4.5rem;
             font-weight: bold;
             font-family: 'Roboto Slab', serif;
             text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
@@ -50,7 +50,8 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            border-radius: 0 15px 15px 0;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
         }
 
         .sidebar button {
@@ -94,6 +95,7 @@
             text-align: center;
             margin-left: auto;
             margin-right: auto;
+            display: block;
         }
 
         .list-item {
@@ -106,12 +108,31 @@
             text-align: center;
             cursor: pointer;
             width: 250px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, height 0.3s ease-in-out;
         }
 
         .list-item:hover {
             box-shadow: 0 0 15px 3px #ffe600;
             transform: scale(1.1);
+        }
+
+        .download-button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            opacity: 0;
+            height: 0;
+            transition: opacity 0.3s, height 0.3s ease-in-out;
+            overflow: hidden;
+        }
+
+        .download-button.active {
+            opacity: 1;
+            height: auto;
         }
 
         .novedades {
@@ -144,54 +165,56 @@
             color: white;
             margin: 0;
         }
-
-        .download-button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            opacity: 0;
-            transform: scale(0.95);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-
-        .download-button.show {
-            opacity: 1;
-            transform: scale(1);
-        }
     </style>
     <script>
-        let lastClickedButton = null;
-
-        function filterItems(category) {
-            const allItems = document.querySelectorAll('.list-item');
-            allItems.forEach(item => {
-                if (category === 'all') {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = item.dataset.category === category ? 'block' : 'none';
-                }
-            });
-        }
+        let activeItem = null; // Variable para guardar el botón activo
 
         function toggleDownloadButtons(itemId, event) {
+            // Evitar la propagación del evento
             event.stopPropagation();
+
             const parentElement = event.target;
-            const existingDownloadButton = parentElement.querySelector('.download-button');
-            if (existingDownloadButton) {
-                existingDownloadButton.classList.toggle('show');
-            } else {
-                const downloadButton = document.createElement('button');
-                downloadButton.classList.add('download-button', 'show');
+
+            // Si el botón ya está activo, lo cerramos
+            if (activeItem === itemId) {
+                const downloadButton = parentElement.querySelector('.download-button');
+                if (downloadButton) {
+                    downloadButton.classList.remove('active');
+                }
+                activeItem = null;
+                parentElement.style.transform = 'scale(1)';
+                return;
+            }
+
+            // Si hay otro botón activo, lo cerramos primero
+            if (activeItem) {
+                const previousElement = document.getElementById(activeItem).parentElement;
+                const previousDownloadButton = previousElement.querySelector('.download-button');
+                if (previousDownloadButton) {
+                    previousDownloadButton.classList.remove('active');
+                }
+                previousElement.style.transform = 'scale(1)';
+            }
+
+            // Marcar este botón como activo
+            activeItem = itemId;
+
+            // Crear o mostrar el botón de descarga
+            let downloadButton = parentElement.querySelector('.download-button');
+            if (!downloadButton) {
+                downloadButton = document.createElement('button');
+                downloadButton.classList.add('download-button', 'active');
                 downloadButton.innerText = `Descargar ${itemId}`;
-                downloadButton.onclick = function() {
+                downloadButton.onclick = function () {
                     openDownloadLink(itemId);
                 };
                 parentElement.appendChild(downloadButton);
+            } else {
+                downloadButton.classList.add('active');
             }
+
+            // Animar el botón principal
+            parentElement.style.transform = 'scale(1.1)';
         }
 
         function openDownloadLink(itemId) {
@@ -210,10 +233,21 @@
                     link = 'https://drive.google.com/file/d/1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7/view?usp=drive_link';
                     break;
                 case 'slimeRancher':
-                    link = 'https://example.com/slime-rancher-download';
+                    link = 'https://example.com/slimerancher';
                     break;
             }
-            window.open(link, "_blank");
+            window.open(link, '_blank');
+        }
+
+        function filterItems(category) {
+            const allItems = document.querySelectorAll('.list-item');
+            allItems.forEach(item => {
+                if (category === 'all') {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = item.dataset.category === category ? 'block' : 'none';
+                }
+            });
         }
     </script>
 </head>
@@ -231,20 +265,20 @@
 
         <div class="games-container">
             <div class="container">
-                <div class="list-item" data-category="games" onclick="toggleDownloadButtons('euroTruck', event)">
+                <div class="list-item" id="euroTruck" data-category="games" onclick="toggleDownloadButtons('euroTruck', event)">
                     Euro Truck Simulator
                 </div>
-                <div class="list-item" data-category="games" onclick="toggleDownloadButtons('americanTruck', event)">
+                <div class="list-item" id="americanTruck" data-category="games" onclick="toggleDownloadButtons('americanTruck', event)">
                     American Truck Simulator
                 </div>
-                <div class="list-item" data-category="dlcs" onclick="toggleDownloadButtons('euroTruckDLC', event)">
+                <div class="list-item" id="slimeRancher" data-category="games" onclick="toggleDownloadButtons('slimeRancher', event)">
+                    Slime Rancher
+                </div>
+                <div class="list-item" id="euroTruckDLC" data-category="dlcs" onclick="toggleDownloadButtons('euroTruckDLC', event)">
                     DLC Euro Truck
                 </div>
-                <div class="list-item" data-category="dlcs" onclick="toggleDownloadButtons('americanTruckDLC', event)">
+                <div class="list-item" id="americanTruckDLC" data-category="dlcs" onclick="toggleDownloadButtons('americanTruckDLC', event)">
                     DLC American Truck
-                </div>
-                <div class="list-item" data-category="games" onclick="toggleDownloadButtons('slimeRancher', event)">
-                    Slime Rancher
                 </div>
             </div>
         </div>
