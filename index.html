@@ -104,14 +104,22 @@
 
         .download-button {
             display: none;
+            width: 90%; /* Tamaño similar a los botones de juego */
+            padding: 12px; /* Un poco más fino */
             margin-top: 10px;
-            padding: 10px;
+            text-align: center;
             background-color: #28a745;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
             animation: fadeIn 0.3s ease;
+            transition: transform 0.3s ease;
+        }
+
+        .download-button:hover {
+            background-color: rgba(40, 167, 69, 0.8);
+            transform: scale(1.05); /* Un pequeño efecto de hover */
         }
 
         @keyframes fadeIn {
