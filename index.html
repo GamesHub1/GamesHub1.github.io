@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GamesHub1</title>
+    <title>OptiHub1</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -31,7 +31,7 @@
             margin-top: 10px;
             text-align: center;
             color: white;
-            font-size: 3rem;
+            font-size: 4.5rem;
             font-weight: bold;
             font-family: 'Roboto Slab', serif;
             text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
@@ -114,6 +114,7 @@
             cursor: pointer;
             width: 250px;
             transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
         }
 
         .list-item:hover {
@@ -130,11 +131,11 @@
             border-radius: 5px;
             cursor: pointer;
             display: none;
+            animation: fadeIn 0.5s ease-in-out;
         }
 
         .download-button.show {
             display: block;
-            animation: fadeIn 0.5s ease-in-out;
         }
 
         @keyframes fadeIn {
@@ -145,41 +146,10 @@
                 opacity: 1;
             }
         }
-
-        .novedades {
-            margin: 40px auto;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            max-width: 800px;
-        }
-
-        .novedad-item {
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            width: 45%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
-        }
-
-        .novedad-item img {
-            width: 100px;
-            height: auto;
-            border-radius: 10px;
-        }
-
-        .novedad-item h3 {
-            color: white;
-            margin: 0;
-        }
     </style>
     <script>
         function toggleDownload(button) {
-            const downloadButton = button.nextElementSibling;
+            const downloadButton = button.querySelector('.download-button');
             if (downloadButton.classList.contains('show')) {
                 downloadButton.classList.remove('show');
             } else {
@@ -188,14 +158,12 @@
             }
         }
 
-        function filterItems(category) {
-            const allItems = document.querySelectorAll('.list-item');
-            allItems.forEach(item => {
-                if (category === 'all') {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = item.dataset.category === category ? 'block' : 'none';
-                }
+        function filterSearch() {
+            const input = document.querySelector('.search-bar input').value.toLowerCase();
+            const items = document.querySelectorAll('.list-item');
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(input) ? 'block' : 'none';
             });
         }
     </script>
@@ -205,39 +173,30 @@
     <div class="background"></div>
 
     <div class="sidebar">
-        <button onclick="filterItems('games')">JUEGOS</button>
-        <button onclick="filterItems('dlcs')">DLC</button>
-        <button onclick="filterItems('all')">MOSTRAR TODO</button>
+        <button onclick="filterSearch()">Buscar</button>
     </div>
 
     <div class="content">
-        <div class="header">GamesHub1</div>
+        <div class="header">OptiHub1</div>
         <div class="search-bar">
-            <input type="text" placeholder="Buscar...">
+            <input type="text" placeholder="Buscar..." oninput="filterSearch()">
         </div>
 
         <div class="games-container">
-            <div class="list-item" data-category="games" onclick="toggleDownload(this)">Euro Truck Simulator</div>
-            <button class="download-button">Descargar</button>
-            <div class="list-item" data-category="dlcs" onclick="toggleDownload(this)">DLC Euro Truck</div>
-            <button class="download-button">Descargar</button>
-            <div class="list-item" data-category="games" onclick="toggleDownload(this)">American Truck Simulator</div>
-            <button class="download-button">Descargar</button>
-            <div class="list-item" data-category="dlcs" onclick="toggleDownload(this)">DLC American Truck</div>
-            <button class="download-button">Descargar</button>
-            <div class="list-item" data-category="games" onclick="toggleDownload(this)">Slime Rancher</div>
-            <button class="download-button">Descargar</button>
-        </div>
-
-        <div class="novedades">
-            <div class="novedad-item">
-                <img src="slimeranchernovedad.jpg" alt="Slime Rancher">
-                <h3>Slime Rancher</h3>
+            <div class="list-item" onclick="toggleDownload(this)">Euro Truck Simulator
+                <button class="download-button">Descargar</button>
             </div>
-            
-            <div class="novedad-item">
-                <img src="American_Truck_Simulator_PC.jpg" alt="American Truck">
-                <h3>American Truck Simulator</h3>
+            <div class="list-item" onclick="toggleDownload(this)">DLC Euro Truck
+                <button class="download-button">Descargar</button>
+            </div>
+            <div class="list-item" onclick="toggleDownload(this)">American Truck Simulator
+                <button class="download-button">Descargar</button>
+            </div>
+            <div class="list-item" onclick="toggleDownload(this)">DLC American Truck
+                <button class="download-button">Descargar</button>
+            </div>
+            <div class="list-item" onclick="toggleDownload(this)">Slime Rancher
+                <button class="download-button">Descargar</button>
             </div>
         </div>
     </div>
