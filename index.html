@@ -161,25 +161,20 @@
     </div>
 
     <div class="central-box" id="game-list">
-        <button class="game-button" data-category="games" onclick="toggleDownload(this)">
+        <button class="game-button" data-category="games" onclick="toggleDownload(this, 'https://link-a-descargar1.com')">
             Euro Truck Simulator
-            <button class="download-button" onclick="event.stopPropagation(); downloadGame('Euro Truck Simulator')">Descargar</button>
         </button>
-        <button class="game-button" data-category="games" onclick="toggleDownload(this)">
+        <button class="game-button" data-category="games" onclick="toggleDownload(this, 'https://link-a-descargar2.com')">
             American Truck Simulator
-            <button class="download-button" onclick="event.stopPropagation(); downloadGame('American Truck Simulator')">Descargar</button>
         </button>
-        <button class="game-button" data-category="games" onclick="toggleDownload(this)">
+        <button class="game-button" data-category="games" onclick="toggleDownload(this, 'https://link-a-descargar3.com')">
             Slime Rancher
-            <button class="download-button" onclick="event.stopPropagation(); downloadGame('Slime Rancher')">Descargar</button>
         </button>
-        <button class="game-button" data-category="dlc" onclick="toggleDownload(this)">
+        <button class="game-button" data-category="dlc" onclick="toggleDownload(this, 'https://link-a-descargar4.com')">
             DLC Euro Truck
-            <button class="download-button" onclick="event.stopPropagation(); downloadGame('DLC Euro Truck')">Descargar</button>
         </button>
-        <button class="game-button" data-category="dlc" onclick="toggleDownload(this)">
+        <button class="game-button" data-category="dlc" onclick="toggleDownload(this, 'https://link-a-descargar5.com')">
             DLC American Truck
-            <button class="download-button" onclick="event.stopPropagation(); downloadGame('DLC American Truck')">Descargar</button>
         </button>
     </div>
 
@@ -206,20 +201,26 @@
             });
         }
 
-        function toggleDownload(button) {
-            const downloadButton = button.querySelector('.download-button');
+        function toggleDownload(button, downloadLink) {
+            // Verifica si el botón de descarga ya está visible
+            let downloadButton = button.querySelector('.download-button');
+            if (!downloadButton) {
+                // Si no existe, crea un nuevo botón de descarga
+                downloadButton = document.createElement('button');
+                downloadButton.classList.add('download-button');
+                downloadButton.textContent = 'Descargar';
+                downloadButton.onclick = function() {
+                    window.location.href = downloadLink; // Enlace de descarga
+                };
+                button.appendChild(downloadButton);
+            }
+
+            // Alterna la visibilidad del botón de descarga
             if (downloadButton.style.display === 'block') {
                 downloadButton.style.display = 'none';
-                button.style.transform = 'scale(1)';
             } else {
                 downloadButton.style.display = 'block';
-                button.style.transform = 'scale(1.1)';
-                setTimeout(() => button.style.transform = 'scale(1)', 300);
             }
-        }
-
-        function downloadGame(gameName) {
-            alert(`Descargando ${gameName}...`);
         }
 
         function searchGames() {
