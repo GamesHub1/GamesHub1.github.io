@@ -115,8 +115,6 @@
             cursor: pointer;
             animation: fadeIn 0.3s ease;
             transition: transform 0.3s ease;
-            position: absolute; /* Hacerlo posicionado absolutamente dentro del botón de juego */
-            bottom: 10px; /* Colocarlo cerca del fondo del botón */
         }
 
         .download-button:hover {
@@ -222,7 +220,7 @@
                 downloadButton.onclick = function() {
                     window.location.href = downloadLink; // Enlace de descarga
                 };
-                button.appendChild(downloadButton);
+                button.parentNode.appendChild(downloadButton); // Agrega el botón de descarga fuera del botón del juego
             }
 
             // Alterna la visibilidad del botón de descarga
