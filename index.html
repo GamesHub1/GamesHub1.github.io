@@ -117,35 +117,6 @@
             z-index: 2; /* Asegura que el botón de descarga quede por debajo */
         }
 
-        .download-button {
-            display: none;
-            width: 90%; /* Tamaño similar a los botones de juego */
-            padding: 12px; /* Un poco más fino */
-            margin-top: 10px;
-            text-align: center;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            animation: fadeIn 0.3s ease;
-            transition: transform 0.3s ease;
-        }
-
-        .download-button:hover {
-            background-color: rgba(40, 167, 69, 0.8);
-            transform: scale(1.05); /* Un pequeño efecto de hover */
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
         .news {
             margin-top: 30px;
             display: flex;
@@ -184,19 +155,19 @@
     </div>
 
     <div class="central-box" id="game-list">
-        <button class="game-button" data-category="games" onclick="toggleDownload(this, 'https://drive.google.com/file/d/1rleQoX_mTcR0lG2AtWX2O6f7lQ3CXlNQ/view?usp=drive_link')">
+        <button class="game-button" data-category="games" onclick="openLink('https://drive.google.com/file/d/1rleQoX_mTcR0lG2AtWX2O6f7lQ3CXlNQ/view?usp=drive_link')">
             Euro Truck Simulator
         </button>
-        <button class="game-button" data-category="games" onclick="toggleDownload(this, 'https://drive.google.com/file/d/1DUtvEG5fg11yYmNO4375xe7OAPRelEBO/view?usp=drive_link')">
+        <button class="game-button" data-category="games" onclick="openLink('https://drive.google.com/file/d/1DUtvEG5fg11yYmNO4375xe7OAPRelEBO/view?usp=drive_link')">
             American Truck Simulator
         </button>
-        <button class="game-button" data-category="games" onclick="toggleDownload(this, 'https://drive.google.com/file/d/1Gy-QK5RrZKHidJ_KPUjxLqMpRml5icwc/view?usp=drive_link')">
+        <button class="game-button" data-category="games" onclick="openLink('https://drive.google.com/file/d/1Gy-QK5RrZKHidJ_KPUjxLqMpRml5icwc/view?usp=drive_link')">
             Slime Rancher
         </button>
-        <button class="game-button" data-category="dlc" onclick="toggleDownload(this, 'https://drive.google.com/file/d/1zwmbXSZGh2rztOQ-0TEXTq5shfQtEUah/view?usp=drive_link')">
+        <button class="game-button" data-category="dlc" onclick="openLink('https://drive.google.com/file/d/1zwmbXSZGh2rztOQ-0TEXTq5shfQtEUah/view?usp=drive_link')">
             DLC Euro Truck
         </button>
-        <button class="game-button" data-category="dlc" onclick="toggleDownload(this, 'https://drive.google.com/file/d/1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7/view?usp=drive_link')">
+        <button class="game-button" data-category="dlc" onclick="openLink('https://drive.google.com/file/d/1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7/view?usp=drive_link')">
             DLC American Truck
         </button>
     </div>
@@ -224,29 +195,8 @@
             });
         }
 
-        function toggleDownload(button, downloadLink) {
-            // Verifica si el botón de descarga ya está visible
-            let downloadButton = button.nextElementSibling; // Obtener el siguiente elemento hermano (el botón de descarga)
-            
-            // Si no existe el botón de descarga, lo crea
-            if (!downloadButton || !downloadButton.classList.contains('download-button')) {
-                downloadButton = document.createElement('button');
-                downloadButton.classList.add('download-button');
-                downloadButton.textContent = 'Descargar';
-                downloadButton.onclick = function() {
-                    window.location.href = downloadLink; // Enlace de descarga
-                };
-                button.parentNode.insertBefore(downloadButton, button.nextSibling); // Añadir el botón de descarga debajo
-            }
-
-            // Alterna la visibilidad del botón de descarga
-            if (downloadButton.style.display === 'block') {
-                downloadButton.style.display = 'none';
-                button.classList.remove('expanded'); // Reduce el tamaño del botón
-            } else {
-                downloadButton.style.display = 'block';
-                button.classList.add('expanded'); // Agranda el botón
-            }
+        function openLink(url) {
+            window.open(url, '_blank'); // Abre el enlace en una nueva pestaña
         }
 
         function searchGames() {
