@@ -14,15 +14,20 @@
             padding-top: 50px;
         }
 
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
         .title {
             font-size: 32px;
-            font-weight: 300; /* Hace la letra más fina */
-            text-align: right; /* Mueve el texto a la derecha */
-            margin-right: 80px; /* Ajusta la posición */
+            font-weight: 300; /* Letra más fina */
+            margin-bottom: 10px; /* Espaciado entre el título y la imagen */
         }
 
         .logo {
-            margin-top: 20px;
             max-width: 400px;
             width: 100%;
             border-radius: 10px;
@@ -51,15 +56,17 @@
     </style>
 </head>
 <body>
-    <h1 class="title">Euro Truck Simulator</h1>
-    <img src="euro truck page logo.jpg" alt="Euro Truck Simulator Logo" class="logo">
+    <div class="container">
+        <h1 class="title">Euro Truck Simulator</h1>
+        <img src="euro truck page logo.jpg" alt="Euro Truck Simulator Logo" class="logo">
 
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/xlTuC18xVII?si=OwWyxdlipcD_msmU" 
-        title="YouTube video player" frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-        allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/xlTuC18xVII?si=OwWyxdlipcD_msmU" 
+            title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen></iframe>
 
-    <br>
-    <a href="index.html" class="back-button">Volver a la página principal</a>
+        <br>
+        <a href="index.html" class="back-button">Volver a la página principal</a>
+    </div>
 </body>
 </html>
