@@ -17,31 +17,46 @@
         .content {
             display: flex;
             flex-direction: column;
-            align-items: flex-start; /* Alinea el contenido a la izquierda */
-            max-width: 400px; /* Limita el ancho para mantener la estructura */
+            align-items: flex-start;
+            max-width: 600px;
         }
 
         .title {
             font-size: 32px;
-            font-weight: 300; /* Letra más fina */
+            font-weight: 300;
             margin-bottom: 10px;
         }
 
         hr {
             width: 100%;
-            border: 1px solid white;
-            margin: 10px 0;
+            border: 1.5px solid white;
+            margin: 15px 0;
         }
 
         .logo {
             max-width: 400px;
             width: 100%;
             border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .info-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .info-left, .info-right {
+            width: 48%;
+        }
+
+        .info-left p, .info-right p {
+            margin: 5px 0;
         }
 
         .video-container {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 40px; /* Más espacio entre la imagen y el video */
         }
 
         iframe {
@@ -72,6 +87,19 @@
         <h1 class="title">Euro Truck Simulator</h1>
         <hr>
         <img src="euro truck page logo.jpg" alt="Euro Truck Simulator Logo" class="logo">
+
+        <div class="info-container">
+            <div class="info-left">
+                <p><strong>Nombre:</strong> Euro Truck Simulator</p>
+                <p><strong>Plataforma:</strong> PC</p>
+                <p><strong>Género:</strong> Simulación, Conducción</p>
+            </div>
+            <div class="info-right">
+                <p><strong>Tamaño:</strong> 3GB</p>
+                <p><strong>Fecha de lanzamiento:</strong> 29 de agosto de 2008</p>
+                <p><strong>Idiomas:</strong> Español, Inglés, Francés, Alemán</p>
+            </div>
+        </div>
     </div>
 
     <div class="video-container">
