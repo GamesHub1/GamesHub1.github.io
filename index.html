@@ -4,22 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OptiHub1</title>
-    <!-- Agrega el favicon aquí -->
-    <link rel="icon" href="Captura de pantalla 2025-01-11 004104.ico" type="image/x-icon"> <!-- Asegúrate de poner la ruta correcta del archivo de tu logo -->
+    <link rel="icon" href="Captura de pantalla 2025-01-11 004104.ico" type="image/x-icon">
     <style>
-        /* Asegura que html y body ocupen toda la altura de la pantalla */
+        /* Estilos generales igual que antes */
         html, body {
             margin: 0;
             padding: 0;
             height: 100%;
         }
 
-        /* Aplicar el fondo de la imagen y el efecto de blur a toda la página */
         body {
             background: url('Fondo2.jpg') no-repeat center center fixed;
             background-size: cover;
-            backdrop-filter: blur(10px); /* Aumenté el valor del blur para más efecto */
-            height: 100%; /* Aseguramos que el body ocupe toda la altura */
+            backdrop-filter: blur(10px);
+            height: 100%;
         }
 
         .sidebar {
@@ -82,21 +80,21 @@
 
         .central-box {
             background: rgba(0, 0, 0, 0.6);
-            width: 50%; /* Reducido el tamaño */
+            width: 50%;
             margin: 20px auto;
             padding: 20px;
             border-radius: 15px;
             text-align: center;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
             display: flex;
-            flex-direction: column; /* Los juegos estarán uno debajo del otro */
-            align-items: center; /* Centrar los botones */
+            flex-direction: column;
+            align-items: center;
         }
 
         .game-button {
-            width: 90%; /* Menor ancho para los botones */
+            width: 90%;
             padding: 15px;
-            margin: 10px 0; /* Separación entre los botones */
+            margin: 10px 0;
             text-align: center;
             background-color: rgba(255, 255, 255, 0.8);
             border: none;
@@ -109,12 +107,7 @@
 
         .game-button:hover {
             background-color: rgba(200, 200, 200, 0.9);
-            transform: scale(1.05); /* Efecto de agrandar al pasar el cursor */
-        }
-
-        .game-button.expanded {
-            transform: scale(1.1); /* Efecto de agrandar al hacer clic */
-            z-index: 2; /* Asegura que el botón de descarga quede por debajo */
+            transform: scale(1.05);
         }
 
         .news {
@@ -155,19 +148,19 @@
     </div>
 
     <div class="central-box" id="game-list">
-        <button class="game-button" data-category="games" onclick="openLink('https://drive.google.com/file/d/1rleQoX_mTcR0lG2AtWX2O6f7lQ3CXlNQ/view?usp=drive_link')">
+        <button class="game-button" data-category="games" onclick="openGamePage('Euro Truck Simulator')">
             Euro Truck Simulator
         </button>
-        <button class="game-button" data-category="games" onclick="openLink('https://drive.google.com/file/d/1DUtvEG5fg11yYmNO4375xe7OAPRelEBO/view?usp=drive_link')">
+        <button class="game-button" data-category="games" onclick="openGamePage('American Truck Simulator')">
             American Truck Simulator
         </button>
-        <button class="game-button" data-category="games" onclick="openLink('https://drive.google.com/file/d/1Gy-QK5RrZKHidJ_KPUjxLqMpRml5icwc/view?usp=drive_link')">
+        <button class="game-button" data-category="games" onclick="openGamePage('Slime Rancher')">
             Slime Rancher
         </button>
-        <button class="game-button" data-category="dlc" onclick="openLink('https://drive.google.com/file/d/1zwmbXSZGh2rztOQ-0TEXTq5shfQtEUah/view?usp=drive_link')">
+        <button class="game-button" data-category="dlc" onclick="openGamePage('DLC Euro Truck')">
             DLC Euro Truck
         </button>
-        <button class="game-button" data-category="dlc" onclick="openLink('https://drive.google.com/file/d/1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7/view?usp=drive_link')">
+        <button class="game-button" data-category="dlc" onclick="openGamePage('DLC American Truck')">
             DLC American Truck
         </button>
     </div>
@@ -195,8 +188,22 @@
             });
         }
 
-        function openLink(url) {
-            window.open(url, '_blank'); // Abre el enlace en una nueva pestaña
+        function openGamePage(gameName) {
+            const newWindow = window.open("", "_blank");
+            newWindow.document.write(`
+                <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>${gameName}</title>
+                    </head>
+                    <body>
+                        <h1>${gameName}</h1>
+                        <p>Información sobre el juego: <strong>${gameName}</strong></p>
+                        <p>Descripción del juego, requisitos, características, etc.</p>
+                    </body>
+                </html>
+            `);
         }
 
         function searchGames() {
