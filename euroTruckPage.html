@@ -10,78 +10,103 @@
             background-size: cover;
             font-family: Arial, sans-serif;
             color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            height: 100vh; /* Ocupa toda la pantalla */
+            margin: 0;
+            padding: 10px;
             text-align: left;
-            padding: 50px;
         }
 
         .content {
             display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 90%;
+            height: 90%;
+        }
+
+        .left-section {
+            display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: flex-start;
-            max-width: 800px;
+            width: 45%;
         }
 
         .title {
-            font-size: 40px;
+            font-size: 24px; /* Reducido para que todo quepa */
             font-weight: 400;
-            margin-bottom: 10px;
+            margin: 0;
         }
 
         hr {
             width: 100%;
-            border: 2px solid white;
-            margin: 15px 0;
+            border: 1px solid white;
+            margin: 5px 0;
         }
 
         .logo {
-            max-width: 400px;
+            max-width: 150px; /* Imagen más pequeña */
             width: 100%;
             border-radius: 10px;
-            margin-bottom: 20px;
         }
 
-        /* Fondo para resaltar la información */
+        /* Caja de información más compacta */
         .info-container {
             display: flex;
             justify-content: space-between;
             width: 100%;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.7); /* Fondo oscuro semi-transparente */
-            border-radius: 10px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            font-size: 12px; /* Reducido el tamaño del texto */
         }
 
         .info-left, .info-right {
-            width: 48%;
+            width: 50%;
         }
 
         .info-left p, .info-right p {
-            margin: 10px 0;
-            font-size: 22px; /* Texto más grande */
+            margin: 5px 0;
         }
 
-        .video-container {
-            text-align: center;
-            margin-top: 50px; /* Más espacio entre la información y el video */
+        .separator {
+            width: 2px;
+            background: white;
+            height: 100%;
+            margin: 0 10px;
+        }
+
+        .right-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
         }
 
         iframe {
-            border: 3px solid #fff;
-            border-radius: 10px;
+            width: 300px;
+            height: 170px;
+            border: 2px solid #fff;
+            border-radius: 5px;
         }
 
         .back-button {
             display: block;
-            margin-top: 30px;
-            padding: 15px 30px;
+            margin-top: 10px;
+            padding: 8px 15px;
             background-color: #007bff;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 3px;
             cursor: pointer;
             text-decoration: none;
-            font-size: 18px;
-            width: fit-content;
+            font-size: 12px;
         }
 
         .back-button:hover {
@@ -91,29 +116,34 @@
 </head>
 <body>
     <div class="content">
-        <h1 class="title">Euro Truck Simulator</h1>
-        <hr>
-        <img src="euro truck page logo.jpg" alt="Euro Truck Simulator Logo" class="logo">
+        <div class="left-section">
+            <h1 class="title">Euro Truck Simulator</h1>
+            <hr>
+            <img src="euro truck page logo.jpg" alt="Euro Truck Simulator Logo" class="logo">
 
-        <div class="info-container">
-            <div class="info-left">
-                <p><strong>Nombre:</strong> Euro Truck Simulator</p>
-                <p><strong>Plataforma:</strong> PC</p>
-                <p><strong>Género:</strong> Simulación, Conducción</p>
+            <div class="info-container">
+                <div class="info-left">
+                    <p><strong>Nombre:</strong> Euro Truck Simulator</p>
+                    <p><strong>Plataforma:</strong> PC</p>
+                    <p><strong>Género:</strong> Simulación, Conducción</p>
+                </div>
+                <div class="separator"></div>
+                <div class="info-right">
+                    <p><strong>Tamaño:</strong> 3GB</p>
+                    <p><strong>Fecha de lanzamiento:</strong> 29 de agosto de 2008</p>
+                    <p><strong>Idiomas:</strong> Español, Inglés, Francés, Alemán</p>
+                </div>
             </div>
-            <div class="info-right">
-                <p><strong>Tamaño:</strong> 3GB</p>
-                <p><strong>Fecha de lanzamiento:</strong> 29 de agosto de 2008</p>
-                <p><strong>Idiomas:</strong> Español, Inglés, Francés, Alemán</p>
-            </div>
+        </div>
+
+        <div class="right-section">
+            <iframe src="https://www.youtube.com/embed/xlTuC18xVII?si=OwWyxdlipcD_msmU" 
+                title="YouTube video player" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen></iframe>
         </div>
     </div>
 
-    <div class="video-container">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/xlTuC18xVII?si=OwWyxdlipcD_msmU" 
-            title="YouTube video player" frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            allowfullscreen></iframe>
-    </div>
-
-    <a href=
+    <a href="index.html" class="back-button">Volver</a>
+</body>
+</html>
