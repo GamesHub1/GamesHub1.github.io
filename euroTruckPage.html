@@ -18,18 +18,18 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            max-width: 600px;
+            max-width: 800px;
         }
 
         .title {
-            font-size: 32px;
-            font-weight: 300;
+            font-size: 40px;
+            font-weight: 400;
             margin-bottom: 10px;
         }
 
         hr {
             width: 100%;
-            border: 1.5px solid white;
+            border: 2px solid white;
             margin: 15px 0;
         }
 
@@ -40,10 +40,15 @@
             margin-bottom: 20px;
         }
 
+        /* Fondo para resaltar la información */
         .info-container {
             display: flex;
             justify-content: space-between;
             width: 100%;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7); /* Fondo oscuro semi-transparente */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
         .info-left, .info-right {
@@ -51,12 +56,13 @@
         }
 
         .info-left p, .info-right p {
-            margin: 5px 0;
+            margin: 10px 0;
+            font-size: 22px; /* Texto más grande */
         }
 
         .video-container {
             text-align: center;
-            margin-top: 40px; /* Más espacio entre la imagen y el video */
+            margin-top: 50px; /* Más espacio entre la información y el video */
         }
 
         iframe {
@@ -67,13 +73,14 @@
         .back-button {
             display: block;
             margin-top: 30px;
-            padding: 10px 20px;
+            padding: 15px 30px;
             background-color: #007bff;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             text-decoration: none;
+            font-size: 18px;
             width: fit-content;
         }
 
@@ -109,6 +116,4 @@
             allowfullscreen></iframe>
     </div>
 
-    <a href="index.html" class="back-button">Volver a la página principal</a>
-</body>
-</html>
+    <a href=
