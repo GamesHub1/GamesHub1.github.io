@@ -11,7 +11,7 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            background: url('Fondo2.jpg') no-repeat center center fixed;
+            background: url('wallpaper-1117546_1920.jpg') no-repeat center center fixed;
             background-size: cover;
         }
 
@@ -128,9 +128,34 @@
             height: auto;
             border-radius: 10px;
         }
+
+        /* Estilo para el texto EN MANTENIMIENTO */
+        .maintenance-text {
+            position: absolute;
+            top: 10px;
+            left: -100%;
+            font-size: 48px;
+            font-weight: bold;
+            color: red;
+            white-space: nowrap;
+            animation: moveText 10s linear infinite;
+        }
+
+        @keyframes moveText {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
     </style>
 </head>
 <body>
+    <!-- Texto EN MANTENIMIENTO que cruza la pantalla -->
+    <div class="maintenance-text">EN MANTENIMIENTO</div>
+
     <div class="sidebar">
         <button onclick="filterGames('games')">JUEGOS</button>
         <button onclick="filterGames('dlc')">DLC</button>
