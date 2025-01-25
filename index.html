@@ -33,40 +33,6 @@
             border-radius: 0 15px 15px 0;
         }
 
-        .sidebar {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 150px;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px 10px;
-            box-sizing: border-box;
-            border-radius: 0 15px 15px 0;
-            transition: transform 0.3s ease;
-        }
-
-        .sidebar.hidden {
-            transform: translateX(-140px);
-        }
-
-        .toggle-sidebar {
-            position: absolute;
-            left: 150px;
-            top: 10px;
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: left 0.3s ease;
-        }
-
-        .sidebar.hidden + .toggle-sidebar {
-            left: 10px;
-        }
-
         .sidebar button {
             width: 100%;
             margin-bottom: 10px;
@@ -81,24 +47,6 @@
 
         .sidebar button:hover {
             transform: scale(1.1);
-        }
-    </style>
-</head>
-<body>
-    <div class="sidebar" id="filterBox">
-        <button onclick="filterGames('games')">JUEGOS</button>
-        <button onclick="filterGames('dlc')">DLC</button>
-        <button onclick="filterGames('all')">MOSTRAR TODO</button>
-    </div>
-    <button class="toggle-sidebar" onclick="toggleSidebar()">☰</button>
-
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('filterBox');
-            sidebar.classList.toggle('hidden');
-        }
-    </script>
-</body>
         }
 
         .title {
