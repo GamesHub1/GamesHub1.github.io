@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OptiHub1</title>
-    <link rel="icon" href="DALL·E-2025-01-25-01.23.ico" type="image/x-icon">
+    <link rel="icon" href="logo-terminado.ico" type="image/x-icon">
     <style>
         /* Asegura que html y body ocupen toda la altura de la pantalla */
         html, body {
@@ -30,7 +30,6 @@
             padding: 20px 10px;
             box-sizing: border-box;
             border-radius: 0 15px 15px 0;
-            transition: transform 0.3s ease;
         }
 
         .toggle-sidebar-icon {
@@ -111,10 +110,11 @@
         }
 
         .game-item img {
-            width: 120px;
-            height: auto;
+            width: 180px;
+            height: 120px;
             border-radius: 10px;
             margin-bottom: 10px;
+            object-fit: cover;
         }
 
         .game-button {
@@ -132,6 +132,22 @@
         .game-button:hover {
             background-color: rgba(200, 200, 200, 0.9);
             transform: scale(1.05);
+        }
+
+        .sidebar button {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar button:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -152,7 +168,7 @@
 
     <div class="central-box" id="game-list">
         <div class="game-item" data-category="games">
-            <img src="euro truck page logo.jpg" alt="Euro Truck Simulator">
+            <img src="Euro_Truck_Simulator_PC.jpg" alt="Euro Truck Simulator">
             <button class="game-button" onclick="window.location.href = 'euroTruckPage.html';">Euro Truck Simulator</button>
         </div>
 
