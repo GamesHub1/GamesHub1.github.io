@@ -175,6 +175,20 @@
             margin-top: 20px;
             text-align: center;
         }
+
+        /* Icono para ocultar o mostrar la sidebar */
+        .toggle-sidebar-icon {
+            position: absolute;
+            left: 150px; /* Lo coloca justo al lado de la sidebar */
+            top: 50%;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            transition: left 0.3s ease;
+        }
     </style>
 </head>
 <body>
@@ -182,8 +196,10 @@
         <button onclick="filterGames('games')">JUEGOS</button>
         <button onclick="filterGames('dlc')">DLC</button>
         <button onclick="filterGames('all')">MOSTRAR TODO</button>
-        <button onclick="toggleSidebar()">Ocultar Sidebar</button>
     </div>
+
+    <!-- Icono para ocultar o mostrar la sidebar -->
+    <div class="toggle-sidebar-icon" onclick="toggleSidebar()">&#9776;</div>
 
     <div class="title">OptiHub1</div>
 
@@ -274,10 +290,13 @@
 
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
+            const toggleIcon = document.querySelector('.toggle-sidebar-icon');
             if (sidebar.style.left === '0px') {
                 sidebar.style.left = '-150px'; // Ocultar sidebar
+                toggleIcon.style.left = '0'; // Mover el ícono
             } else {
                 sidebar.style.left = '0px'; // Mostrar sidebar
+                toggleIcon.style.left = '150px'; // Mover el ícono
             }
         }
 
