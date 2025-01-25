@@ -194,9 +194,26 @@
             justify-content: center;
             align-items: center;
         }
+
+        /* Asegurarse de que la sidebar esté visible por defecto */
+        body.sidebar-visible .sidebar {
+            left: 0;
+        }
+
+        body.sidebar-visible .toggle-sidebar-icon {
+            left: 150px; /* Ajusta el ícono para que esté a la derecha */
+        }
+
+        body.sidebar-hidden .sidebar {
+            left: -150px;
+        }
+
+        body.sidebar-hidden .toggle-sidebar-icon {
+            left: 0;
+        }
     </style>
 </head>
-<body>
+<body class="sidebar-visible">
     <div class="sidebar" id="sidebar">
         <button onclick="filterGames('games')">JUEGOS</button>
         <button onclick="filterGames('dlc')">DLC</button>
@@ -294,14 +311,13 @@
         }
 
         function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const toggleIcon = document.querySelector('.toggle-sidebar-icon');
-            if (sidebar.style.left === '0px') {
-                sidebar.style.left = '-150px'; // Ocultar sidebar
-                toggleIcon.style.left = '0'; // Mover el ícono
+            const body = document.body;
+            if (body.classList.contains('sidebar-visible')) {
+                body.classList.remove('sidebar-visible');
+                body.classList.add('sidebar-hidden');
             } else {
-                sidebar.style.left = '0px'; // Mostrar sidebar
-                toggleIcon.style.left = '150px'; // Mover el ícono
+                body.classList.remove('sidebar-hidden');
+                body.classList.add('sidebar-visible');
             }
         }
 
