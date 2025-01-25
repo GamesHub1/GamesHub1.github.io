@@ -1,269 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YECD2XW4Z9"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-YECD2XW4Z9');
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OptiHub1</title>
-    <link rel="icon" href="Captura de pantalla 2025-01-11 004104.ico" type="image/x-icon">
+    <title>Euro Truck Simulator</title>
     <style>
-        /* Establecer el fondo global */
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            background: url('Fondo2.jpg') no-repeat center center fixed;
+        body {
+            background: url('wallpaper-1117546_1920.jpg') no-repeat center center fixed;
             background-size: cover;
-        }
-
-        /* Estilos de la barra lateral */
-        .sidebar {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 150px;
+            font-family: Arial, sans-serif;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px 10px;
-            box-sizing: border-box;
-            border-radius: 0 15px 15px 0;
+            margin: 0;
+            padding: 20px;
+            text-align: left;
+            overflow-y: auto;
         }
 
-        .sidebar button {
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 90%;
+            min-height: 100%;
+        }
+
+        .title {
+            font-size: 48px;
+            font-weight: 600;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
             width: 100%;
-            margin-bottom: 10px;
-            padding: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            color: #ffcc00;
+        }
+
+        hr {
+            width: 100%;
+            border: 2px solid white;
+            margin: 10px 0;
+        }
+
+        .logo {
+            max-width: 300px;
+            width: 100%;
+            border-radius: 15px;
+            margin-top: 15px;
+        }
+
+        .info-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            font-size: 22px;
+            margin-top: 20px;
+        }
+
+        .info-left, .info-right {
+            width: 48%;
+        }
+
+        .info-left p, .info-right p {
+            margin: 12px 0;
+        }
+
+        .separator {
+            width: 2px;
+            background: white;
+            height: 100%;
+            margin: 0 15px;
+        }
+
+        .description-container {
+            background: rgba(0, 0, 0, 0.8);
+            width: 100%;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
+        .download-btn {
+            background-color: #28a745;
+            color: white;
+            font-size: 22px;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            width: 250px;
+            margin: 20px 0;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background-color: #218838;
+            transform: translateY(-5px);
+        }
+
+        .video-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        iframe {
+            width: 560px;
+            height: 315px;
+            border: 2px solid #fff;
+            border-radius: 10px;
+        }
+
+        .back-button {
+            display: block;
+            margin-top: 30px;
+            padding: 15px 25px;
             background-color: #007bff;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .sidebar button:hover {
-            transform: scale(1.1);
-        }
-
-        .title {
-            text-align: center;
-            color: white;
-            font-size: 36px;
-            margin-top: 20px;
-            font-family: 'Arial Black', sans-serif;
-        }
-
-        .search-bar {
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
-        }
-
-        .search-bar input {
-            width: 300px;
-            padding: 15px;
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.8);
-            border: none;
-            border-radius: 10px;
+            text-decoration: none;
             font-size: 18px;
-            transition: all 0.3s ease;
         }
 
-        .search-bar input:focus {
-            outline: none;
-            background-color: rgba(200, 200, 200, 0.9);
+        .back-button:hover {
+            background-color: #0056b3;
         }
-
-        .central-box {
-            background: rgba(0, 0, 0, 0.6);
-            width: 50%;
-            margin: 20px auto;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .game-button {
-            width: 90%;
-            padding: 15px;
-            margin: 10px 0;
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.8);
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            cursor: pointer;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .game-button:hover {
-            background-color: rgba(200, 200, 200, 0.9);
-            transform: scale(1.05);
-        }
-
-        .news {
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .news-item {
-            width: 200px;
-            height: 250px;
-            background-color: rgba(0, 0, 0, 0.6);
-            color: white;
-            text-align: center;
-            padding: 10px;
-            border-radius: 10px;
-        }
-
-        .news-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-
-        /* Estilo para el texto EN MANTENIMIENTO */
-        .maintenance-text {
-            position: absolute;
-            top: 10px;
-            left: -100%;
-            font-size: 48px;
-            font-weight: bold;
-            color: red;
-            white-space: nowrap;
-            animation: moveText 10s linear infinite;
-        }
-
-        @keyframes moveText {
-            0% {
-                left: -100%;
-            }
-            100% {
-                left: 100%;
-            }
-        }
-
     </style>
 </head>
 <body>
-    <!-- Texto EN MANTENIMIENTO que cruza la pantalla -->
-    <div class="maintenance-text">EN MANTENIMIENTO</div>
+    <div class="content">
+        <h1 class="title">Euro Truck Simulator</h1>
+        <hr>
+        <img src="euro truck page logo.jpg" alt="Euro Truck Simulator Logo" class="logo">
 
-    <div class="sidebar">
-        <button onclick="filterGames('games')">JUEGOS</button>
-        <button onclick="filterGames('dlc')">DLC</button>
-        <button onclick="filterGames('all')">MOSTRAR TODO</button>
-    </div>
-
-    <div class="title">OptiHub1</div>
-
-    <div class="search-bar">
-        <input type="text" id="search" placeholder="Buscar juegos o DLC..." onkeyup="searchGames()">
-    </div>
-
-    <div class="central-box" id="game-list">
-        <button class="game-button" data-category="games">
-    <a href="euroTruckPage.html" target="_blank">Euro Truck Simulator</a>
-</button>
-        <button class="game-button" data-category="games" onclick="openGamePage('American Truck Simulator')">
-            American Truck Simulator
-        </button>
-        <button class="game-button" data-category="games" onclick="openGamePage('Slime Rancher')">
-            Slime Rancher
-        </button>
-        <button class="game-button" data-category="dlc" onclick="openGamePage('DLC Euro Truck')">
-            DLC Euro Truck
-        </button>
-        <button class="game-button" data-category="dlc" onclick="openGamePage('DLC American Truck')">
-            DLC American Truck
-        </button>
-    </div>
-
-    <div class="news">
-        <div class="news-item">
-            <img src="american truck simmulator PC.jpg" alt="American Truck Simulator">
-            <p>American Truck Simulator</p>
+        <div class="info-container">
+            <div class="info-left">
+                <p><strong>Nombre:</strong> Euro Truck Simulator 2</p>
+                <p><strong>Plataforma:</strong> PC</p>
+                <p><strong>Género:</strong> Simulación, Conducción</p>
+            </div>
+            <div class="separator"></div>
+            <div class="info-right">
+                <p><strong>Tamaño:</strong> 3GB</p>
+                <p><strong>Fecha de lanzamiento:</strong> 19 de octubre de 2012</p>
+                <p><strong>Idiomas:</strong> Español, Inglés, Francés, Alemán</p>
+            </div>
         </div>
-        <div class="news-item">
-            <img src="slimeranchernovedad.jpg" alt="Slime Rancher">
-            <p>Slime Rancher</p>
+
+        <!-- Descripción del juego -->
+        <div class="description-container">
+            <h2>Descripción</h2>
+            <p>Euro Truck Simulator 2 es un simulador de camiones en el que los jugadores se convierten en conductores de camiones, recorriendo rutas en diferentes países europeos. El juego ofrece una experiencia realista de conducción de camiones, con la posibilidad de transportar mercancías a través de diversas ciudades y países. Con un mapa expansivo, gráficos detallados, y una amplia selección de camiones, los jugadores pueden personalizar sus vehículos y mejorar sus habilidades de conducción. A lo largo del juego, se pueden desbloquear nuevas rutas y contratar a otros conductores para ampliar la flota de la empresa. Además, los jugadores pueden competir por realizar entregas de manera eficiente y con el menor impacto ambiental posible.</p>
         </div>
+
+        <!-- Botón de descarga -->
+        <a href="https://drive.google.com/file/d/1rleQoX_mTcR0lG2AtWX2O6f7lQ3CXlNQ/view?usp=drive_link" target="_blank" class="download-btn">
+            Descargar Euro Truck Simulator 2
+        </a>
+
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/xlTuC18xVII?si=OwWyxdlipcD_msmU" 
+                title="YouTube video player" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen></iframe>
+        </div>
+
+        <a href="index.html" class="back-button">Volver</a>
     </div>
-
-    <script>
-        function filterGames(category) {
-            const games = document.querySelectorAll('.game-button');
-            games.forEach(game => {
-                if (category === 'all' || game.dataset.category === category) {
-                    game.style.display = 'block';
-                } else {
-                    game.style.display = 'none';
-                }
-            });
-        }
-
-        function openGamePage(gameName) {
-            const newWindow = window.open("", "_blank");
-            newWindow.document.write(`
-                <html lang="en">
-                    <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>${gameName}</title>
-                        <style>
-                            body {
-                                background: url('wallpaper-1117546_1920.jpg') no-repeat center center fixed;
-                                background-size: cover;
-                                color: white;
-                                font-family: Arial, sans-serif;
-                            }
-                            h1 {
-                                text-align: center;
-                                margin-top: 50px;
-                            }
-                            p {
-                                text-align: center;
-                                font-size: 18px;
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        <h1>${gameName}</h1>
-                        <p>Información sobre el juego: <strong>${gameName}</strong></p>
-                        <p>Descripción del juego, requisitos, características, etc.</p>
-                    </body>
-                </html>
-            `);
-        }
-
-        function searchGames() {
-            const query = document.getElementById('search').value.toLowerCase();
-            const games = document.querySelectorAll('.game-button');
-            games.forEach(game => {
-                const text = game.textContent.toLowerCase();
-                if (text.includes(query)) {
-                    game.style.display = 'block';
-                } else {
-                    game.style.display = 'none';
-                }
-            });
-        }
-    </script>
 </body>
 </html>
