@@ -17,7 +17,7 @@
             margin: 0;
             padding: 20px;
             text-align: left;
-            overflow-y: auto; /* Permite el desplazamiento vertical */
+            overflow-y: auto;
         }
 
         .content {
@@ -25,13 +25,20 @@
             flex-direction: column;
             align-items: center;
             width: 90%;
-            min-height: 100%; /* Asegura que todo se vea */
+            min-height: 100%;
         }
 
         .title {
-            font-size: 48px; /* Aumentado para que se vea más grande */
+            font-size: 48px;
             font-weight: 600;
             margin: 0;
+            padding: 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            width: 100%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            color: #ffcc00; /* Título más visible */
         }
 
         hr {
@@ -41,7 +48,7 @@
         }
 
         .logo {
-            max-width: 300px; /* Imagen más grande */
+            max-width: 300px;
             width: 100%;
             border-radius: 15px;
             margin-top: 15px;
@@ -55,7 +62,7 @@
             background: rgba(0, 0, 0, 0.7);
             border-radius: 5px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            font-size: 22px; /* Aumentado para mayor visibilidad */
+            font-size: 22px;
             margin-top: 20px;
         }
 
@@ -74,6 +81,17 @@
             margin: 0 15px;
         }
 
+        .description-container {
+            background: rgba(0, 0, 0, 0.8); /* Fondo oscuro para resaltar */
+            width: 100%;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
         .video-container {
             width: 100%;
             display: flex;
@@ -82,7 +100,7 @@
         }
 
         iframe {
-            width: 560px; /* Reducido el tamaño del video */
+            width: 560px;
             height: 315px;
             border: 2px solid #fff;
             border-radius: 10px;
@@ -98,7 +116,7 @@
             border-radius: 5px;
             cursor: pointer;
             text-decoration: none;
-            font-size: 18px; /* Aumentado tamaño */
+            font-size: 18px;
         }
 
         .back-button:hover {
@@ -124,6 +142,12 @@
                 <p><strong>Fecha de lanzamiento:</strong> 19 de octubre de 2012</p>
                 <p><strong>Idiomas:</strong> Español, Inglés, Francés, Alemán</p>
             </div>
+        </div>
+
+        <!-- Descripción del juego -->
+        <div class="description-container">
+            <h2>Descripción</h2>
+            <p>Euro Truck Simulator 2 es un simulador de camiones en el que los jugadores se convierten en conductores de camiones, recorriendo rutas en diferentes países europeos. El juego ofrece una experiencia realista de conducción de camiones, con la posibilidad de transportar mercancías a través de diversas ciudades y países. Con un mapa expansivo, gráficos detallados, y una amplia selección de camiones, los jugadores pueden personalizar sus vehículos y mejorar sus habilidades de conducción. A lo largo del juego, se pueden desbloquear nuevas rutas y contratar a otros conductores para ampliar la flota de la empresa. Además, los jugadores pueden competir por realizar entregas de manera eficiente y con el menor impacto ambiental posible.</p>
         </div>
 
         <div class="video-container">
