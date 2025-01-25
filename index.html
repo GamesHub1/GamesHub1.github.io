@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OptiHub1</title>
-    <link rel="icon" href="logo-terminado.ico" type="image/x-icon">
+    <link rel="icon" href="DALL·E-2025-01-25-01.23.ico" type="image/x-icon">
     <style>
         /* Asegura que html y body ocupen toda la altura de la pantalla */
         html, body {
@@ -13,7 +13,6 @@
             height: 100%;
         }
 
-        /* Aplicar el fondo de la imagen y el efecto de blur a toda la página */
         body {
             background: url('Fondo2.jpg') no-repeat center center fixed;
             background-size: cover;
@@ -31,23 +30,33 @@
             padding: 20px 10px;
             box-sizing: border-box;
             border-radius: 0 15px 15px 0;
-            transition: left 0.3s ease;
-        }
-
-        .sidebar button {
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
             transition: transform 0.3s ease;
         }
 
-        .sidebar button:hover {
-            transform: scale(1.1);
+        .toggle-sidebar-icon {
+            position: absolute;
+            left: 150px;
+            top: 75px;
+            background-color: #007bff;
+            color: white;
+            padding: 5px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: left 0.3s ease;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sidebar.hidden {
+            transform: translateX(-100%);
+        }
+
+        .sidebar.hidden + .toggle-sidebar-icon {
+            left: 10px;
         }
 
         .title {
@@ -72,7 +81,7 @@
             border: none;
             border-radius: 10px;
             font-size: 18px;
-            transition: all 0.6s ease;
+            transition: all 0.3s ease;
         }
 
         .search-bar input:focus {
@@ -81,29 +90,42 @@
         }
 
         .central-box {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
             background: rgba(0, 0, 0, 0.6);
-            width: 50%;
+            width: 60%;
             margin: 20px auto;
             padding: 20px;
             border-radius: 15px;
-            text-align: center;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .game-item {
             display: flex;
-            flex-direction: column; 
-            align-items: center; 
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .game-item img {
+            width: 120px;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 10px;
         }
 
         .game-button {
             width: 90%;
             padding: 15px;
-            margin: 10px 0;
             text-align: center;
             background-color: rgba(255, 255, 255, 0.8);
             border: none;
             border-radius: 10px;
             font-size: 18px;
             cursor: pointer;
-            position: relative;
             transition: all 0.3s ease;
         }
 
@@ -111,117 +133,16 @@
             background-color: rgba(200, 200, 200, 0.9);
             transform: scale(1.05);
         }
-
-        .game-button.expanded {
-            transform: scale(1.1); 
-            z-index: 2; 
-        }
-
-        .download-button {
-            display: none;
-            width: 90%;
-            padding: 12px;
-            margin-top: 10px;
-            text-align: center;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            animation: fadeIn 0.3s ease;
-            transition: transform 0.3s ease;
-        }
-
-        .download-button:hover {
-            background-color: rgba(40, 167, 69, 0.8);
-            transform: scale(1.05);
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        .news {
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .news-item {
-            width: 200px;
-            height: 250px;
-            background-color: rgba(0, 0, 0, 0.6);
-            color: white;
-            text-align: center;
-            padding: 10px;
-            border-radius: 10px;
-        }
-
-        .news-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-
-        /* Estilo para el video */
-        .video-container {
-            display: none;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        /* Icono para ocultar o mostrar la sidebar */
-        .toggle-sidebar-icon {
-            position: absolute;
-            left: 0; /* Lo coloca justo al lado de la sidebar */
-            top: 10px; /* Lo coloca a la altura del primer botón */
-            background-color: #007bff;
-            color: white;
-            padding: 10px;
-            border-radius: 10px;
-            font-size: 20px;
-            cursor: pointer;
-            transition: left 0.3s ease;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Asegurarse de que la sidebar esté visible por defecto */
-        body.sidebar-visible .sidebar {
-            left: 0;
-        }
-
-        body.sidebar-visible .toggle-sidebar-icon {
-            left: 150px; /* Ajusta el ícono para que esté a la derecha */
-        }
-
-        body.sidebar-hidden .sidebar {
-            left: -150px;
-        }
-
-        body.sidebar-hidden .toggle-sidebar-icon {
-            left: 0;
-        }
     </style>
 </head>
-<body class="sidebar-visible">
-    <div class="sidebar" id="sidebar">
+<body>
+    <div class="sidebar">
         <button onclick="filterGames('games')">JUEGOS</button>
         <button onclick="filterGames('dlc')">DLC</button>
         <button onclick="filterGames('all')">MOSTRAR TODO</button>
     </div>
 
-    <!-- Icono para ocultar o mostrar la sidebar -->
-    <div class="toggle-sidebar-icon" onclick="toggleSidebar()">&#9776;</div>
+    <div class="toggle-sidebar-icon" onclick="toggleSidebar()">☰</div>
 
     <div class="title">OptiHub1</div>
 
@@ -230,42 +151,47 @@
     </div>
 
     <div class="central-box" id="game-list">
-        <button class="game-button" data-category="games" onclick="window.location.href = 'euroTruckPage.html';">
-            Euro Truck Simulator
-        </button>
-        <button class="game-button" data-category="games" onclick="window.location.href = 'AmericanTruckSimulator.html';">
-            American Truck Simulator
-        </button>
-        <button class="game-button" data-category="games" onclick="window.location.href = 'SlimeRancher.html';">
-            Slime Rancher
-        </button>
-        <button class="game-button" data-category="dlc" onclick="toggleDownload(this, 'https://drive.google.com/file/d/1zwmbXSZGh2rztOQ-0TEXTq5shfQtEUah/view?usp=drive_link')">
-            DLC Euro Truck
-        </button>
-        <button class="game-button" data-category="dlc" onclick="toggleDownload(this, 'https://drive.google.com/file/d/1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7/view?usp=drive_link')">
-            DLC American Truck
-        </button>
-    </div>
-
-    <div class="news">
-        <div class="news-item">
-            <img src="american truck simmulator PC.jpg" alt="American Truck Simulator">
-            <p>American Truck Simulator</p>
+        <div class="game-item" data-category="games">
+            <img src="euro_truck.jpg" alt="Euro Truck Simulator">
+            <button class="game-button" onclick="window.location.href = 'euroTruckPage.html';">Euro Truck Simulator</button>
         </div>
-        <div class="news-item">
-            <img src="slimeranchernovedad.jpg" alt="Slime Rancher">
-            <p>Slime Rancher</p>
-        </div>
-    </div>
 
-    <!-- Video de Euro Truck Simulator -->
-    <div id="euroTruck" class="video-container">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/xlTuC18xVII?si=OwWyxdlipcD_msmU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div class="game-item" data-category="games">
+            <img src="american_truck.jpg" alt="American Truck Simulator">
+            <button class="game-button" onclick="window.location.href = 'AmericanTruckSimulator.html';">American Truck Simulator</button>
+        </div>
+
+        <div class="game-item" data-category="games">
+            <img src="slime_rancher.jpg" alt="Slime Rancher">
+            <button class="game-button" onclick="window.location.href = 'SlimeRancher.html';">Slime Rancher</button>
+        </div>
+
+        <div class="game-item" data-category="dlc">
+            <img src="dlc_euro_truck.jpg" alt="DLC Euro Truck">
+            <button class="game-button" onclick="toggleDownload(this, 'https://drive.google.com/file/d/1zwmbXSZGh2rztOQ-0TEXTq5shfQtEUah/view?usp=drive_link')">DLC Euro Truck</button>
+        </div>
+
+        <div class="game-item" data-category="dlc">
+            <img src="dlc_american_truck.jpg" alt="DLC American Truck">
+            <button class="game-button" onclick="toggleDownload(this, 'https://drive.google.com/file/d/1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7/view?usp=drive_link')">DLC American Truck</button>
+        </div>
     </div>
 
     <script>
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const toggleButton = document.querySelector('.toggle-sidebar-icon');
+            sidebar.classList.toggle('hidden');
+
+            if (sidebar.classList.contains('hidden')) {
+                toggleButton.innerHTML = "▶";
+            } else {
+                toggleButton.innerHTML = "☰";
+            }
+        }
+
         function filterGames(category) {
-            const games = document.querySelectorAll('.game-button');
+            const games = document.querySelectorAll('.game-item');
             games.forEach(game => {
                 if (category === 'all' || game.dataset.category === category) {
                     game.style.display = 'block';
@@ -275,55 +201,13 @@
             });
         }
 
-        function toggleDownload(button, downloadLink) {
-            let downloadButton = button.nextElementSibling;
-            
-            if (!downloadButton || !downloadButton.classList.contains('download-button')) {
-                downloadButton = document.createElement('button');
-                downloadButton.classList.add('download-button');
-                downloadButton.textContent = 'Descargar';
-                downloadButton.onclick = function() {
-                    window.location.href = downloadLink;
-                };
-                button.parentNode.insertBefore(downloadButton, button.nextSibling);
-            }
-
-            if (downloadButton.style.display === 'block') {
-                downloadButton.style.display = 'none';
-                button.classList.remove('expanded');
-            } else {
-                downloadButton.style.display = 'block';
-                button.classList.add('expanded');
-            }
-        }
-
         function searchGames() {
             const query = document.getElementById('search').value.toLowerCase();
-            const games = document.querySelectorAll('.game-button');
+            const games = document.querySelectorAll('.game-item');
             games.forEach(game => {
                 const text = game.textContent.toLowerCase();
-                if (text.includes(query)) {
-                    game.style.display = 'block';
-                } else {
-                    game.style.display = 'none';
-                }
+                game.style.display = text.includes(query) ? 'block' : 'none';
             });
-        }
-
-        function toggleSidebar() {
-            const body = document.body;
-            if (body.classList.contains('sidebar-visible')) {
-                body.classList.remove('sidebar-visible');
-                body.classList.add('sidebar-hidden');
-            } else {
-                body.classList.remove('sidebar-hidden');
-                body.classList.add('sidebar-visible');
-            }
-        }
-
-        function toggleVideo(gameId) {
-            const videoContainer = document.getElementById(gameId);
-            videoContainer.style.display = videoContainer.style.display === 'block' ? 'none' : 'block';
         }
     </script>
 </body>
