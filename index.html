@@ -31,6 +31,7 @@
             padding: 20px 10px;
             box-sizing: border-box;
             border-radius: 0 15px 15px 0;
+            transition: left 0.3s ease;
         }
 
         .sidebar button {
@@ -177,10 +178,11 @@
     </style>
 </head>
 <body>
-    <div class="sidebar">
+    <div class="sidebar" id="sidebar">
         <button onclick="filterGames('games')">JUEGOS</button>
         <button onclick="filterGames('dlc')">DLC</button>
         <button onclick="filterGames('all')">MOSTRAR TODO</button>
+        <button onclick="toggleSidebar()">Ocultar Sidebar</button>
     </div>
 
     <div class="title">OptiHub1</div>
@@ -191,13 +193,13 @@
 
     <div class="central-box" id="game-list">
         <button class="game-button" data-category="games" onclick="window.location.href = 'euroTruckPage.html';">
-    Euro Truck Simulator
+            Euro Truck Simulator
         </button>
         <button class="game-button" data-category="games" onclick="window.location.href = 'AmericanTruckSimulator.html';">
-    American Truck Simulator
+            American Truck Simulator
         </button>
         <button class="game-button" data-category="games" onclick="window.location.href = 'SlimeRancher.html';">
-    Slime Rancher
+            Slime Rancher
         </button>
         <button class="game-button" data-category="dlc" onclick="toggleDownload(this, 'https://drive.google.com/file/d/1zwmbXSZGh2rztOQ-0TEXTq5shfQtEUah/view?usp=drive_link')">
             DLC Euro Truck
@@ -268,6 +270,15 @@
                     game.style.display = 'none';
                 }
             });
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.style.left === '0px') {
+                sidebar.style.left = '-150px'; // Ocultar sidebar
+            } else {
+                sidebar.style.left = '0px'; // Mostrar sidebar
+            }
         }
 
         function toggleVideo(gameId) {
