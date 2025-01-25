@@ -22,19 +22,10 @@
 
         .content {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-between;
             width: 90%;
             min-height: 100%; /* Asegura que todo se vea */
-        }
-
-        .left-section {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            width: 45%;
         }
 
         .title {
@@ -65,6 +56,7 @@
             border-radius: 5px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             font-size: 22px; /* Aumentado para mayor visibilidad */
+            margin-top: 20px;
         }
 
         .info-left, .info-right {
@@ -82,20 +74,18 @@
             margin: 0 15px;
         }
 
-        .right-section {
+        .video-container {
+            width: 100%;
             display: flex;
             justify-content: center;
-            align-items: center;
-            width: 45%;
-            flex-direction: column;
+            margin-top: 30px;
         }
 
         iframe {
-            width: 650px; /* Aumentado el tamaño del video */
-            height: 400px;
+            width: 560px; /* Reducido el tamaño del video */
+            height: 315px;
             border: 2px solid #fff;
             border-radius: 10px;
-            margin-top: 30px;
         }
 
         .back-button {
@@ -118,34 +108,32 @@
 </head>
 <body>
     <div class="content">
-        <div class="left-section">
-            <h1 class="title">Euro Truck Simulator</h1>
-            <hr>
-            <img src="euro truck page logo.jpg" alt="Euro Truck Simulator Logo" class="logo">
+        <h1 class="title">Euro Truck Simulator</h1>
+        <hr>
+        <img src="euro truck page logo.jpg" alt="Euro Truck Simulator Logo" class="logo">
 
-            <div class="info-container">
-                <div class="info-left">
-                    <p><strong>Nombre:</strong> Euro Truck Simulator 2</p>
-                    <p><strong>Plataforma:</strong> PC</p>
-                    <p><strong>Género:</strong> Simulación, Conducción</p>
-                </div>
-                <div class="separator"></div>
-                <div class="info-right">
-                    <p><strong>Tamaño:</strong> 3GB</p>
-                    <p><strong>Fecha de lanzamiento:</strong> 19 de octubre de 2012</p>
-                    <p><strong>Idiomas:</strong> Español, Inglés, Francés, Alemán</p>
-                </div>
+        <div class="info-container">
+            <div class="info-left">
+                <p><strong>Nombre:</strong> Euro Truck Simulator 2</p>
+                <p><strong>Plataforma:</strong> PC</p>
+                <p><strong>Género:</strong> Simulación, Conducción</p>
+            </div>
+            <div class="separator"></div>
+            <div class="info-right">
+                <p><strong>Tamaño:</strong> 3GB</p>
+                <p><strong>Fecha de lanzamiento:</strong> 19 de octubre de 2012</p>
+                <p><strong>Idiomas:</strong> Español, Inglés, Francés, Alemán</p>
             </div>
         </div>
 
-        <div class="right-section">
+        <div class="video-container">
             <iframe src="https://www.youtube.com/embed/xlTuC18xVII?si=OwWyxdlipcD_msmU" 
                 title="YouTube video player" frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                 allowfullscreen></iframe>
         </div>
-    </div>
 
-    <a href="index.html" class="back-button">Volver</a>
+        <a href="index.html" class="back-button">Volver</a>
+    </div>
 </body>
 </html>
