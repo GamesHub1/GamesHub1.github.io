@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OptiHub1</title>
     <link rel="icon" href="logo-terminado.ico" type="image/x-icon">
+    <!-- Enlace a la fuente "Rowdies" -->
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* Asegura que html y body ocupen toda la altura de la pantalla */
         html, body {
@@ -62,8 +64,21 @@
             text-align: center;
             color: white;
             font-size: 36px;
+            font-family: 'Rowdies', sans-serif;
             margin-top: 20px;
-            font-family: 'Arial Black', Rowdies;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .title .optihub {
+            margin-right: 10px;
+        }
+
+        .title .logo {
+            width: 40px;  /* Ajuste del tamaño del logo */
+            height: 40px;
+            margin: 0 10px;
         }
 
         .search-bar {
@@ -110,8 +125,8 @@
         }
 
         .game-item img {
-            width: 220px;
-            height: 265px;
+            width: 180px;
+            height: 220px; /* Cambio a 220px de altura */
             border-radius: 10px;
             margin-bottom: 10px;
             object-fit: cover;
@@ -160,7 +175,11 @@
 
     <div class="toggle-sidebar-icon" onclick="toggleSidebar()">☰</div>
 
-    <div class="title">OptiHub1</div>
+    <div class="title">
+        <span class="optihub">Opti</span>
+        <img src="logo-terminado.jpg" alt="Logo" class="logo">
+        <span class="optihub">Hub 1</span>
+    </div>
 
     <div class="search-bar">
         <input type="text" id="search" placeholder="Buscar juegos o DLC..." onkeyup="searchGames()">
