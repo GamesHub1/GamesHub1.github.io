@@ -225,8 +225,8 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            width: 100px;
-            height: 100px;
+            width: 100px;  /* Actualizado a 100px */
+            height: 100px; /* Actualizado a 100px */
             cursor: pointer;
             transition: transform 0.3s ease;
         }
@@ -332,6 +332,8 @@
     </div>
 
     <script>
+        let gameInitialized = false;
+
         function toggleSidebar() {
             const sidebar = document.querySelector('.sidebar');
             const toggleButton = document.querySelector('.toggle-sidebar-icon');
@@ -379,6 +381,9 @@
         }
 
         function showGame() {
+            if (gameInitialized) return;
+            gameInitialized = true;
+
             const gameContainer = document.getElementById('gameContainer');
             gameContainer.style.display = 'block';
             startGame();
@@ -387,6 +392,7 @@
         function closeGame() {
             const gameContainer = document.getElementById('gameContainer');
             gameContainer.style.display = 'none';
+            gameInitialized = false;
         }
 
         function startGame() {
