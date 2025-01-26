@@ -332,7 +332,8 @@
     </div>
 
     <script>
-        let gameInitialized = false;
+        let game;
+        let animationFrameId;
 
         function toggleSidebar() {
             const sidebar = document.querySelector('.sidebar');
@@ -381,18 +382,24 @@
         }
 
         function showGame() {
-            if (gameInitialized) return;
-            gameInitialized = true;
-
             const gameContainer = document.getElementById('gameContainer');
             gameContainer.style.display = 'block';
-            startGame();
+
+            if (!game) {
+                game = startGame();
+            } else {
+                resetGame();
+                animationFrameId = requestAnimationFrame(gameLoop);
+            }
         }
 
         function closeGame() {
             const gameContainer = document.getElementById('gameContainer');
             gameContainer.style.display = 'none';
-            gameInitialized = false;
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
+            }
         }
 
         function startGame() {
@@ -430,6 +437,7 @@
                 score = 0;
                 document.getElementById('score').textContent = 'Manzanas comidas: ' + score;
                 placeApple();
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
             }
 
             function placeApple() {
@@ -445,7 +453,7 @@
             }
 
             function gameLoop() {
-                requestAnimationFrame(gameLoop);
+                animationFrameId = requestAnimationFrame(gameLoop);
 
                 if (++count < 4) {
                     return;
@@ -512,7 +520,12 @@
             });
 
             placeApple();
-            requestAnimationFrame(gameLoop);
+            animationFrameId = requestAnimationFrame(gameLoop);
+
+            return {
+                reset: resetGame,
+                loop: gameLoop
+            };
         }
     </script>
 </body>
