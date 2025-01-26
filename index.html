@@ -13,20 +13,21 @@
             margin: 0;
             padding: 0;
             height: 100%;
+            font-family: 'Rowdies', sans-serif;
         }
 
         body::before {
-    content: "";
-    position: fixed; /* Fijo para que el blur se mantenga al hacer scroll */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('fortnitefondo.jpg') no-repeat center center fixed;
-    background-size: cover;
-    filter: blur(10px); /* Ajusta la intensidad del blur */
-    z-index: -1; /* Asegura que el fondo esté detrás del contenido */
-}
+            content: "";
+            position: fixed; /* Fijo para que el blur se mantenga al hacer scroll */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('fortnitefondo.jpg') no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(10px); /* Ajusta la intensidad del blur */
+            z-index: -1; /* Asegura que el fondo esté detrás del contenido */
+        }
 
         .sidebar {
             position: absolute;
@@ -67,18 +68,16 @@
         }
 
         .title {
-    text-align: center;
-    color: white;
-    font-size: 70px;
-    font-family: 'Rowdies', sans-serif;
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 5px solid white;  /* Esta línea agrega la línea debajo del título */
-    padding-bottom: 10px;  /* Espaciado entre el texto y la línea */
-}
-
+            text-align: center;
+            color: white;
+            font-size: 70px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 5px solid white;  /* Esta línea agrega la línea debajo del título */
+            padding-bottom: 10px;  /* Espaciado entre el texto y la línea */
+        }
 
         .title .optihub {
             margin-right: 7px;
@@ -105,6 +104,7 @@
             border-radius: 10px;
             font-size: 18px;
             transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
         }
 
         .search-bar input:focus {
@@ -131,6 +131,11 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .game-item:hover {
+            transform: scale(1.05);
         }
 
         .game-item img {
@@ -173,6 +178,17 @@
         .sidebar button:hover {
             transform: scale(1.1);
         }
+
+        .footer {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -199,7 +215,6 @@
             <img src="Euro_Truck_Simulator_PC.jpg" alt="Euro Truck Simulator">
             <button class="game-button" onclick="window.location.href = 'euroTruckPage.html';">Euro Truck Simulator</button>
         </div>
-
         <div class="game-item" data-category="games">
             <img src="american truck simmulator PC.jpg" alt="American Truck Simulator">
             <button class="game-button" onclick="window.location.href = 'AmericanTruckSimulator.html';">American Truck Simulator</button>
@@ -212,16 +227,18 @@
             <img src="slimeranchernovedad.jpg" alt="Slime Rancher">
             <button class="game-button" onclick="window.location.href = 'SlimeRancher.html';">Slime Rancher</button>
         </div>
-
         <div class="game-item" data-category="dlc">
             <img src="dlc.jpg" alt="DLC Euro Truck">
             <button class="game-button" onclick="toggleDownload(this, 'https://drive.google.com/file/d/1zwmbXSZGh2rztOQ-0TEXTq5shfQtEUah/view?usp=drive_link')">DLC Euro Truck</button>
         </div>
-
         <div class="game-item" data-category="dlc">
             <img src="dlc.jpg" alt="DLC American Truck">
             <button class="game-button" onclick="toggleDownload(this, 'https://drive.google.com/file/d/1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7/view?usp=drive_link')">DLC American Truck</button>
         </div>
+    </div>
+
+    <div class="footer">
+        © 2025 GamesHub1. All rights reserved.
     </div>
 
     <script>
