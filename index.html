@@ -334,6 +334,7 @@
     <script>
         let game;
         let animationFrameId;
+        let isGameRunning = false;
 
         function toggleSidebar() {
             const sidebar = document.querySelector('.sidebar');
@@ -385,21 +386,24 @@
             const gameContainer = document.getElementById('gameContainer');
             gameContainer.style.display = 'block';
 
-            if (!game) {
+            if (!isGameRunning) {
                 game = startGame();
+                isGameRunning = true;
             } else {
-                resetGame();
-                animationFrameId = requestAnimationFrame(gameLoop);
+                game.reset();
+                animationFrameId = requestAnimationFrame(game.loop);
             }
         }
 
         function closeGame() {
             const gameContainer = document.getElementById('gameContainer');
             gameContainer.style.display = 'none';
+
             if (animationFrameId) {
                 cancelAnimationFrame(animationFrameId);
                 animationFrameId = null;
             }
+            isGameRunning = false;
         }
 
         function startGame() {
