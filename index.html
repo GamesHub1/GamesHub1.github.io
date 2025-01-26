@@ -225,14 +225,43 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            width: 100px;
-            height: 100px;
+            width: 30px;
+            height: 30px;
             cursor: pointer;
             transition: transform 0.3s ease;
         }
 
         .toggle-dark-mode:hover {
             transform: scale(1.1);
+        }
+
+        .game-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid black;
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        .game-container canvas {
+            display: block;
+            margin: 0 auto;
+            background-color: #000;
+        }
+
+        .close-game {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -288,6 +317,13 @@
 
     <img src="luna.png" alt="Toggle Dark Mode" onclick="toggleDarkMode()" class="toggle-dark-mode" id="toggleDarkModeIcon">
 
+    <button onclick="showGame()" style="position: fixed; bottom: 20px; right: 20px; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Boton de Espera</button>
+
+    <div class="game-container" id="gameContainer">
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        <button class="close-game" onclick="closeGame()">Cerrar Juego</button>
+    </div>
+
     <script>
         function toggleSidebar() {
             const sidebar = document.querySelector('.sidebar');
@@ -333,6 +369,121 @@
                 icon.src = 'luna.png';
                 icon.alt = 'Toggle Dark Mode';
             }
+        }
+
+        function showGame() {
+            const gameContainer = document.getElementById('gameContainer');
+            gameContainer.style.display = 'block';
+            startGame();
+        }
+
+        function closeGame() {
+            const gameContainer = document.getElementById('gameContainer');
+            gameContainer.style.display = 'none';
+        }
+
+        function startGame() {
+            const canvas = document.getElementById('gameCanvas');
+            const ctx = canvas.getContext('2d');
+            const grid = 20;
+            let count = 0;
+
+            const snake = {
+                x: 160,
+                y: 160,
+                dx: grid,
+                dy: 0,
+                cells: [],
+                maxCells: 4
+            };
+
+            const apple = {
+                x: 320,
+                y: 320
+            };
+
+            function getRandomInt(min, max) {
+                return Math.floor(Math.random() * (max - min)) + min;
+            }
+
+            function resetGame() {
+                snake.x = 160;
+                snake.y = 160;
+                snake.cells = [];
+                snake.maxCells = 4;
+                snake.dx = grid;
+                snake.dy = 0;
+                apple.x = getRandomInt(0, 25) * grid;
+                apple.y = getRandomInt(0, 25) * grid;
+            }
+
+            function gameLoop() {
+                requestAnimationFrame(gameLoop);
+
+                if (++count < 4) {
+                    return;
+                }
+
+                count = 0;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                snake.x += snake.dx;
+                snake.y += snake.dy;
+
+                if (snake.x < 0) {
+                    resetGame();
+                } else if (snake.x >= canvas.width) {
+                    resetGame();
+                } else if (snake.y < 0) {
+                    resetGame();
+                } else if (snake.y >= canvas.height) {
+                    resetGame();
+                }
+
+                snake.cells.unshift({ x: snake.x, y: snake.y });
+
+                if (snake.cells.length > snake.maxCells) {
+                    snake.cells.pop();
+                }
+
+                ctx.fillStyle = 'red';
+                ctx.fillRect(apple.x, apple.y, grid - 1, grid - 1);
+
+                ctx.fillStyle = 'green';
+                snake.cells.forEach(function (cell, index) {
+                    ctx.fillRect(cell.x, cell.y, grid - 1, grid - 1);
+
+                    if (cell.x === apple.x && cell.y === apple.y) {
+                        snake.maxCells++;
+                        apple.x = getRandomInt(0, 25) * grid;
+                        apple.y = getRandomInt(0, 25) * grid;
+                    }
+
+                    for (let i = index + 1; i < snake.cells.length; i++) {
+                        if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
+                            resetGame();
+                        }
+                    }
+                });
+            }
+
+            document.addEventListener('keydown', function (e) {
+                if (e.which === 37 && snake.dx === 0) {
+                    snake.dx = -grid;
+                    snake.dy = 0;
+                } else if (e.which === 38 && snake.dy === 0) {
+                    snake.dy = -grid;
+                    snake.dx = 0;
+                } else if (e.which === 39 && snake.dx === 0) {
+                    snake.dx = grid;
+                    snake.dy = 0;
+                } else if (e.which === 40 && snake.dy === 0) {
+                    snake.dy = grid;
+                    snake.dx = 0;
+                }
+            });
+
+            requestAnimationFrame(gameLoop);
         }
     </script>
 </body>
