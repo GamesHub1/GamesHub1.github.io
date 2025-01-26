@@ -1,3 +1,6 @@
+Vamos a modificar el archivo `index.html` para agregar un contador de manzanas comidas y asegurarnos de que aparezca una nueva manzana después de que la serpiente se la coma. Aquí tienes el código actualizado:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -263,6 +266,12 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
+        .score {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -320,6 +329,7 @@
     <button onclick="showGame()" style="position: fixed; bottom: 20px; right: 20px; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Boton de Espera</button>
 
     <div class="game-container" id="gameContainer">
+        <div class="score" id="score">Manzanas comidas: 0</div>
         <canvas id="gameCanvas" width="400" height="400"></canvas>
         <button class="close-game" onclick="closeGame()">Cerrar Juego</button>
     </div>
@@ -387,6 +397,7 @@
             const ctx = canvas.getContext('2d');
             const grid = 20;
             let count = 0;
+            let score = 0;
 
             const snake = {
                 x: 160,
@@ -415,6 +426,8 @@
                 snake.dy = 0;
                 apple.x = getRandomInt(0, 25) * grid;
                 apple.y = getRandomInt(0, 25) * grid;
+                score = 0;
+                document.getElementById('score').textContent = 'Manzanas comidas: ' + score;
             }
 
             function gameLoop() {
@@ -457,6 +470,8 @@
                         snake.maxCells++;
                         apple.x = getRandomInt(0, 25) * grid;
                         apple.y = getRandomInt(0, 25) * grid;
+                        score++;
+                        document.getElementById('score').textContent = 'Manzanas comidas: ' + score;
                     }
 
                     for (let i = index + 1; i < snake.cells.length; i++) {
@@ -488,3 +503,6 @@
     </script>
 </body>
 </html>
+```
+
+Este código agrega un contador de manzanas comidas en la parte superior del contenedor del juego y asegura que una nueva manzana aparezca cuando la serpiente se coma una.
