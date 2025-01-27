@@ -1,3 +1,7 @@
+1 reference
+Para hacer que las letras de los nombres de los juegos se hagan blancas en el modo oscuro, añadiremos una regla CSS específica para .dark-mode .game-button.
+
+HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>O p t i  H u b 1</title>
     <link rel="icon" href="logoterminado.png" type="image/x-icon">
-    <!-- Enlace a la fuente "Rowdies" -->
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* Asegura que html y body ocupen toda la altura de la pantalla */
@@ -203,6 +206,7 @@
 
         .dark-mode .game-button {
             background-color: rgba(50, 50, 50, 0.8);
+            color: white; /* Añadido para cambiar el color del texto a blanco */
         }
 
         .dark-mode .game-button:hover {
@@ -307,7 +311,7 @@
             <img src="slimeranchernovedad.jpg" alt="Slime Rancher">
             <button class="game-button" onclick="window.location.href = 'SlimeRancher.html';">Slime Rancher</button>
         </div>
-         <div class="game-item" data-category="games">
+        <div class="game-item" data-category="games">
             <img src="busSIM.png" alt="Bus Simulator 18">
             <button class="game-button" onclick="window.location.href = 'busSIM.html';">Bus Simulator 18</button>
         </div>
@@ -327,7 +331,7 @@
 
     <img src="luna.png" alt="Toggle Dark Mode" onclick="toggleDarkMode()" class="toggle-dark-mode" id="toggleDarkModeIcon">
 
-    <button onclick="showGame()" style="position: fixed; bottom: 20px; right: 20px; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Boton de Espera</button>
+    <button onclick="showGame()" style="position: fixed; bottom: 20px; right: 20px; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Botón de Juego</button>
 
     <div class="game-container" id="gameContainer">
         <div class="score" id="score">Manzanas comidas: 0</div>
@@ -528,13 +532,3 @@
             });
 
             placeApple();
-            animationFrameId = requestAnimationFrame(gameLoop);
-
-            return {
-                reset: resetGame,
-                loop: gameLoop
-            };
-        }
-    </script>
-</body>
-</html>
