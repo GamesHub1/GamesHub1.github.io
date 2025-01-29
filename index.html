@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -276,14 +277,7 @@
         <button onclick="filterGames('games')">JUEGOS</button>
         <button onclick="filterGames('dlc')">DLC</button>
         <button onclick="filterGames('all')">MOSTRAR TODO</button>
-        <div class="contact-form">
-            <input type="text" id="name" placeholder="Tu nombre" required>
-            <input type="email" id="email" placeholder="Tu correo" required>
-            <textarea id="message" rows="4" placeholder="Tu mensaje" required></textarea>
-            <button onclick="sendEmail()">Enviar</button>
-        </div>
     </div>
-    
 
     <div class="toggle-sidebar-icon" onclick="toggleSidebar()">☰</div>
 
@@ -342,7 +336,7 @@
 
     <img src="luna.png" alt="Toggle Dark Mode" onclick="toggleDarkMode()" class="toggle-dark-mode" id="toggleDarkModeIcon">
 
-    <button onclick="showGame()" style="position: fixed; bottom: 20px; right: 20px; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Botón del Juego</button>
+    <button onclick="showGame()" style="position: fixed; bottom: 20px; right: 20px; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Boton de Espera</button>
 
     <div class="game-container" id="gameContainer">
         <div class="score" id="score">Manzanas comidas: 0</div>
@@ -398,17 +392,6 @@
             } else {
                 icon.src = 'luna.png';
                 icon.alt = 'Toggle Dark Mode';
-            }
-        }
-        function sendEmail() {
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-
-            if (name && email && message) {
-                window.location.href = `mailto:ghb19546@gmail.com?subject=Mensaje de ${name}&body=${message} (${email})`;
-            } else {
-                alert("Por favor, completa todos los campos.");
             }
         }
 
@@ -537,4 +520,30 @@
                 });
             }
 
-            document.addEventListener('keydown', function
+            document.addEventListener('keydown', function (e) {
+                if (e.which === 37 && snake.dx === 0) {
+                    snake.dx = -grid;
+                    snake.dy = 0;
+                } else if (e.which === 38 && snake.dy === 0) {
+                    snake.dy = -grid;
+                    snake.dx = 0;
+                } else if (e.which === 39 && snake.dx === 0) {
+                    snake.dx = grid;
+                    snake.dy = 0;
+                } else if (e.which === 40 && snake.dy === 0) {
+                    snake.dy = grid;
+                    snake.dx = 0;
+                }
+            });
+
+            placeApple();
+            animationFrameId = requestAnimationFrame(gameLoop);
+
+            return {
+                reset: resetGame,
+                loop: gameLoop
+            };
+        }
+    </script>
+</body>
+</html>
