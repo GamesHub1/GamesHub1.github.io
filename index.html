@@ -276,6 +276,7 @@
         <button onclick="filterGames('games')">JUEGOS</button>
         <button onclick="filterGames('dlc')">DLC</button>
         <button onclick="filterGames('all')">MOSTRAR TODO</button>
+        <button onclick="location.href='mailto:ghb19546@gmail.com'">ENVIAR EMAIL</button>
     </div>
 
     <div class="toggle-sidebar-icon" onclick="toggleSidebar()">☰</div>
@@ -335,7 +336,7 @@
 
     <img src="luna.png" alt="Toggle Dark Mode" onclick="toggleDarkMode()" class="toggle-dark-mode" id="toggleDarkModeIcon">
 
-    <button onclick="showGame()" style="position: fixed; bottom: 20px; right: 20px; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Boton de Espera</button>
+    <button onclick="showGame()" style="position: fixed; bottom: 20px; right: 20px; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Botón del Juego</button>
 
     <div class="game-container" id="gameContainer">
         <div class="score" id="score">Manzanas comidas: 0</div>
@@ -519,30 +520,4 @@
                 });
             }
 
-            document.addEventListener('keydown', function (e) {
-                if (e.which === 37 && snake.dx === 0) {
-                    snake.dx = -grid;
-                    snake.dy = 0;
-                } else if (e.which === 38 && snake.dy === 0) {
-                    snake.dy = -grid;
-                    snake.dx = 0;
-                } else if (e.which === 39 && snake.dx === 0) {
-                    snake.dx = grid;
-                    snake.dy = 0;
-                } else if (e.which === 40 && snake.dy === 0) {
-                    snake.dy = grid;
-                    snake.dx = 0;
-                }
-            });
-
-            placeApple();
-            animationFrameId = requestAnimationFrame(gameLoop);
-
-            return {
-                reset: resetGame,
-                loop: gameLoop
-            };
-        }
-    </script>
-</body>
-</html>
+            document.addEventListener('keydown', function
