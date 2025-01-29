@@ -276,8 +276,14 @@
         <button onclick="filterGames('games')">JUEGOS</button>
         <button onclick="filterGames('dlc')">DLC</button>
         <button onclick="filterGames('all')">MOSTRAR TODO</button>
-        <button onclick="location.href='mailto:ghb19546@gmail.com'">ENVIAR EMAIL</button>
+        <div class="contact-form">
+            <input type="text" id="name" placeholder="Tu nombre" required>
+            <input type="email" id="email" placeholder="Tu correo" required>
+            <textarea id="message" rows="4" placeholder="Tu mensaje" required></textarea>
+            <button onclick="sendEmail()">Enviar</button>
+        </div>
     </div>
+    
 
     <div class="toggle-sidebar-icon" onclick="toggleSidebar()">☰</div>
 
@@ -392,6 +398,17 @@
             } else {
                 icon.src = 'luna.png';
                 icon.alt = 'Toggle Dark Mode';
+            }
+        }
+        function sendEmail() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            if (name && email && message) {
+                window.location.href = `mailto:ghb19546@gmail.com?subject=Mensaje de ${name}&body=${message} (${email})`;
+            } else {
+                alert("Por favor, completa todos los campos.");
             }
         }
 
