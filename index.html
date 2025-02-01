@@ -14,13 +14,36 @@
     <!-- Enlace a la fuente "Rowdies" -->
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@400;700&display=swap" rel="stylesheet">
     <style>
+    /* Estilos generales para escritorio */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        width: 80%; /* Ajuste para pantallas grandes */
+        margin: 0 auto;
+    }
+
+    /* Media Queries para pantallas pequeñas (móviles) */
+    @media screen and (max-width: 768px) {
+          .container {
+              width: 100%; /* Se ajusta a pantallas móviles */
+              padding: 10px;
+        }
+
+        h1 {
+              font-size: 24px; /* Reduce el tamaño de la fuente en móvil */
+        }
+    }
         /* Asegura que html y body ocupen toda la altura de la pantalla */
         html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: 'Rowdies', sans-serif;
-        }
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: 'Rowdies', sans-serif;
+    }
 
         body::before {
             content: "";
