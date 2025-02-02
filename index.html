@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,89 +15,6 @@
     <!-- Enlace a la fuente "Rowdies" -->
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@400;700&display=swap" rel="stylesheet">
     <style>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-        }
-        .container {
-            position: relative;
-            width: 90%;
-            height: 90%;
-            border: 20px solid #000;
-            box-sizing: border-box;
-        }
-        .container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #ff0000;
-            color: #fff;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            font-size: 18px;
-            border-radius: 50%;
-        }
-        .countdown {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            color: #fff;
-            padding: 10px;
-            font-size: 24px;
-            border-radius: 10px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <button class="close-btn" onclick="closeAd()">X</button>
-        <img src="images/optispeedx.jpg" alt="🎮🔥 ¡Acelera tu juego con OptiSpeedX! 🔥🎮">
-        <div class="countdown" id="countdown">72:00:00</div>
-    </div>
-
-    <script>
-        function closeAd() {
-            document.querySelector('.container').style.display = 'none';
-        }
-
-        function startCountdown(duration, display) {
-            var timer = duration, hours, minutes, seconds;
-            setInterval(function () {
-                hours = parseInt(timer / 3600, 10);
-                minutes = parseInt((timer % 3600) / 60, 10);
-                seconds = parseInt(timer % 60, 10);
-
-                hours = hours < 10 ? "0" + hours : hours;
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                display.textContent = hours + ":" + minutes + ":" + seconds;
-
-                if (--timer < 0) {
-                    timer = duration;
-                }
-            }, 1000);
-        }
-
-        window.onload = function () {
-            var seventyTwoHours = 72 * 60 * 60,
-                display = document.querySelector('#countdown');
-            startCountdown(seventyTwoHours, display);
-        };
     /* Estilos generales para escritorio */
     body {
         font-family: Arial, sans-serif;
