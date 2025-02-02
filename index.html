@@ -184,6 +184,12 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
+        .games-item {
+            cursor: pointer;
+            width: 100px;  /* Ajusta el tamaño según sea necesario */
+            height: auto;  /* Mantiene la proporción de la imagen */
+            border: none;  /* Elimina cualquier borde si lo hubiera */
+         }
 
         .game-button:hover {
             background-color: rgba(200, 200, 200, 0.9);
@@ -303,9 +309,9 @@
     <button onclick="filterGames('games')">JUEGOS</button>
     <button onclick="filterGames('dlc')">DLC</button>
     <button onclick="filterGames('all')">MOSTRAR TODO</button>
-    <div class="game-item" data-category="games">
+    <div class="games-item" data-category="games">
         <a href="https://www.tiktok.com/@optihub1_official">
-            <img src="pngwing.com (1).png" alt="Game Image" class="game-button">
+            <img src="pngwing.com (1).png" alt="games-item Image" class="games-item">
         </a>
     </div>
 </div>
