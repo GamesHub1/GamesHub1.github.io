@@ -1,62 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="OptiHub es la mejor plataforma para gestionar y descargar juegos y DLC. Encuentra y organiza tus juegos fácilmente.">
-<meta name="keywords" content="OptiHub, juegos, DLC, plataforma de juegos, gestión de juegos, descargas">
-<meta name="author" content="gameshub">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Descubre juegos y DLC con OptiHub - ¡Optimiza tu experiencia!</title>
     <link rel="icon" href="logoterminado.png" type="image/x-icon">
-    <!-- Enlace a la fuente "Rowdies" -->
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@400;700&display=swap" rel="stylesheet">
     <style>
-    /* Estilos generales para escritorio */
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-    }
-
-    .container {
-        width: 80%; /* Ajuste para pantallas grandes */
-        margin: 0 auto;
-    }
-
-    /* Media Queries para pantallas pequeñas (móviles) */
-    @media screen and (max-width: 768px) {
-          .container {
-              width: 100%; /* Se ajusta a pantallas móviles */
-              padding: 10px;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
-
-        h1 {
-              font-size: 24px; /* Reduce el tamaño de la fuente en móvil */
+        .container {
+            width: 80%;
+            margin: 0 auto;
         }
-    }
-        /* Asegura que html y body ocupen toda la altura de la pantalla */
+        @media screen and (max-width: 768px) {
+            .container {
+                width: 100%;
+                padding: 10px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+        }
         html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        font-family: 'Rowdies', sans-serif;
-    }
-
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Rowdies', sans-serif;
+        }
         body::before {
             content: "";
-            position: fixed; /* Fijo para que el blur se mantenga al hacer scroll */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: url('fondoCMS18.webp') no-repeat center center fixed;
             background-size: cover;
-            filter: blur(5px); /* Ajusta la intensidad del blur */
-            z-index: -1; /* Asegura que el fondo esté detrás del contenido */
+            filter: blur(5px);
+            z-index: -1;
         }
-
         .sidebar {
             position: absolute;
             left: 0;
@@ -85,15 +71,12 @@
             justify-content: center;
             align-items: center;
         }
-
         .sidebar.hidden {
             transform: translateX(-100%);
         }
-
         .sidebar.hidden + .toggle-sidebar-icon {
             left: 10px;
         }
-
         .title {
             text-align: center;
             color: white;
@@ -102,26 +85,22 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            border-bottom: 5px solid white;  /* Esta línea agrega la línea debajo del título */
-            padding-bottom: 10px;  /* Espaciado entre el texto y la línea */
+            border-bottom: 5px solid white;
+            padding-bottom: 10px;
         }
-
         .title .optihub {
             margin-right: 7px;
         }
-
         .title .logo {
-            width: 40px;  /* Ajuste del tamaño del logo */
+            width: 40px;
             height: 40px;
             margin: 0 30px;
         }
-
         .search-bar {
             display: flex;
             justify-content: center;
             margin-top: 10px;
         }
-
         .search-bar input {
             width: 300px;
             padding: 15px;
@@ -133,12 +112,10 @@
             transition: all 0.3s ease;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
         }
-
         .search-bar input:focus {
             outline: none;
             background-color: rgba(200, 200, 200, 0.9);
         }
-
         .central-box {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -152,7 +129,6 @@
             border-radius: 15px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
         }
-
         .game-item {
             display: flex;
             flex-direction: column;
@@ -160,19 +136,16 @@
             text-align: center;
             transition: transform 0.3s;
         }
-
         .game-item:hover {
             transform: scale(1.05);
         }
-
         .game-item img {
             width: 180px;
-            height: 220px; /* Cambio a 220px de altura */
+            height: 220px;
             border-radius: 10px;
             margin-bottom: 10px;
             object-fit: cover;
         }
-
         .game-button {
             width: 90%;
             padding: 15px;
@@ -184,12 +157,10 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
         .game-button:hover {
             background-color: rgba(200, 200, 200, 0.9);
             transform: scale(1.05);
         }
-
         .sidebar button {
             width: 100%;
             margin-bottom: 10px;
@@ -201,11 +172,9 @@
             cursor: pointer;
             transition: transform 0.3s ease;
         }
-
         .sidebar button:hover {
             transform: scale(1.1);
         }
-
         .footer {
             background-color: rgba(0, 0, 0, 0.7);
             color: white;
@@ -216,52 +185,42 @@
             width: 100%;
             box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
         }
-
         .dark-mode {
             background-color: #121212;
             color: white;
         }
-
         .dark-mode .sidebar,
         .dark-mode .footer,
         .dark-mode .toggle-sidebar-icon {
             background-color: rgba(0, 0, 0, 0.9);
         }
-
         .dark-mode .game-button {
             background-color: rgba(50, 50, 50, 0.8);
         }
-
         .dark-mode .game-button:hover {
             background-color: rgba(100, 100, 100, 0.9);
         }
-
         .dark-mode .search-bar input {
             background-color: rgba(50, 50, 50, 0.8);
         }
-
         .dark-mode .search-bar input:focus {
             background-color: rgba(100, 100, 100, 0.9);
         }
-
         .dark-mode .toggle-dark-mode {
             content: url('sol.png');
         }
-
         .toggle-dark-mode {
             position: fixed;
             top: 20px;
             right: 20px;
-            width: 100px;  /* Actualizado a 100px */
-            height: 100px; /* Actualizado a 100px */
+            width: 100px;
+            height: 100px;
             cursor: pointer;
             transition: transform 0.3s ease;
         }
-
         .toggle-dark-mode:hover {
             transform: scale(1.1);
         }
-
         .game-container {
             display: none;
             position: fixed;
@@ -273,13 +232,11 @@
             padding: 20px;
             z-index: 1000;
         }
-
         .game-container canvas {
             display: block;
             margin: 0 auto;
             background-color: #000;
         }
-
         .close-game {
             display: block;
             margin: 10px auto;
@@ -290,11 +247,80 @@
             border-radius: 5px;
             cursor: pointer;
         }
-
         .score {
             text-align: center;
             font-size: 24px;
             margin-bottom: 10px;
+        }
+        /* Estilos para la imagen promocional y el contador */
+        .promo-container {
+            position: relative;
+            width: 90%;
+            height: 90%;
+            border: 20px solid #000;
+            box-sizing: border-box;
+        }
+        .promo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff0000;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 50%;
+        }
+        .countdown {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 10px;
+            font-size: 24px;
+            border-radius: 10px;
+        }
+        /* Estilos para la imagen a pantalla completa */
+        .image-container {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+        }
+        .fullscreen-img {
+            width: calc(100vw - 80px);
+            height: calc(100vh - 80px);
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .close-btn {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: red;
+            color: white;
+            border: none;
+            font-size: 20px;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .close-btn:hover {
+            background: darkred;
         }
     </style>
 </head>
@@ -304,90 +330,75 @@
         <button onclick="filterGames('dlc')">DLC</button>
         <button onclick="filterGames('all')">MOSTRAR TODO</button>
     </div>
-
     <div class="toggle-sidebar-icon" onclick="toggleSidebar()">☰</div>
-
     <div class="title">
         <span class="optihub">O p t i</span>
         <img src="logoterminado.png" alt="Logo" class="logo">
         <span class="optihub">H u b 1</span>
     </div>
-
     <div class="search-bar">
         <input type="text" id="search" placeholder="Buscar juegos o DLC..." onkeyup="searchGames()">
     </div>
-
     <div class="central-box" id="game-list">
-        <div class="game-item" data-category="games">
-            <img src="Euro_Truck_Simulator_PC.jpg" alt="Euro Truck Simulator">
-            <button class="game-button" onclick="window.location.href = 'euroTruckPage.html';">Euro Truck Simulator</button>
-        </div>
-        <div class="game-item" data-category="games">
-            <img src="american truck simmulator PC.jpg" alt="American Truck Simulator">
-            <button class="game-button" onclick="window.location.href = 'AmericanTruckSimulator.html';">American Truck Simulator</button>
-        </div>
-        <div class="game-item" data-category="games">
-            <img src="fortniteconfig.jpg" alt="Fortnite Config">
-            <button class="game-button" onclick="window.location.href = 'https://drive.google.com/file/d/1XO7J9ymnBZFDYpjeE8daj7NHkKn6BzMm/view?usp=drive_link';">Fortnite (Config)</button>
-        </div>
-        <div class="game-item" data-category="games">
-            <img src="slimeranchernovedad.jpg" alt="Slime Rancher">
-            <button class="game-button" onclick="window.location.href = 'SlimeRancher.html';">Slime Rancher</button>
-        </div>
-         <div class="game-item" data-category="games">
-            <img src="busSIM.png" alt="Bus Simulator 18">
-            <button class="game-button" onclick="window.location.href = 'busSIM.html';">Bus Simulator 18</button>
-        </div>
-        <div class="game-item" data-category="games">
-            <img src="prosocceronline.jpg" alt="Pro Soccer Online">
-            <button class="game-button" onclick="window.location.href = 'ProSoceerOnline.html';">Pro Soccer Online</button>
-        </div>
-        <div class="game-item" data-category="games">
-            <img src="hollowknightindex.webp" alt="Hollow Knight">
-            <button class="game-button" onclick="window.location.href = 'HollowKnight.html';">Hollow Knight</button>
-        </div>
-         <div class="game-item" data-category="games">
-            <img src="logoCMS18.webp" alt="Car Mechanic Simulator 18">
-            <button class="game-button" onclick="window.location.href = 'CMS18.html';">Car Mechanic Simulator 18</button>
-        </div>
-        <div class="game-item" data-category="games">
-            <img src="onearmedcookindex.jpg" alt="One Armed Cook">
-            <button class="game-button" onclick="window.location.href = 'OAC.html';">One Armed Cook</button>
-        </div>
-        <div class="game-item" data-category="dlc">
-            <img src="dlc.jpg" alt="DLC Euro Truck">
-            <button class="game-button" onclick="toggleDownload(this, 'https://drive.google.com/file/d/1zwmbXSZGh2rztOQ-0TEXTq5shfQtEUah/view?usp=drive_link')">DLC Euro Truck</button>
-        </div>
-        <div class="game-item" data-category="dlc">
-            <img src="dlc.jpg" alt="DLC American Truck">
-            <button class="game-button" onclick="toggleDownload(this, 'https://drive.google.com/file/d/1dG83La3kHZWUXwGOD3UIDoj4vHPDpTZ7/view?usp=drive_link')">DLC American Truck</button>
-        </div>
+        <!-- Juegos y DLC -->
     </div>
-
     <div class="footer">
         © 2025 OptiHub1. All rights reserved.
     </div>
-
     <img src="luna.png" alt="Toggle Dark Mode" onclick="toggleDarkMode()" class="toggle-dark-mode" id="toggleDarkModeIcon">
-
-    <button onclick="showGame()" style="position: fixed; bottom: 20px; right: 20px; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Boton de Espera</button>
-
+    <button onclick="showGame()" style="position: fixed; bottom: 20px; right: 20px; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Botón de Juego</button>
     <div class="game-container" id="gameContainer">
         <div class="score" id="score">Manzanas comidas: 0</div>
         <canvas id="gameCanvas" width="400" height="400"></canvas>
         <button class="close-game" onclick="closeGame()">Cerrar Juego</button>
     </div>
-
+    <div class="promo-container">
+        <button class="close-btn" onclick="closeAd()">X</button>
+        <img src="images/optispeedx.jpg" alt="🎮🔥 ¡Acelera tu juego con OptiSpeedX! 🔥🎮">
+        <div class="countdown" id="countdown">72:00:00</div>
+    </div>
+    <div class="image-container" id="imageContainer">
+        <button class="close-btn" onclick="cerrarImagen()">X</button>
+        <img src="ruta-de-tu-imagen.jpg" class="fullscreen-img">
+    </div>
     <script>
-        let game;
-        let animationFrameId;
-        let isGameRunning = false;
+        function closeAd() {
+            document.querySelector('.promo-container').style.display = 'none';
+        }
+
+        function startCountdown(duration, display) {
+            var timer = duration, hours, minutes, seconds;
+            setInterval(function () {
+                hours = parseInt(timer / 3600, 10);
+                minutes = parseInt((timer % 3600) / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                hours = hours < 10 ? "0" + hours : hours;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = hours + ":" + minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    timer = duration;
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            var seventyTwoHours = 72 * 60 * 60,
+                display = document.querySelector('#countdown');
+            startCountdown(seventyTwoHours, display);
+        };
+
+        function cerrarImagen() {
+            document.getElementById("imageContainer").style.display = "none";
+        }
 
         function toggleSidebar() {
             const sidebar = document.querySelector('.sidebar');
             const toggleButton = document.querySelector('.toggle-sidebar-icon');
             sidebar.classList.toggle('hidden');
-
             if (sidebar.classList.contains('hidden')) {
                 toggleButton.innerHTML = "▶";
             } else {
@@ -419,7 +430,6 @@
             const body = document.body;
             const icon = document.getElementById('toggleDarkModeIcon');
             body.classList.toggle('dark-mode');
-            
             if (body.classList.contains('dark-mode')) {
                 icon.src = 'sol.png';
                 icon.alt = 'Toggle Light Mode';
@@ -432,7 +442,6 @@
         function showGame() {
             const gameContainer = document.getElementById('gameContainer');
             gameContainer.style.display = 'block';
-
             if (!isGameRunning) {
                 game = startGame();
                 isGameRunning = true;
@@ -445,7 +454,6 @@
         function closeGame() {
             const gameContainer = document.getElementById('gameContainer');
             gameContainer.style.display = 'none';
-
             if (animationFrameId) {
                 cancelAnimationFrame(animationFrameId);
                 animationFrameId = null;
@@ -494,9 +502,34 @@
             function placeApple() {
                 apple.x = getRandomInt(0, 25) * grid;
                 apple.y = getRandomInt(0, 25) * grid;
-
-                // Ensure the apple does not appear on the snake
                 snake.cells.forEach(function (cell) {
+                    if (cell.x === apple.x && cell.y === apple.y) {
+                        placeApple();
+                    }
+                });
+            }
+
+            function gameLoop() {
+                animationFrameId = requestAnimationFrame(gameLoop);
+                if (++count < 4) {
+                    return;
+                }
+                count = 0;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                snake.x += snake.dx;
+                snake.y += snake.dy;
+                if (snake.x < 0 || snake.x >= canvas.width || snake.y < 0 || snake.y >= canvas.height) {
+                    resetGame();
+                }
+                snake.cells.unshift({ x: snake.x, y: snake.y });
+                if (snake.cells.length > snake.maxCells) {
+                    snake.cells.pop();
+                }
+                ctx.fillStyle = 'red';
+                ctx.fillRect(apple.x, apple.y, grid - 1, grid - 1);
+                ctx.fillStyle = 'green';
+                snake.cells.forEach(function (cell, index) {
+                    ctx.fillRect(cell.x, cell.y, grid - 1, grid - 1);
                     if (cell.x === apple.x && cell.y === apple.y) {
                         placeApple();
                     }
