@@ -152,7 +152,12 @@
             border-radius: 15px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
         }
-
+         .game-container {
+    border: 3px solid #ffffff; /* Borde blanco de 3px */
+    border-radius: 10px; /* Bordes redondeados opcionales */
+    padding: 10px; /* Espaciado interno para que el contenido no toque el borde */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente opcional */
+}
         .game-item {
             display: flex;
             flex-direction: column;
@@ -267,7 +272,6 @@
         .toggle-dark-mode:hover {
             transform: scale(1.1);
         }
-
         .game-container {
             display: none;
             position: fixed;
@@ -279,12 +283,6 @@
             padding: 20px;
             z-index: 1000;
         }
-        .game-container {
-    border: 3px solid #ffffff; /* Borde blanco de 3px */
-    border-radius: 10px; /* Bordes redondeados opcionales */
-    padding: 10px; /* Espaciado interno para que el contenido no toque el borde */
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente opcional */
-}
         .game-container canvas {
             display: block;
             margin: 0 auto;
